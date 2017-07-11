@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Flashback.Model;
 using Template10.Services.FileService;
 
-namespace FlashbackUwp.Services.CacheServices
+namespace FlashbackUwp.Services.FileServices
 {
     /// <summary>
     /// Skälet till denna är för att att spara state via onnavigatedFrom osv har begränsning till 8kb för state där.

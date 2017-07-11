@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services;
 using Flashback.Services.Forum;
-using FlashbackUwp.Services.CacheServices;
+using FlashbackUwp.Services.FileServices;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
 using Template10.Utils;

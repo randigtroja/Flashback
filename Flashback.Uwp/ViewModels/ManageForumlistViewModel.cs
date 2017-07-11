@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
-using FlashbackUwp.Services.CacheServices;
+using FlashbackUwp.Services.FileServices;
 
 namespace FlashbackUwp.ViewModels
 {

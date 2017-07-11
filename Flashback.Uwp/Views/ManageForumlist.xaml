@@ -66,7 +66,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <TextBlock Margin="0,24,0,0" x:Name="InfoText2" RelativePanel.Below="ListForums" Style="{StaticResource CaptionTextBlockStyle}">Namn på forumet (ex. Hockey)</TextBlock>
+                <TextBlock Margin="0,24,0,0" x:Name="InfoText2" RelativePanel.Below="ListForums" Style="{StaticResource CaptionTextBlockStyle}">Namn på forumet (ex. Systemutveckling)</TextBlock>
                 <TextBox MinWidth="200"  x:Name="ForumDescription" RelativePanel.Below="InfoText2" Text="{Binding AddName, Mode=TwoWay}"/>
 
                 <TextBlock x:Name="PathText" RelativePanel.Below="ForumDescription" Style="{StaticResource CaptionTextBlockStyle}">Sökväg (ex. /f42 )</TextBlock>
