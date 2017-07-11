@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Flashback.Model;
+using FlashbackUwp.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +27,19 @@ namespace FlashbackUwp.Views
         public ManageForumlist()
         {
             this.InitializeComponent();
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {            
+            // så jävla fult men orkar inte just nu med vymodelcommandbinding. // TODO
+            FbItem forumToDelete = (sender as Button).DataContext as FbItem;
+            if (forumToDelete == null) return;
+
+            var model = DataContext as ManageForumlistViewModel;
+            if (model != null)
+            {
+                model.DeleteForum(forumToDelete);
+            }            
         }
     }
 }

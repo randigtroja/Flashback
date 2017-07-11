@@ -102,7 +102,7 @@
     <Compile Include="Extensions\HtmlWebViewExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleData\SampleData.cs" />
-    <Compile Include="Services\CacheServices\CacheService.cs" />
+    <Compile Include="Services\FileServices\FileService.cs" />
     <Compile Include="Services\SecurityServices\EncryptionService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\AktuellaAmnenViewModel.cs" />

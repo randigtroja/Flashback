@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.UI.Xaml;
+using FlashbackUwp.Views;
 
 namespace FlashbackUwp.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {
         public SettingsPartViewModel SettingsPartViewModel { get; } = new SettingsPartViewModel();
-        public AboutPartViewModel AboutPartViewModel { get; } = new AboutPartViewModel();        
+        public AboutPartViewModel AboutPartViewModel { get; } = new AboutPartViewModel();
+
+        public async Task NavigateToManageForums()
+        {
+            await NavigationService.NavigateAsync(typeof(ManageForumlist));
+        }
     }
 
     public class SettingsPartViewModel : ViewModelBase
@@ -29,7 +36,7 @@ namespace FlashbackUwp.ViewModels
 
             FontSizes = new ObservableCollection<string> {"120%", "110%", "100%", "90%", "80%", "70%"};
 
-        }
+        }        
 
         public string FontSize
         {

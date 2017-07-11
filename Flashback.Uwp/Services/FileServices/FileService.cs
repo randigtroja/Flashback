@@ -11,9 +11,10 @@ namespace FlashbackUwp.Services.CacheServices
     /// Skälet till denna är för att att spara state via onnavigatedFrom osv har begränsning till 8kb för state där.
     /// Spara ner vymodelleras data här. Används för bläddring bakåt i forumlistorna så man slipper göra riktiga anrop
     /// </summary>
-    public class CacheService
+    public class FileService
     {
         private const string CACHEFILE = "fbCache.json";
+        private const string EXTRAFORUMSFILE = "extraForums.json";
         
         public async Task AddToCacheList(ForumList newForumlist)
         {
@@ -72,5 +73,29 @@ namespace FlashbackUwp.Services.CacheServices
                 return item?[key];
             }            
         }
+
+        public async Task SaveExtraForums(List<FbItem> forumList)
+        {
+            if(forumList == null)
+                forumList = new List<FbItem>();
+                    
+            await FileHelper.WriteFileAsync(EXTRAFORUMSFILE, forumList);
+        }
+
+        public async Task<List<FbItem>> GetExtraForums()
+        {
+            var fileExists = await FileHelper.FileExistsAsync(EXTRAFORUMSFILE);
+
+            if (!fileExists)
+            {
+                return new List<FbItem>();
+            }
+            else
+            {
+                return await FileHelper.ReadFileAsync<List<FbItem>>(EXTRAFORUMSFILE);
+            }
+        }
+
+
     }
 }

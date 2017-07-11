@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -10,6 +11,7 @@ using Flashback.Services.Forum;
 using FlashbackUwp.Services.CacheServices;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
+using Template10.Utils;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -49,17 +51,24 @@ namespace FlashbackUwp.ViewModels
         {
             try
             {
-                CacheService cacheService = new CacheService();
+                FileService fileService = new FileService();
 
                 if (string.IsNullOrWhiteSpace(id) || id == "mainlist")
                 {
                     
-                    await cacheService.ResetCache();
+                    await fileService.ResetCache();
 
                     Busy.SetBusy(true, "Laddar forumlistan...");
                     Error = null;
 
                     var resultForumList = await _forumService.GetMainForumlist();
+                    var extraForum = await fileService.GetExtraForums();
+
+                    if (extraForum != null && extraForum.Any())
+                    {
+                        resultForumList.Items.AddRange(extraForum);
+                    }
+
                     ForumList = resultForumList;
                 }
                 else
@@ -75,7 +84,7 @@ namespace FlashbackUwp.ViewModels
                 if (ForumList.Items.Count > 0)
                 {
                     
-                    await cacheService.AddToCacheList(ForumList);
+                    await fileService.AddToCacheList(ForumList);
                 }
             }
             catch (Exception e)
@@ -99,7 +108,7 @@ namespace FlashbackUwp.ViewModels
             }
             else
             {
-                var cache = new CacheService();
+                var cache = new FileService();
                 
                 var cachedForumlist = await cache.TryGetFromCache(ForumList.Id);
 

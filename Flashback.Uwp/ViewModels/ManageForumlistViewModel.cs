@@ -4,7 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
+using FlashbackUwp.Services.CacheServices;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -16,11 +19,36 @@ namespace FlashbackUwp.ViewModels
         private string _addName = "";
         public string AddName { get { return _addName; } set { Set(ref _addName, value); } }
 
-        public ObservableCollection<FbItem> ExtraForumList { get; set; }
+
+        private ObservableCollection<FbItem> _extraForums;
+        public ObservableCollection<FbItem> ExtraForumList
+        {
+            get
+            {
+                return _extraForums;
+            }
+            set
+            {
+                Set(ref _extraForums, value);
+            }
+        }
+
+        private FileService _fileService;
 
         public ManageForumlistViewModel()
-        {
-            
+        {           
+            ExtraForumList = new ObservableCollection<FbItem>();
+
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                ExtraForumList = SampleData.SampleData.GetDefaultExtraForums();
+            }            
+        }
+
+        public async Task DeleteForum(FbItem item)
+        {            
+            ExtraForumList.Remove(item);
+            await _fileService.SaveExtraForums(ExtraForumList.ToList());
         }
 
         public async Task AddForum()
@@ -29,7 +57,8 @@ namespace FlashbackUwp.ViewModels
             {
                 Id = AddPath,
                 Name = AddName,
-                Type = FbItemType.Forum
+                Type = FbItemType.Forum,
+                ShowForumColor = true
             };
 
             if (!ValidateAndFixPaths(forum))
@@ -44,12 +73,20 @@ namespace FlashbackUwp.ViewModels
                 AddPath = "";
                 return;
             }
-
+            
             ExtraForumList.Add(forum);
             AddName = "";
             AddPath = "";
+            
+            await _fileService.SaveExtraForums(ExtraForumList.ToList());
+        }
 
+        public async Task LoadViewModel()
+        {
+            _fileService = new FileService();
+            var forums = await _fileService.GetExtraForums();
 
+            ExtraForumList =  new ObservableCollection<FbItem>(forums);
         }
 
         private bool ValidateAndFixPaths(FbItem forum)
@@ -60,6 +97,11 @@ namespace FlashbackUwp.ViewModels
             forum.Id = forum.Id.Replace("/", "");
 
             return forum.Id.Contains("f");
+        }
+
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            await LoadViewModel();
         }
     }
 }

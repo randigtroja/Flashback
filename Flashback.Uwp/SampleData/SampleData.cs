@@ -134,5 +134,28 @@ namespace FlashbackUwp.SampleData
 
             return list;
         }
+
+        public static ObservableCollection<FbItem> GetDefaultExtraForums()
+        {
+            var list = new ObservableCollection<FbItem>()
+            {
+                new FbItem()
+                {
+                    Description = "AAAA",
+                    Name = "AAAA",
+                    Id = "/f1",
+                    Type = FbItemType.Forum                    
+                },
+                new FbItem()
+                {
+                    Description = "BBBB",
+                    Name = "BBBBB",
+                    Id = "/f2",
+                    Type = FbItemType.Forum
+                }
+            };
+
+            return list;
+        }
     }
 }

@@ -108,9 +108,11 @@
                                       RelativePanel.AlignLeftWithPanel="True"
                                       RelativePanel.Below="VisaAvatarerButtonToggleSwtich" />
 
-                        <ComboBox Header="Textstorlek i trådar" ItemsSource="{Binding FontSizes}" RelativePanel.Below="UseLightThemeToggleSwitch" SelectedItem="{Binding FontSize, Mode=TwoWay}">
+                        <ComboBox x:Name="ComboFontSize"  Header="Textstorlek i trådar" ItemsSource="{Binding FontSizes}" RelativePanel.Below="UseLightThemeToggleSwitch" SelectedItem="{Binding FontSize, Mode=TwoWay}">
                             
                         </ComboBox>
+
+                        <Button RelativePanel.Below="ComboFontSize" Margin="0,24,0,0" Click="{x:Bind ViewModel.NavigateToManageForums}">Hantera forumlistan</Button>
 
 
 
