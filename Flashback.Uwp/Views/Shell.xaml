@@ -1,0 +1,182 @@
+﻿<Page x:Class="FlashbackUwp.Views.Shell"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Controls="using:Template10.Controls"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:behaviors="using:Template10.Behaviors"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:FlashbackUwp.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:views="using:FlashbackUwp.Views"
+      xmlns:viewModels="using:FlashbackUwp.ViewModels"
+      xmlns:converters="using:FlashbackUwp.Converters"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:ShellViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
+    </Page.Resources>
+
+    <Controls:HamburgerMenu x:Name="MyHamburgerMenu">
+
+        <Controls:HamburgerMenu.PrimaryButtons>
+            <!--  mainpage button  -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:ForumMainList">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE14C;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Forum" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:AktuellaAmnenPage">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xEA5C;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Aktuellt" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NewTopicsPage">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE8F4;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Nya ämnen" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NewPostsPage">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE8E5;" FontSize="20" Width="48" Height="48" />
+
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Nya inlägg" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:FavouritesPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE24A;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Favoriter" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MyQuotedPostsPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE89B;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Mina citerade inlägg" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MyStartedThreadsPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE932;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Mina startade trådar" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MyStartedThreadsPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE715;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Privata meddelanden" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NewsPage">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE774;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Nyheter" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+        </Controls:HamburgerMenu.PrimaryButtons>
+
+        <Controls:HamburgerMenu.SecondaryButtons>
+
+            <!--  search button  -->
+            <Controls:HamburgerButtonInfo x:Name="SearchButton"
+                                          PageParameter="0"
+                                          PageType="views:SearchPage">
+                <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo />
+                </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE721;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Sök" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <!--  profile button  -->
+            <Controls:HamburgerButtonInfo x:Name="LoginButton"
+                                          PageParameter="0"
+                                          PageType="views:LoginPage"
+                                          Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter},ConverterParameter=true}">
+                <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo />
+                </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE72E;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Logga in" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo x:Name="LogoutButton"
+                                          PageParameter="0"
+                                          ButtonType="Command"
+                                          Command="{x:Bind ViewModel.LogoutCommand}"
+                                          Visibility="{x:Bind Path=ViewModel.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolConverter}}"
+                                          >
+                <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo />
+                </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE785;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Logga ut" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <!--  settingspage button  -->
+            <Controls:HamburgerButtonInfo x:Name="SettingsButton"
+                                          PageParameter="0"
+                                          PageType="views:SettingsPage">
+                <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo />
+                </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE713;" FontSize="20" Width="48" Height="48" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Inställningar" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+        </Controls:HamburgerMenu.SecondaryButtons>
+
+    </Controls:HamburgerMenu>
+
+</Page>
