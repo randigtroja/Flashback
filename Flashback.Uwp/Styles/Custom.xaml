@@ -80,20 +80,26 @@
 
             <SolidColorBrush x:Key="ExtendedSplashBackground" Color="Black" />
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="White" />
+            <SolidColorBrush x:Key="CustomColorBrush" Color="{ThemeResource SystemAccentColor}" />
 
             <Style TargetType="controls:HamburgerMenu">
-                <Setter Property="PaneBorderThickness" Value="0" />
-                <Setter Property="SecondarySeparator" Value="{ThemeResource SystemColorWindowTextColor}" />
-                <Setter Property="NavButtonBackground" Value="{ThemeResource SystemColorWindowColor}" />
-                <Setter Property="NavButtonForeground" Value="{ThemeResource SystemColorWindowTextColor}" />
-                <Setter Property="NavAreaBackground" Value="{ThemeResource SystemColorWindowColor}" />
-                <Setter Property="HamburgerForeground" Value="{ThemeResource SystemColorWindowColor}" />
-                <Setter Property="HamburgerBackground" Value="{ThemeResource SystemColorWindowTextColor}" />
-                <Setter Property="VisualStateNarrowMinWidth" Value="{ThemeResource NarrowMinWidth}" />
-                <Setter Property="VisualStateNormalMinWidth" Value="{ThemeResource NormalMinWidth}" />
-                <Setter Property="VisualStateWideMinWidth" Value="{ThemeResource WideMinWidth}" />
+                <Setter Property="NavAreaBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
+                <Setter Property="NavButtonForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                <Setter Property="NavButtonBackground" Value="Transparent" />
+                <Setter Property="NavButtonHoverForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonHoverBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
+                <Setter Property="NavButtonPressedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonPressedBackground" Value="Transparent" />
+                <Setter Property="NavButtonCheckedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonCheckedBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
+                <Setter Property="HamburgerBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
+                <Setter Property="HamburgerForeground" Value="{ThemeResource SystemControlPageBackgroundBaseMediumBrush}" />
+                <Setter Property="NavButtonCheckedIndicatorBrush" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="VisualStateNarrowMinWidth" Value="{StaticResource NarrowMinWidth}" />
+                <Setter Property="VisualStateNormalMinWidth" Value="{StaticResource NormalMinWidth}" />
+                <Setter Property="VisualStateWideMinWidth" Value="{StaticResource WideMinWidth}" />
             </Style>
-
+      
             <Style TargetType="controls:PageHeader">
                 <Setter Property="Background" Value="{ThemeResource SystemColorWindowColor}" />
                 <Setter Property="Foreground" Value="{ThemeResource SystemColorWindowTextColor}" />
