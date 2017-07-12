@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="47476Skrikandegris.FlashbackForum" Publisher="CN=skrikandegris" Version="1.1.0.0" />
+  <Identity Name="Skrikandegris.FlashbackUWP" Publisher="CN=do-not-trust" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="54a1f598-7141-415b-b9cc-3d91c54da688" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Flashback</DisplayName>
+    <DisplayName>Flashback (Preview)</DisplayName>
     <PublisherDisplayName>Skrikandegris</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Sample.App">
-      <uap:VisualElements DisplayName="Flashback" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Sample" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Flashback (Preview)" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Flashback Forum-app (Preview)" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
