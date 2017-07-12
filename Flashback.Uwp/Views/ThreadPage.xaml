@@ -80,6 +80,7 @@
                 <AppBarButton Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
                 <AppBarButton Icon="Pin" Label="Pinna" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
                 <AppBarButton Icon="Unpin" Label="Ta bort" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
+                <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser" />
             </controls:PageHeader.PrimaryCommands>
             <controls:PageHeader.Content>
                 <RelativePanel HorizontalAlignment="Left">
@@ -134,6 +135,7 @@
                 <CommandBar.SecondaryCommands>
                     <AppBarButton Icon="ClosePane" Label="Överst" Click="WebViewTop"/>
                     <AppBarButton Icon="OpenPane" Label="Längst ner" Click="WebViewBottom"/>
+                    <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser"/>
                 </CommandBar.SecondaryCommands>
             </CommandBar>
             

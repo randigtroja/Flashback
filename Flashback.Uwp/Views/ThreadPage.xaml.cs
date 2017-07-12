@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FlashbackUwp.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Common;
 
@@ -82,6 +83,16 @@ namespace FlashbackUwp.Views
         private async void WebViewBottom(object sender, RoutedEventArgs e)
         {
             await this.WebView.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0, document.body.scrollHeight);" });   
-        }        
+        }
+
+        private async void OpenInWebBrowser(object sender, RoutedEventArgs e)
+        {
+            var model = DataContext as ThreadViewModel;
+            if (model != null)
+            {
+                var id = model.ForumThread.Id;
+                var openUrl = await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.flashback.org/" + id));
+            }
+        }
     }
 }
