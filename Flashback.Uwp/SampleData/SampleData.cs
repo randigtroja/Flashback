@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Flashback.Model;
 
 namespace FlashbackUwp.SampleData
@@ -156,6 +151,50 @@ namespace FlashbackUwp.SampleData
             };
 
             return list;
+        }
+
+        public static ObservableCollection<FbItem> GetDefaultSearchResult()
+        {
+            return new ObservableCollection<FbItem>
+            {
+                new FbItem
+                {
+                    Name = "varör är beatles bäst?",
+                    ShowPostCount = true,
+                    PostCount = 1234,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "Senaste inlägg av XXXX 2017-05-01"
+                },
+                new FbItem
+                {
+                    Name = "paul eller lennon?",
+                    ShowPostCount = true,
+                    PostCount = 367,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "Senaste inlägg av XXXX 2017-05-01"
+                },
+                new FbItem()
+                {
+                    Name = "stora tråden om beatles",
+                    ShowPostCount = true,
+                    PostCount = 12819,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "Senaste inlägg av XXXX 2017-05-01"
+                },
+                new FbItem()
+                {
+                    Name = "Rickenbacker?",
+                    ShowPostCount = true,
+                    PostCount = 4,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "Senaste inlägg av XXXX 2017-05-01"
+                }
+
+            };
         }
     }
 }

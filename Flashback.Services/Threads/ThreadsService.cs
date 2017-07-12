@@ -711,5 +711,21 @@ namespace Flashback.Services.Threads
                 throw new Exception("hittade inte användarnamnet");
             }
         }
+
+        public async Task<List<FbItem>> SearchThreads(string searchTerm, string forumId)
+        {
+            if (string.IsNullOrWhiteSpace(forumId))
+            {
+                // implementera sök allmänt  
+                //https://www.flashback.org/sok/" + searchTerm
+            }
+            else
+            {
+                // implementera sökning i specifikt forum
+                //https://www.flashback.org/sok/" + searchTerm + "?f=" + forumId
+            }
+
+            throw new NotImplementedException();
+        }
     }
 }
