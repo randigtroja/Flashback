@@ -94,7 +94,7 @@
                         <SymbolIcon Symbol="Back"></SymbolIcon>
                     </Button>
 
-                    <Button Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Picker" RelativePanel.Below="rubrik" RelativePanel.RightOf="Back">
+                    <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Picker" RelativePanel.Below="rubrik" RelativePanel.RightOf="Back">
                         <SymbolIcon Symbol="List"></SymbolIcon>
                     </Button>
 

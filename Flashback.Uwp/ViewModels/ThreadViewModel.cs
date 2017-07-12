@@ -5,6 +5,7 @@ using Windows.UI;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services;
@@ -216,6 +217,40 @@ namespace FlashbackUwp.ViewModels
                 return;
 
             await LoadViewModel(ForumThread.Id.GetCleanIdNextPage(ForumThread.CurrentPage));
+        }
+
+        public async Task ShowPicker()
+        {
+            InputScope scope = new InputScope();
+            InputScopeName scopeName = new InputScopeName { NameValue = InputScopeNameValue.Number };
+
+            scope.Names.Add(scopeName);
+
+            TextBox inputTextBox = new TextBox
+            {
+                AcceptsReturn = false,
+                Height = 32,
+                InputScope = scope
+            };
+
+            ContentDialog dialog = new ContentDialog
+            {
+                Content = inputTextBox,
+                Title = "Hoppa till sida",
+                IsSecondaryButtonEnabled = true,
+                PrimaryButtonText = "Ok",
+                SecondaryButtonText = "Avbryt",
+            };
+
+            if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                int pageNumer;
+
+                if (int.TryParse(inputTextBox.Text, out pageNumer) && pageNumer > 0 && pageNumer <= ForumThread.MaxPages)
+                {
+                    await LoadViewModel(ForumThread.Id.GetCleanIdForPage(pageNumer));
+                }
+            }
         }
     }
 }

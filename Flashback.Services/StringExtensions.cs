@@ -26,6 +26,20 @@ namespace Flashback.Services
             }
         }
 
+        public static string GetCleanIdForPage(this String str, int pageNumber)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return str;
+            }
+            else
+            {
+                str = str.GetCleanId(false) + "p" + pageNumber;
+
+                return str;                
+            }
+        }
+
         public static string GetCleanIdFirstPage(this String str)
         {
             if (string.IsNullOrWhiteSpace(str))
