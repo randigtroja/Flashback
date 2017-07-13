@@ -712,20 +712,82 @@ namespace Flashback.Services.Threads
             }
         }
 
+        /// <summary>
+        /// Söker fram trådar på forumet.
+        /// </summary>
+        /// <param name="searchTerm">Det man söker på</param>
+        /// <param name="forumId">Eventuellt forum och dess underforum som man söker i, null = rubbet</param>
+        /// <returns></returns>
         public async Task<List<FbItem>> SearchThreads(string searchTerm, string forumId)
         {
+            string searchUrl;
             if (string.IsNullOrWhiteSpace(forumId))
-            {
-                // implementera sök allmänt  
-                //https://www.flashback.org/sok/" + searchTerm
+            {                
+                searchUrl = "https://www.flashback.org/sok/" + searchTerm;
             }
             else
-            {
-                // implementera sökning i specifikt forum
-                //https://www.flashback.org/sok/" + searchTerm + "?f=" + forumId
+            {                
+                searchUrl = "https://www.flashback.org/sok/" + searchTerm + "?f=" + forumId.Replace("/","").Replace("f","");
             }
 
-            throw new NotImplementedException();
+            var result = await _httpClient.GetStringAsync(searchUrl);
+
+            return await ParseSearchResult(result);            
+        }
+
+        private async Task<List<FbItem>> ParseSearchResult(string result)
+        {
+            var parser = new HtmlParser();
+
+            var quotedPosts = await parser.ParseAsync(result);
+
+            var searchResult = new List<FbItem>();
+
+            Regex regex = new Regex(@"Svar: ([\d]+)");
+
+            var searchCheck = quotedPosts.QuerySelectorAll("table#threadslist tr");
+            if (searchCheck != null)
+            {
+                foreach (var searchRow in searchCheck)
+                {
+                    var item = new FbItem(){Type = FbItemType.Thread, ShowPostCount = true};
+
+                    var titleCheck = searchRow.QuerySelector("td:nth-child(2) div a");
+                    if (titleCheck != null)
+                    {
+                        item.Name = WebUtility.HtmlDecode(titleCheck.TextContent);
+                        string id = titleCheck.Attributes["href"].Value;
+                        id = id.Replace("/", "");                        
+                        item.Id = id;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    var descriptionCheck = searchRow.QuerySelector("td:nth-child(2) a.thread-forum-title");
+                    if (descriptionCheck != null)
+                    {
+                        item.Description = descriptionCheck.TextContent;
+                    }
+
+                    var countCheck = searchRow.QuerySelector("td:nth-child(4)");
+                    if (countCheck != null)
+                    {
+
+                        foreach (Match match in regex.Matches(countCheck.Attributes[1].Value.FixaRadbrytningar()))
+                        {
+                            item.PostCount = int.Parse(match.Groups[1].Value);
+                        }
+                    }
+
+                    searchResult.Add(item);
+
+                }
+            }
+
+            return searchResult;
+
         }
     }
 }

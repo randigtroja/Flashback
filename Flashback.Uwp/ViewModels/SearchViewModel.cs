@@ -18,7 +18,7 @@ namespace FlashbackUwp.ViewModels
         private readonly ThreadsService _threadService;
         private readonly SettingsService _settings;
 
-        public bool IsDataLoaded => SearchResult != null && SearchResult.Any() && !string.IsNullOrWhiteSpace(SearchTerm);
+        public bool IsDataLoaded => SearchResult != null && SearchResult.Any();
 
         private string _searchTerm;
         private string _forumId;
@@ -75,12 +75,15 @@ namespace FlashbackUwp.ViewModels
 
         public async Task LoadViewModel()
         {
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+                return;
+
             try
             {
                 Busy.SetBusy(true, "Söker...");
                 Error = null;
 
-                var result = await _threadService.SearchThreads(_searchTerm, _forumId);
+                var result = await _threadService.SearchThreads(SearchTerm, ForumId);
                 SearchResult = new ObservableCollection<FbItem>(result);
             }
             catch (Exception e)
