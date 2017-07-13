@@ -68,10 +68,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"
-                             RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True"                              
+        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                          
                              EllipsisVisibility="Collapsed" 
                              PrimaryCommandsVisibility="Collapsed">
             <controls:PageHeader.PrimaryCommands>
@@ -87,38 +84,33 @@
                     <TextBlock x:Name="rubrik" Text="{Binding ForumThread.Title}" Tapped="{x:Bind ViewModel.NavigateToParentForum}" Margin="0,0,10,5"></TextBlock>
 
                     <Button Click="{x:Bind ViewModel.FirstPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Style="{StaticResource NavigationButton}" RelativePanel.Below="rubrik" x:Name="First">
-                        <SymbolIcon Symbol="Previous"></SymbolIcon>
+                        <SymbolIcon Symbol="Previous"/>
                     </Button>
 
                     <Button Click="{x:Bind ViewModel.PrevioustPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Back" RelativePanel.Below="rubrik" RelativePanel.RightOf="First">
-                        <SymbolIcon Symbol="Back"></SymbolIcon>
+                        <SymbolIcon Symbol="Back"/>
                     </Button>
 
                     <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Picker" RelativePanel.Below="rubrik" RelativePanel.RightOf="Back">
-                        <SymbolIcon Symbol="List"></SymbolIcon>
+                        <SymbolIcon Symbol="List"/>
                     </Button>
 
                     <Button Click="{x:Bind ViewModel.NextPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Next" RelativePanel.Below="rubrik" RelativePanel.RightOf="Picker">
-                        <SymbolIcon Symbol="Forward"></SymbolIcon>
+                        <SymbolIcon Symbol="Forward"/>
                     </Button>
 
                     <Button Click="{x:Bind ViewModel.LastPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Last" RelativePanel.Below="rubrik" RelativePanel.RightOf="Next">
-                        <SymbolIcon Symbol="Next"></SymbolIcon>
+                        <SymbolIcon Symbol="Next"/>
                     </Button>
 
-                    <TextBlock Margin="24,-5,0,0"  RelativePanel.Below="rubrik" RelativePanel.RightOf="Last" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Text="{Binding ForumThread.PagenumberText}"></TextBlock>
+                    <TextBlock Margin="24,-5,0,0"  RelativePanel.Below="rubrik" RelativePanel.RightOf="Last" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Text="{Binding ForumThread.PagenumberText}"/>
 
                 </RelativePanel>
             </controls:PageHeader.Content>
         </controls:PageHeader>
 
         <!--  content  -->
-        <ScrollViewer Padding="12,8,0,0" RelativePanel.AlignBottomWithPanel="True"
-                      RelativePanel.AlignLeftWithPanel="True"
-                      RelativePanel.AlignRightWithPanel="True"
-                      RelativePanel.Below="pageHeader"
-                      VerticalScrollBarVisibility="Auto" Grid.Row="1">
-
+        <ScrollViewer Padding="12,8,0,0" Grid.Row="1">
             <WebView x:Name="WebView" NavigationCompleted="{x:Bind ViewModel.BrowserReady}"  NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding ForumThread.Html}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}" >
                 
             </WebView>
