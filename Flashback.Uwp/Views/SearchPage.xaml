@@ -69,10 +69,10 @@
             <StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                    <TextBox x:Name="SearchBox" MinWidth="280" Margin="0,0,12,0" Text="{Binding SearchTerm, Mode=TwoWay}">
+                    <TextBox x:Name="SearchBox" MinWidth="280" Margin="0,0,12,0" Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                        
                     </TextBox>
-                    <Button Content="Sök" Click="{x:Bind ViewModel.LoadViewModel}" IsEnabled="{Binding CanSearch, Converter={StaticResource BoolConverter},Mode=TwoWay}">
+                    <Button Content="Sök" Click="{x:Bind ViewModel.LoadViewModel}" IsEnabled="{Binding CanSearch,Mode=TwoWay}">
                        
                     </Button>
                 </StackPanel>

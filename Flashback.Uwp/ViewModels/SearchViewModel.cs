@@ -95,6 +95,12 @@ namespace FlashbackUwp.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
+            var forumId = parameter as string;
+            if (forumId != null)
+            {
+                ForumId = forumId;
+            }
+
             if (!IsDataLoaded)
             {
                 await LoadViewModel();

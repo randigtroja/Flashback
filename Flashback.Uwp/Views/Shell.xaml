@@ -114,8 +114,7 @@
         <Controls:HamburgerMenu.SecondaryButtons>
 
             <!--  search button  -->
-            <Controls:HamburgerButtonInfo x:Name="SearchButton"
-                                          PageParameter="0"
+            <Controls:HamburgerButtonInfo x:Name="SearchButton"                                          
                                           PageType="views:SearchPage">
                 <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
                     <SuppressNavigationTransitionInfo />
@@ -129,8 +128,7 @@
             </Controls:HamburgerButtonInfo>
 
             <!--  profile button  -->
-            <Controls:HamburgerButtonInfo x:Name="LoginButton"
-                                          PageParameter="0"
+            <Controls:HamburgerButtonInfo x:Name="LoginButton"                                          
                                           PageType="views:LoginPage"
                                           Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter},ConverterParameter=true}">
                 <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
@@ -144,8 +142,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo x:Name="LogoutButton"
-                                          PageParameter="0"
+            <Controls:HamburgerButtonInfo x:Name="LogoutButton"                                          
                                           ButtonType="Command"
                                           Command="{x:Bind ViewModel.LogoutCommand}"
                                           Visibility="{x:Bind Path=ViewModel.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolConverter}}"
@@ -162,8 +159,7 @@
             </Controls:HamburgerButtonInfo>
 
             <!--  settingspage button  -->
-            <Controls:HamburgerButtonInfo x:Name="SettingsButton"
-                                          PageParameter="0"
+            <Controls:HamburgerButtonInfo x:Name="SettingsButton"                                          
                                           PageType="views:SettingsPage">
                 <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
                     <SuppressNavigationTransitionInfo />
