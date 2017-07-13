@@ -92,10 +92,9 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="BottomBar" Grid.Row="2">
-            <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands">
-                <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
-            </CommandBar>
-        </Grid>
+        <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
+            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+        </CommandBar>
+
     </Grid>
 </Page>
