@@ -167,6 +167,7 @@ namespace FlashbackUwp.ViewModels
                     new Uri("ms-appx:///Assets/Square150x150Logo.png"),
                     TileSize.Default) {RoamingEnabled = false};
 
+                tile.VisualElements.Wide310x150Logo = new Uri("ms-appx:///Assets/Wide310x150Logo.png");
                 tile.VisualElements.ShowNameOnSquare150x150Logo = true;
                 tile.VisualElements.ShowNameOnWide310x150Logo = true;
                 tile.VisualElements.ShowNameOnSquare310x310Logo = true;
