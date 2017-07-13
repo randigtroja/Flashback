@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="FlashbackUwp.Views.ThreadPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -124,21 +124,19 @@
             </WebView>
         </ScrollViewer>
 
-        <Grid x:Name="BottomBar" Grid.Row="2">
-            <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Visibility="Collapsed">
-                <AppBarButton Name="BottonAddFavourite" Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.Refresh}" IsEnabled="{Binding IsLoggedIn}" />
-                <AppBarButton Name="BottonReply" Icon=" Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
-                <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
-                <AppBarButton Name="BottonPin" Icon="Pin" Label="Pinna" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
-                <AppBarButton Name="BottonUnPin" Icon="Unpin" Label="Ta bort" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
+        <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Visibility="Collapsed" Grid.Row="2">
+            <AppBarButton Name="BottonAddFavourite" Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.Refresh}" IsEnabled="{Binding IsLoggedIn}" />
+            <AppBarButton Name="BottonReply" Icon=" Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
+            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+            <AppBarButton Name="BottonPin" Icon="Pin" Label="Pinna" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
+            <AppBarButton Name="BottonUnPin" Icon="Unpin" Label="Ta bort" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
 
-                <CommandBar.SecondaryCommands>
-                    <AppBarButton Icon="ClosePane" Label="Överst" Click="WebViewTop"/>
-                    <AppBarButton Icon="OpenPane" Label="Längst ner" Click="WebViewBottom"/>
-                    <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser"/>
-                </CommandBar.SecondaryCommands>
-            </CommandBar>
-            
-        </Grid>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="ClosePane" Label="Överst" Click="WebViewTop"/>
+                <AppBarButton Icon="OpenPane" Label="Längst ner" Click="WebViewBottom"/>
+                <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+
     </Grid>
 </Page>
