@@ -18,13 +18,35 @@ namespace FlashbackUwp.ViewModels
         private readonly ThreadsService _threadService;
         private readonly SettingsService _settings;
 
-        public bool IsDataLoaded => SearchResult != null && SearchResult.Any();
+        public bool IsDataLoaded => SearchResult != null && SearchResult.Any() && !string.IsNullOrWhiteSpace(SearchTerm);
 
         private string _searchTerm;
         private string _forumId;
+        private bool _canSearch;
 
-        public string SearchTerm { get { return _searchTerm; } set { Set(ref _searchTerm, value); } }
+        public string SearchTerm
+        {
+            get
+            {
+                return _searchTerm;
+            }
+            set
+            {
+                Set(ref _searchTerm, value);
+                RaisePropertyChanged("CanSearch");
+            }
+        }
+
         public string ForumId { get { return _forumId; } set { Set(ref _forumId, value); } }
+
+        public bool CanSearch
+        {
+            get { return !string.IsNullOrWhiteSpace(SearchTerm) && SearchTerm.Length >= 3; }
+            set
+            {
+                Set(ref _canSearch, value);
+            }
+        }
 
         public ObservableCollection<FbItem> SearchResult
         {
