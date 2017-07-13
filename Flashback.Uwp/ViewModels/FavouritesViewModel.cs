@@ -9,6 +9,7 @@ using Flashback.Model;
 using Flashback.Services.Threads;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -25,6 +26,8 @@ namespace FlashbackUwp.ViewModels
             _threadsService = new ThreadsService(App.CookieContainer, null);
             _favourites = new ObservableCollection<FbFavourite>();
             _settings = SettingsService.Instance;
+
+            Messenger.Default.Register<bool>(this, "FavoritesUpdated", (result) => Refresh());
         }
 
         public ObservableCollection<FbFavourite> Favourites

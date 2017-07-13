@@ -135,6 +135,8 @@ namespace FlashbackUwp.ViewModels
 
             if (result)
             {
+
+                Messenger.Default.Send<bool>(true, "FavoritesUpdated");
                 await new Windows.UI.Popups.MessageDialog("Ok, tråden är tillagd till favoriterna!").ShowAsync();
             }
             else 
