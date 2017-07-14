@@ -106,6 +106,7 @@
     <Compile Include="Services\SecurityServices\EncryptionService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\AktuellaAmnenViewModel.cs" />
+    <Compile Include="ViewModels\ComposePrivateMessageViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
     <Compile Include="ViewModels\FlashbackViewModelBase.cs" />
     <Compile Include="ViewModels\ForumMainListViewModel.cs" />
@@ -121,6 +122,9 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ThreadViewModel.cs" />
+    <Compile Include="Views\ComposePrivateMessagePage.xaml.cs">
+      <DependentUpon>ComposePrivateMessagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FavouritesPage.xaml.cs">
       <DependentUpon>FavouritesPage.xaml</DependentUpon>
     </Compile>
@@ -199,6 +203,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\ComposePrivateMessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FavouritesPage.xaml">
       <SubType>Designer</SubType>
