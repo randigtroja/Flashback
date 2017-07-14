@@ -5,9 +5,89 @@
     xmlns:local="using:FlashbackUwp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:FlashbackUwp.ViewModels"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:converters="using:FlashbackUwp.Converters"
     mc:Ignorable="d">
+    
+    <Page.DataContext>
+        <viewModels:PrivateMessagesViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
+        <converters:UnreadMessageBrushconverter x:Key="UnreadBrushConverter" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                        <Setter Target="BottonCommands.Visibility" Value="Visible"/>
+                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                        <Setter Target="BottonCommands.Visibility" Value="Visible"/>
+                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BottonCommands.Visibility" Value="Collapsed"/>
+                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <!--  header  -->
+        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                    
+                             EllipsisVisibility="Collapsed" 
+                             PrimaryCommandsVisibility="Collapsed" Text="Privata meddelanden">
+            <controls:PageHeader.PrimaryCommands>
+                <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh" x:Name="RefreshButton"/>
+                <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Nytt meddelande" Icon="Add" x:Name="AddNewMessageButton"/>
+            </controls:PageHeader.PrimaryCommands>
+        </controls:PageHeader>
+
+        <!--  content  -->
+        <ListView ItemsSource="{Binding Path=Messages}" ItemClick="{x:Bind ViewModel.NavigateToMessage}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="12,0,0,5">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Name}" Width="400" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                            <TextBlock VerticalAlignment="Bottom" Width="400" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{StaticResource BodyTextBlockStyle}" Text="{Binding Path=FromName}" Foreground="{Binding IsUnread, Converter={StaticResource UnreadBrushConverter}}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                    </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
+            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+            <AppBarButton Name="BottonPrimaryNEw" Icon="Add" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+        </CommandBar>
     </Grid>
 </Page>
