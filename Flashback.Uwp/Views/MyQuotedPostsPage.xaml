@@ -68,9 +68,7 @@
                 <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh"/>
             </controls:PageHeader.PrimaryCommands>
             <controls:PageHeader.Content>
-                <RelativePanel>
-                    <TextBlock x:Name="rubrik">Mina citerade inlägg</TextBlock>
-                </RelativePanel>
+                <TextBlock x:Name="rubrik">Mina citerade inlägg</TextBlock>
             </controls:PageHeader.Content>
         </controls:PageHeader>
 
