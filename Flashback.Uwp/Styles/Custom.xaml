@@ -20,11 +20,11 @@
                 <Setter Property="NavAreaBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
                 <Setter Property="NavButtonForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonBackground" Value="Transparent" />
-                <Setter Property="NavButtonHoverForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonHoverForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonHoverBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
-                <Setter Property="NavButtonPressedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonPressedForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonPressedBackground" Value="Transparent" />
-                <Setter Property="NavButtonCheckedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonCheckedForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonCheckedBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
 
 
@@ -53,11 +53,11 @@
                 <Setter Property="NavAreaBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
                 <Setter Property="NavButtonForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonBackground" Value="Transparent" />
-                <Setter Property="NavButtonHoverForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonHoverForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonHoverBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
-                <Setter Property="NavButtonPressedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonPressedForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonPressedBackground" Value="Transparent" />
-                <Setter Property="NavButtonCheckedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonCheckedForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonCheckedBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
 
                 <Setter Property="HamburgerBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
@@ -86,11 +86,11 @@
                 <Setter Property="NavAreaBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
                 <Setter Property="NavButtonForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonBackground" Value="Transparent" />
-                <Setter Property="NavButtonHoverForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonHoverForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonHoverBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
-                <Setter Property="NavButtonPressedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonPressedForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonPressedBackground" Value="Transparent" />
-                <Setter Property="NavButtonCheckedForeground" Value="{ThemeResource CustomColorBrush}" />
+                <Setter Property="NavButtonCheckedForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
                 <Setter Property="NavButtonCheckedBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
                 <Setter Property="HamburgerBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
                 <Setter Property="HamburgerForeground" Value="{ThemeResource SystemControlPageBackgroundBaseMediumBrush}" />
