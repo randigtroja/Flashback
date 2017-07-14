@@ -21,11 +21,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- Header Row -->
             <RowDefinition Height="*" />
-            <!-- Content Row -->
             <RowDefinition Height="Auto" />
-            <!-- CommandBar Row -->
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -63,14 +60,12 @@
         </VisualStateManager.VisualStateGroups>
 
         <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0" EllipsisVisibility="Collapsed">
-            <controls:PageHeader.PrimaryCommands>
-                <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh"/>
-            </controls:PageHeader.PrimaryCommands>
-            <controls:PageHeader.Content>
-                <TextBlock x:Name="rubrik">Mina citerade inlägg</TextBlock>
-            </controls:PageHeader.Content>
-        </controls:PageHeader>
+        <controls:PageHeader x:Name="pageHeader" 
+                             Frame="{x:Bind Frame}" 
+                             Grid.Row="0" 
+                             EllipsisVisibility="Collapsed" 
+                             Text="Mina citerade inlägg" />
+
 
         <!--  content  -->
         <ListView ItemsSource="{Binding Path=Posts}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
