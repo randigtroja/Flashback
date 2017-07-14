@@ -369,7 +369,7 @@ namespace Flashback.Services.Threads
                         {
                             // fyfan vilket piss
                             var textNumber = countCheck.TextContent.Substring(pos + 1, countCheck.TextContent.Length - pos - 1);
-                            textNumber = textNumber.FixaRadbrytningar().Replace("svar", "");
+                            textNumber = textNumber.FixaRadbrytningar().Replace(" ", "").Replace("svar", "");
 
                             int.TryParse(textNumber, out number);
                         }
