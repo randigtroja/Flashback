@@ -435,7 +435,7 @@ namespace Flashback.Services.Threads
                     if (titleCheck != null)
                     {
                         item.Name = WebUtility.HtmlDecode(titleCheck.TextContent).FixaRadbrytningar();
-                        item.Id = titleCheck.Attributes["href"].Value.Replace("/","");
+                        item.Id = titleCheck.Attributes["href"].Value.Replace("/","").Replace("n","");
 
                         if (titleCheck.Parent != null && titleCheck.Parent.NodeName == "STRONG")
                         {
