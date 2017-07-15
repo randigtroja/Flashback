@@ -70,6 +70,11 @@ namespace FlashbackUwp.ViewModels
             await LoadViewModel();
         }
 
+        public async Task NewMessage()
+        {
+            await NavigationService.NavigateAsync(typeof(ComposePrivateMessagePage), null);
+        }
+
         public void NavigateToMessage(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem as PrivateMessage;

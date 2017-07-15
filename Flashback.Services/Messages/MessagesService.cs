@@ -90,5 +90,10 @@ namespace Flashback.Services.Messages
 
             return privateMessages;
         }
+
+        public Task<ComposePrivateMessageModel> NewPrivateMessage(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -67,7 +67,7 @@
                              PrimaryCommandsVisibility="Collapsed" Text="Privata meddelanden">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh" x:Name="RefreshButton"/>
-                <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Nytt meddelande" Icon="Add" x:Name="AddNewMessageButton"/>
+                <AppBarButton Click="{x:Bind ViewModel.NewMessage}" Label="Nytt meddelande" Icon="Add" x:Name="AddNewMessageButton"/>
             </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 
@@ -87,7 +87,7 @@
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
-            <AppBarButton Name="BottonPrimaryNEw" Icon="Add" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+            <AppBarButton Name="BottonPrimaryNEw" Icon="Add" Label="Ladda om" Click="{x:Bind ViewModel.NewMessage}" />
         </CommandBar>
     </Grid>
 </Page>

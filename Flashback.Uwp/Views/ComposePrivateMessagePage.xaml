@@ -5,9 +5,76 @@
     xmlns:local="using:FlashbackUwp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:FlashbackUwp.ViewModels"
+    xmlns:converters="using:FlashbackUwp.Converters"
+    xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <viewModels:ComposePrivateMessageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for narrow view  -->
+                        <Setter Target="BottonCommands.Visibility" Value="Visible"/>
+                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                        <Setter Target="BottonCommands.Visibility" Value="Visible"/>
+                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BottonCommands.Visibility" Value="Collapsed"/>
+                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <!--  header  -->
+        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                    
+                             EllipsisVisibility="Collapsed" 
+                             PrimaryCommandsVisibility="Collapsed" Text="Nytt meddelande">
+        </controls:PageHeader>
+
+        <!--  content  -->
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <TextBox Header="Till"></TextBox>
+                <TextBox Header="Ämne"></TextBox>
+                <TextBox Height="200"></TextBox>
+                <Button>Skicka</Button>
+            </StackPanel>
+            
+        </Grid>
+        
     </Grid>
 </Page>
