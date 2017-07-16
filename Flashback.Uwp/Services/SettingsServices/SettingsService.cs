@@ -163,10 +163,10 @@ namespace FlashbackUwp.Services.SettingsServices
             set { _helper.Write(nameof(FontSize), value); }
         }
 
-        public bool UseWindowsEmoticons
+        public bool UseEmoticons
         {
-            get { return _helper.Read<bool>(nameof(UseWindowsEmoticons), true); }
-            set { _helper.Write(nameof(UseWindowsEmoticons), value); }
+            get { return _helper.Read<bool>(nameof(UseEmoticons), true); }
+            set { _helper.Write(nameof(UseEmoticons), value); }
         }
 
     }

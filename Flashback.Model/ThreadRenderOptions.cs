@@ -10,7 +10,7 @@
         public string AccentColor { get; set; }
         public bool ShowAvatars { get; set; }
         public string FontSize { get; set; }
-        public bool UseStandardSmileys { get; set; }
+        public bool RenderEmoticons { get; set; }
    
         public string GetForeColor()
         {

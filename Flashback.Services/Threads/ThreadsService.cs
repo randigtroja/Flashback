@@ -288,7 +288,7 @@ namespace Flashback.Services.Threads
                     continue;
                 }
                 
-                if (_options.UseStandardSmileys)
+                if (_options.RenderEmoticons)
                 {
                     postMessage = _options.ReplaceSmileys(postMessage);
                 }
