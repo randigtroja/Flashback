@@ -124,9 +124,10 @@
             <AppBarButton Name="BottonUnPin" Icon="Unpin" Label="Ta bort" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
 
             <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser"/>
+                <AppBarSeparator></AppBarSeparator>
                 <AppBarButton Icon="ClosePane" Label="Överst" Click="WebViewTop"/>
                 <AppBarButton Icon="OpenPane" Label="Längst ner" Click="WebViewBottom"/>
-                <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
 
