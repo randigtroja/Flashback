@@ -288,6 +288,11 @@ namespace Flashback.Services.Threads
                     continue;
                 }
                 
+                if (_options.UseStandardSmileys)
+                {
+                    postMessage = _options.ReplaceSmileys(postMessage);
+                }
+
                 sb.AppendLine("<a id=\"" + postLink + "\" href=\"#" + postLink +  "\"></a>");
                 sb.AppendLine("<p>");
                 sb.AppendLine(avatar);
