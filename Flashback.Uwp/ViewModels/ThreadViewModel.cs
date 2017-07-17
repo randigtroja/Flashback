@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services;
 using Flashback.Services.Threads;
+using FlashbackUwp.Services.FileServices;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
 using GalaSoft.MvvmLight.Messaging;
@@ -21,9 +22,11 @@ namespace FlashbackUwp.ViewModels
     {
         private ForumThread _forumThread;
         private ThreadsService _threadService;
+        private readonly FileService _fileService;
         private readonly SettingsService _settings;
         private string _requestedId;
         private bool _hasScrolled = false;
+        private bool _firstLoadDone = false;
 
         public ForumThread ForumThread
         {
@@ -69,6 +72,7 @@ namespace FlashbackUwp.ViewModels
 
             var c = (Color)Application.Current.Resources["SystemAccentColor"];
             _settings = SettingsService.Instance;
+            _fileService = new FileService();
 
             _threadService = new ThreadsService(App.CookieContainer, new ThreadRenderOptions()
             {
@@ -93,7 +97,28 @@ namespace FlashbackUwp.ViewModels
                 Error = null;
                 _requestedId = id;
 
-                ForumThread = await _threadService.GetForumThread(id);                
+                if (!id.Contains("#") && !id.StartsWith("p") && _settings.UseSmartNavigation && !_firstLoadDone)
+                {
+                    // Så länge vi inte navigerar till ett specifikt citerat inlägg och kör med inställningen smartnavigering
+                    // så kollat vi om vi har besökt tråden tidigare. Har vi det hoppar vi till senast besökta sida i den.
+                    var lastVisitedPageNumber = await _fileService.GetLastVisitedPageForThread(id.GetCleanId(false));
+
+                    if (lastVisitedPageNumber.HasValue)
+                    {
+                        id = id.GetCleanId(false).GetCleanIdForPage(lastVisitedPageNumber.Value);
+                    }
+
+                }
+
+                ForumThread = await _threadService.GetForumThread(id);
+                _firstLoadDone = true;
+
+                // spara ner senaste besökta sida om vi använder smartnavigering
+                if (_settings.UseSmartNavigation)
+                {                  
+                    await _fileService.SaveLastVisitedPageNumber(id.GetCleanId(false),ForumThread.CurrentPage);
+                }
+
             }
             catch (Exception e)
             {

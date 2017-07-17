@@ -169,5 +169,11 @@ namespace FlashbackUwp.Services.SettingsServices
             set { _helper.Write(nameof(UseEmoticons), value); }
         }
 
+        public bool UseSmartNavigation
+        {
+            get { return _helper.Read<bool>(nameof(UseSmartNavigation), true); }
+            set { _helper.Write(nameof(UseSmartNavigation), value); }
+        }
+
     }
 }

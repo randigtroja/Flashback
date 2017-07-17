@@ -15,6 +15,7 @@ namespace FlashbackUwp.Services.FileServices
     {
         private const string CACHEFILE = "fbCache.json";
         private const string EXTRAFORUMSFILE = "extraForums.json";
+        private const string SMARTNAVIGATIONFILE = "smartnavigation.json";
         
         public async Task AddToCacheList(ForumList newForumlist)
         {
@@ -93,6 +94,49 @@ namespace FlashbackUwp.Services.FileServices
             else
             {
                 return await FileHelper.ReadFileAsync<List<FbItem>>(EXTRAFORUMSFILE);
+            }
+        }
+        
+        public async Task SaveLastVisitedPageNumber(string threadId, int pageNumber)
+        {
+            FlashbackCacheList<LastReadPageInfo> data;
+
+            if (await FileHelper.FileExistsAsync(SMARTNAVIGATIONFILE))
+            {
+                data = await FileHelper.ReadFileAsync<FlashbackCacheList<LastReadPageInfo>>(SMARTNAVIGATIONFILE);
+            }
+            else
+            {
+                data = new FlashbackCacheList<LastReadPageInfo>();    
+            }
+
+            if (data.All(x => x.ThreadId != threadId))
+            {
+                data.Add(new LastReadPageInfo() {PageNr = pageNumber, ThreadId = threadId});
+            }
+            else
+            {
+                data.First(x => x.ThreadId == threadId).PageNr = pageNumber;
+            }                
+
+            await FileHelper.WriteFileAsync(SMARTNAVIGATIONFILE, data);
+        }        
+
+        public async Task<int?> GetLastVisitedPageForThread(string threadId)
+        {
+            var fileExists = await FileHelper.FileExistsAsync(SMARTNAVIGATIONFILE);
+
+            if (!fileExists)
+            {
+                return null;
+            }
+            else
+            {
+                var savedPositions = await FileHelper.ReadFileAsync<FlashbackCacheList<LastReadPageInfo>>(SMARTNAVIGATIONFILE);
+
+                var item = savedPositions?.FirstOrDefault(x => x.ThreadId == threadId);
+
+                return item?.PageNr;
             }
         }
 
