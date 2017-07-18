@@ -91,9 +91,61 @@ namespace Flashback.Services.Messages
             return privateMessages;
         }
 
-        public Task<ComposePrivateMessageModel> NewPrivateMessage(string id)
+        public async Task<ComposePrivateMessageModel> NewPrivateMessage(string id)
         {
-            throw new NotImplementedException();
+            string pmUrl = "";
+
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                pmUrl = "https://www.flashback.org/private.php?do=newpm";
+            }
+            else
+            {
+                pmUrl = "https://www.flashback.org/private.php?do=newpm&pmid=" + id;
+            }
+
+            var result = await _httpClient.GetStringAsync(pmUrl);
+
+            var messageModel = await ParseNewPrivateMessage(result);
+
+            return messageModel;
+
+        }
+
+        private async Task<ComposePrivateMessageModel> ParseNewPrivateMessage(string result)
+        {
+            var document = await new HtmlParser().ParseAsync(result);
+
+            var model = new ComposePrivateMessageModel();
+
+
+            var textCheck = document.QuerySelector("textarea[name='message']");
+            if (textCheck != null)
+            {
+                model.Message = WebUtility.HtmlDecode(textCheck.InnerHtml);
+            }
+
+            var tokenCheck = document.QuerySelector("input[name='csrftoken']");
+            if (tokenCheck != null)
+            {
+                model.PostToken = tokenCheck.Attributes["value"].Value;
+            }
+
+            var subjectCheck = document.QuerySelector("input[name='title']");
+
+            if (subjectCheck != null)
+            {
+                model.Subject = WebUtility.HtmlDecode(subjectCheck.Attributes["value"].Value);
+            }
+
+            var toCheck = document.QuerySelector("select[name='recipients[]'] option");
+
+            if (toCheck != null)
+            {
+                model.To = WebUtility.HtmlDecode(toCheck.TextContent);
+            }
+        
+            return model;
         }
     }
 }

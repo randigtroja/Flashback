@@ -81,7 +81,7 @@ namespace FlashbackUwp.ViewModels
 
             if (item != null)
             {
-                //NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : "")); // TODO bygg sida för ett meddelande
+                NavigationService.Navigate(typeof(ComposePrivateMessagePage), item.Id);
             }
         }
     }

@@ -31,9 +31,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
-                        <Setter Target="BottonCommands.Visibility" Value="Visible"/>
-                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
+                        <!--  TODO: change properties for narrow view  -->                        
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -41,9 +39,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
-                        <Setter Target="BottonCommands.Visibility" Value="Visible"/>
-                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
+                        <!--  TODO: change properties for normal view  -->                                                
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -51,9 +47,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="BottonCommands.Visibility" Value="Collapsed"/>
-                        <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Visible"/>
-
+                        
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -66,12 +60,12 @@
         </controls:PageHeader>
 
         <!--  content  -->
-        <Grid Grid.Row="1">
-            <StackPanel>
-                <TextBox Header="Till"></TextBox>
-                <TextBox Header="Ämne"></TextBox>
-                <TextBox Height="200"></TextBox>
-                <Button>Skicka</Button>
+        <Grid Padding="12,8,12,0" Grid.Row="1">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBox Header="Till" Width="Auto" MaxWidth="400" MinWidth="400" Text="{Binding ComposeModel.To,Mode=TwoWay, UpdateSourceTrigger=Explicit}"></TextBox>
+                <TextBox Header="Ämne" Width="Auto"  MaxWidth="400" Text="{Binding ComposeModel.Subject,Mode=TwoWay, UpdateSourceTrigger=Explicit}"></TextBox>
+                <TextBox Height="200" AcceptsReturn="True" Width="Auto" Header="Inlägg" Text="{Binding ComposeModel.Message, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextWrapping="Wrap" MaxWidth="400"></TextBox>
+                <Button Margin="0,24,0,0" IsEnabled="{x:Bind ViewModel.MayPost}">Skicka meddelande</Button>
             </StackPanel>
             
         </Grid>
