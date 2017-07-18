@@ -281,5 +281,19 @@ namespace FlashbackUwp.ViewModels
                 }
             }
         }
+
+        public async void WebView_OnScriptNotify(object sender, NotifyEventArgs e)
+        {
+            if (e.Value.Contains("left"))
+            {
+                await this.NextPage();
+                return;
+            }
+            else if (e.Value.Contains("right"))
+            {
+                await this.PrevioustPage();
+                return;
+            }
+        }
     }
 }

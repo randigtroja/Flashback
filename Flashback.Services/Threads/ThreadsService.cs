@@ -36,7 +36,7 @@ namespace Flashback.Services.Threads
         }
 
         private async Task<List<FbItem>> ParseHotTopics(string result)
-        {
+        {                        
             var parser = new HtmlParser();
 
             var document = await parser.ParseAsync(result);
@@ -225,10 +225,42 @@ namespace Flashback.Services.Threads
                 "border-width:1px; " +
                 "font-size:" + fontSize + "; };" +
                 "</style>";
-
+            
             sb.AppendLine("<html>");
             sb.AppendLine("<head>");
             sb.AppendLine(htmlHeaders);
+            sb.AppendLine(
+                "<script type=\"text/javascript\">" +
+                    "window.onload = function() { document.addEventListener(\'touchstart\', handleTouchStart, false);" +
+                    "document.addEventListener(\'touchmove\', handleTouchMove, false);" +
+                    "var xDown = null;" +
+                    "var yDown = null;" +
+                    "function handleTouchStart(evt) {" +                        
+                        "xDown = evt.touches[0].clientX;" +
+                        "yDown = evt.touches[0].clientY;" +
+                    "};" +
+                    "function handleTouchMove(evt) {" +
+                        "if ( ! xDown || ! yDown ) {" +
+                            "return;" +
+                    "}" +
+                    "var xUp = evt.touches[0].clientX;" +
+                    "var yUp = evt.touches[0].clientY;" +
+                    "var xDiff = xDown - xUp;" +
+                    "var yDiff = yDown - yUp;" +
+                    "if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/" +
+                    "if ( xDiff > 0 ) {" +                    
+                        "window.external.notify('left');" +
+                    "} else {" +                
+                        "window.external.notify('right');" +
+                    "} " +
+                    "} else {if ( yDiff > 0 ) {" +                    
+                    "} else {" +                        
+                    "}" +
+                "}" +
+                "/* reset values */" +
+                "xDown = null;" +
+                "yDown = null;" +
+                "}};</script>");            
             sb.AppendLine("</head>");
             sb.AppendLine("<body style=\"margin:0px;font-family:'Segoe UI';background-color:" + backgroundColor + ";font-size: " + fontSize + ";\">");
             sb.AppendLine("<div id=\"pageWrapper\" style=\"width:100%; color:" + foreColor + ";word-wrap: break-word\">");

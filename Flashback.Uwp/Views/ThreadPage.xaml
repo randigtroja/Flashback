@@ -111,7 +111,7 @@
 
         <!--  content  -->
         <ScrollViewer Padding="12,8,0,0" Grid.Row="1">
-            <WebView x:Name="WebView" NavigationCompleted="{x:Bind ViewModel.BrowserReady}"  NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding ForumThread.Html}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}" >
+            <WebView x:Name="WebView" NavigationCompleted="{x:Bind ViewModel.BrowserReady}" ScriptNotify="{x:Bind ViewModel.WebView_OnScriptNotify}"  NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding ForumThread.Html}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}" >
                 
             </WebView>
         </ScrollViewer>
