@@ -147,5 +147,10 @@ namespace Flashback.Services.Messages
         
             return model;
         }
+
+        public async Task<bool> PostMessage(string composeModelTo, string composeModelSubject, string composeModelMessage)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -41,6 +41,8 @@ namespace FlashbackUwp.ViewModels
         {
             _messageService = new MessagesService(App.CookieContainer);
             _composeModel = new ComposePrivateMessageModel();
+
+            MayPost = true;
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
@@ -75,6 +77,36 @@ namespace FlashbackUwp.ViewModels
             finally
             {
                 Busy.SetBusy(false);
+            }
+        }
+
+        public async Task PostMessage()
+        {
+
+            if (string.IsNullOrWhiteSpace(this.ComposeModel.Subject) || string.IsNullOrWhiteSpace(this.ComposeModel.To) || string.IsNullOrWhiteSpace(this.ComposeModel.Message))
+            {
+                await new Windows.UI.Popups.MessageDialog("Ej fullständiga uppgifter ifyllda för att kunna skicka.").ShowAsync();
+                return;
+            }
+
+            try
+            {
+                MayPost = false;
+
+                Busy.SetBusy(true,"Skickar meddelande...");
+                Error = null;
+
+                var result = await _messageService.PostMessage(ComposeModel.To, ComposeModel.Subject, ComposeModel.Message);
+            }
+            catch (Exception e)
+            {
+                Error = e.Message;
+
+            }
+            finally
+            {
+                Busy.SetBusy(false);
+                MayPost = true;
             }
         }
     }

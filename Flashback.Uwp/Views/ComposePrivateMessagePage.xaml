@@ -65,7 +65,7 @@
                 <TextBox Header="Till" Width="Auto" MaxWidth="400" MinWidth="400" Text="{Binding ComposeModel.To,Mode=TwoWay, UpdateSourceTrigger=Explicit}"></TextBox>
                 <TextBox Header="Ämne" Width="Auto"  MaxWidth="400" Text="{Binding ComposeModel.Subject,Mode=TwoWay, UpdateSourceTrigger=Explicit}"></TextBox>
                 <TextBox Height="200" AcceptsReturn="True" Width="Auto" Header="Inlägg" Text="{Binding ComposeModel.Message, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextWrapping="Wrap" MaxWidth="400"></TextBox>
-                <Button Margin="0,24,0,0" IsEnabled="{x:Bind ViewModel.MayPost}">Skicka meddelande</Button>
+                <Button Margin="0,24,0,0" IsEnabled="{x:Bind ViewModel.MayPost}" Click="{x:Bind ViewModel.PostMessage}">Skicka meddelande</Button>
             </StackPanel>
             
         </Grid>
