@@ -95,6 +95,7 @@ namespace FlashbackUwp.ViewModels
                 return false;
 
             forum.Id = forum.Id.Replace("/", "");
+            forum.Id = forum.Id.ToLower();
 
             return forum.Id.Contains("f");
         }
