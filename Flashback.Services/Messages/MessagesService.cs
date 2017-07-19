@@ -175,5 +175,25 @@ namespace Flashback.Services.Messages
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> DeleteMessage(string messageId, string folderId, string token)
+        {
+            var postData = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("do","managepm"),
+                new KeyValuePair<string, string>("csrftoken",token),
+                new KeyValuePair<string, string>("s",""),
+                new KeyValuePair<string, string>("dowhat","delete"),
+                new KeyValuePair<string, string>("folderid",folderId),
+                new KeyValuePair<string, string>("dowhat","delete") ,
+                new KeyValuePair<string, string>("pm%5B" + messageId + "%5D","true")                                 
+            };
+
+            var postContent = new FormUrlEncodedContent(postData);
+
+            var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }
