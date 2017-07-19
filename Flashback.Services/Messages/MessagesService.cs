@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
 using Flashback.Model;
@@ -148,9 +149,31 @@ namespace Flashback.Services.Messages
             return model;
         }
 
-        public async Task<bool> PostMessage(string composeModelTo, string composeModelSubject, string composeModelMessage)
+        public async Task<bool> PostMessage(string to, string subject, string message,string token)
         {
-            throw new NotImplementedException();
+            var postData = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("message", message.FormatToEncodedPostable()),
+                new KeyValuePair<string, string>("s",""),
+                new KeyValuePair<string, string>("do","insertpm"),
+                new KeyValuePair<string, string>("recipients%5B%5D",to.FormatToEncodedPostable()),
+                new KeyValuePair<string, string>("title",subject.FormatToEncodedPostable()),
+                new KeyValuePair<string, string>("receipt","0"),
+                new KeyValuePair<string, string>("signature","1"),
+                new KeyValuePair<string, string>("parseurl","1"),
+                new KeyValuePair<string, string>("disablesmilies","0"),
+                new KeyValuePair<string, string>("savecopy","1"),
+                new KeyValuePair<string, string>("pmid",""),
+                new KeyValuePair<string, string>("ajax",""),
+                new KeyValuePair<string, string>("forward",""),
+                new KeyValuePair<string, string>("csrftoken",token)
+            };
+
+            var postContent = new FormUrlEncodedContent(postData);
+
+            var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }

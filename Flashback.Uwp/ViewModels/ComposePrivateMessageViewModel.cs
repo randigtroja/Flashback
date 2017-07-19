@@ -96,7 +96,16 @@ namespace FlashbackUwp.ViewModels
                 Busy.SetBusy(true,"Skickar meddelande...");
                 Error = null;
 
-                var result = await _messageService.PostMessage(ComposeModel.To, ComposeModel.Subject, ComposeModel.Message);
+                var result = await _messageService.PostMessage(ComposeModel.To, ComposeModel.Subject, ComposeModel.Message, ComposeModel.PostToken);
+
+                if (result)
+                {
+                    await new Windows.UI.Popups.MessageDialog("Meddelande är skickat!").ShowAsync();
+                }
+                else
+                {
+                    await new Windows.UI.Popups.MessageDialog("Något gick fel vid skickande av meddelande.").ShowAsync();
+                }
             }
             catch (Exception e)
             {
