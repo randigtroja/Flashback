@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Text;
 
 namespace Flashback.Services
 {
@@ -113,6 +115,25 @@ namespace Flashback.Services
 
                 return str;
             }
+        }
+
+        public static string FormatToEncodedPostable(this String str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                return str;
+
+            var output = WebUtility.HtmlEncode(str);
+
+            var destinationEncoding = Encoding.GetEncoding("ISO-8859-1");            
+            var sourceEncoding = Encoding.UTF8;
+            
+            var sourceBytes = sourceEncoding.GetBytes(output);
+            var destinationBytes = Encoding.Convert(sourceEncoding, destinationEncoding, sourceBytes);            
+
+            var encodesBytes = WebUtility.UrlEncodeToBytes(destinationBytes, 0, destinationBytes.Length);
+            var encodedString = destinationEncoding.GetString(encodesBytes, 0, encodesBytes.Length);
+
+            return encodedString;            
         }
 
     }
