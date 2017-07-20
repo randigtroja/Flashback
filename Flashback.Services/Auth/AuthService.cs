@@ -46,23 +46,13 @@ namespace Flashback.Services.Auth
         /// Loggar in
         /// </summary>
         /// <param name="username">Användarnamn</param>
-        /// <param name="password">Lösenord (måste md5-hashas innan anropet)</param>
-        /// <param name="rememberMe">Om vi ska få cookie med persisterad inloggning</param>
+        /// <param name="password">Lösenord</param>        
         /// <returns></returns>
         public async Task<bool> TryLogin(string username, string password)
-        {
-            var iso = Encoding.GetEncoding("ISO-8859-1");
-            var utf8 = Encoding.UTF8;
-
-            var utfBytes = utf8.GetBytes(username);
-            var isoBytes = Encoding.Convert(utf8, iso, utfBytes);
-
-            var encodesBytes = WebUtility.UrlEncodeToBytes(isoBytes, 0, isoBytes.Length);
-            var encodedUserName = iso.GetString(encodesBytes, 0, encodesBytes.Length);
-
+        {            
             var postData = new List<KeyValuePair<string, string>>
                 {
-                    new KeyValuePair<string, string>("vb_login_username", encodedUserName),
+                    new KeyValuePair<string, string>("vb_login_username", username),
                     new KeyValuePair<string, string>("vb_login_password", ""),
                     new KeyValuePair<string, string>("do", "login"),
                     new KeyValuePair<string, string>("cookieuser", "1"),
@@ -70,7 +60,7 @@ namespace Flashback.Services.Auth
                     new KeyValuePair<string, string>("vb_login_md5password_utf", BuildMd5HashForLogin(password))
                 };
 
-            var postContent = new FormUrlEncodedContent(postData);
+            var postContent = new FlashbackStringUrlContent(postData);
 
             var response = await _httpClient.PostAsync("https://www.flashback.org/login.php", postContent);
 
