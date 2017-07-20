@@ -195,5 +195,22 @@ namespace Flashback.Services.Messages
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<PrivateMessage> GetMessage(string id)
+        {
+            var result = await _httpClient.GetStringAsync("https://www.flashback.org/private.php?do=showpm&pmid=" + id);
+
+
+            var message = await ParseMessage(result);
+
+            return message;
+        }
+
+        private async Task<PrivateMessage> ParseMessage(string result)
+        {
+            var document = await new HtmlParser().ParseAsync(result);
+
+            throw new NotImplementedException();
+        }
     }
 }

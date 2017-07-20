@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ThreadViewModel.cs" />
+    <Compile Include="ViewModels\ViewPrivateMessageViewModel.cs" />
     <Compile Include="Views\ComposePrivateMessagePage.xaml.cs">
       <DependentUpon>ComposePrivateMessagePage.xaml</DependentUpon>
     </Compile>
@@ -175,6 +176,9 @@
     </Compile>
     <Compile Include="Views\ThreadPage.xaml.cs">
       <DependentUpon>ThreadPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewPrivateMessagePage.xaml.cs">
+      <DependentUpon>ViewPrivateMessagePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ThreadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewPrivateMessagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

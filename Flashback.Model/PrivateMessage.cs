@@ -10,6 +10,7 @@ namespace Flashback.Model
         public string FromName { get; set; }            
         public DateTime Date { get; set; }            
         public string Message { get; set; }         
-        public bool IsUnread { get; set; }        
+        public bool IsUnread { get; set; }
+        public string FolderId { get; set; }
     }
 }

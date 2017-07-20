@@ -81,7 +81,7 @@ namespace FlashbackUwp.ViewModels
 
             if (item != null)
             {
-                NavigationService.Navigate(typeof(ComposePrivateMessagePage), item.Id);
+                NavigationService.Navigate(typeof(ViewPrivateMessagePage), item.Id);
             }
         }
     }
