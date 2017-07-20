@@ -116,13 +116,13 @@ namespace Flashback.Services
                 return str;
             }
         }
-
+        
         public static string FormatToEncodedPostable(this String str)
         {
             if (string.IsNullOrWhiteSpace(str))
                 return str;
 
-            var output = WebUtility.HtmlEncode(str);
+            var output = WebUtility.HtmlEncode(str).Replace("&amp;", "&").Replace("&gt;", ">").Replace("&lt;", "<").Replace("&quot;", "\"");
 
             var destinationEncoding = Encoding.GetEncoding("ISO-8859-1");            
             var sourceEncoding = Encoding.UTF8;
@@ -135,6 +135,5 @@ namespace Flashback.Services
 
             return encodedString;            
         }
-
     }
 }

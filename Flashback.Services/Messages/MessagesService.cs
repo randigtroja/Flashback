@@ -169,7 +169,7 @@ namespace Flashback.Services.Messages
                 new KeyValuePair<string, string>("csrftoken",token)
             };
             
-            var postContent = new FormUrlEncodedContent(postData);            
+            var postContent = new FlashbackStringUrlContent(postData);            
 
             var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);                        
 
@@ -186,10 +186,10 @@ namespace Flashback.Services.Messages
                 new KeyValuePair<string, string>("dowhat","delete"),
                 new KeyValuePair<string, string>("folderid",folderId),
                 new KeyValuePair<string, string>("dowhat","delete") ,
-                new KeyValuePair<string, string>("pm%5B" + messageId + "%5D","true")                                 
+                new KeyValuePair<string, string>("pm[" + messageId + "]","true")                                 
             };
 
-            var postContent = new FormUrlEncodedContent(postData);
+            var postContent = new FlashbackStringUrlContent(postData);
 
             var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);
 
