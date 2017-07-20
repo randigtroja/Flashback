@@ -13,7 +13,13 @@ namespace FlashbackUwp.ViewModels
     {
        
 
-        private bool _mayPost;        
+        private bool _mayPost;
+        private string _subject;
+        private string _id;
+        private bool _isQuote;
+        private string _to;
+        private string _message;
+        private string _postToken;
 
         public bool MayPost
         {
@@ -21,26 +27,47 @@ namespace FlashbackUwp.ViewModels
             set { Set(ref _mayPost, value); }
         }
 
-        private ComposePrivateMessageModel _composeModel;
-
-        public ComposePrivateMessageModel ComposeModel
+        public string Id
         {
-            get
-            {
-                return _composeModel;
-            }
-            set
-            {
-                Set(ref _composeModel, value);
-            }
+            get { return _id; }
+            set { Set(ref _id,value); }
         }
 
+        public bool IsQuote
+        {
+            get { return _isQuote; }
+            set { Set(ref _isQuote, value); }
+        }
+
+        public string To
+        {
+            get { return _to; }
+            set { Set(ref _to, value); }
+        }
+
+        public string Subject
+        {
+            get { return _subject; }
+            set { Set(ref _subject, value); }
+        }
+
+        public string Message
+        {
+            get { return _message; }
+            set { Set(ref _message, value); }
+        }
+
+        public string PostToken
+        {
+            get { return _postToken; }
+            set { Set(ref _postToken, value); }
+        }
+       
         private MessagesService _messageService;
 
         public ComposePrivateMessageViewModel()
         {
-            _messageService = new MessagesService(App.CookieContainer);
-            _composeModel = new ComposePrivateMessageModel();
+            _messageService = new MessagesService(App.CookieContainer);            
 
             MayPost = true;
         }
@@ -50,8 +77,8 @@ namespace FlashbackUwp.ViewModels
             var id = parameter as string;
             if (id != null)
             {
-                ComposeModel.Id =id;
-                ComposeModel.IsQuote= true;
+                Id =id;
+                IsQuote= true;
             }
 
             await LoadViewModel();
@@ -67,8 +94,14 @@ namespace FlashbackUwp.ViewModels
                 Busy.SetBusy(true, "Laddar...");
                 Error = null;
 
-                var result = await _messageService.NewPrivateMessage(ComposeModel.Id);
-                ComposeModel = result;
+                var result = await _messageService.NewPrivateMessage(Id);
+
+                Id = result.Id;
+                PostToken = result.PostToken;
+                Message = result.Message;
+                To = result.To;
+                Subject = result.Subject;
+
             }
             catch (Exception e)
             {
@@ -83,7 +116,7 @@ namespace FlashbackUwp.ViewModels
         public async Task PostMessage()
         {
 
-            if (string.IsNullOrWhiteSpace(this.ComposeModel.Subject) || string.IsNullOrWhiteSpace(this.ComposeModel.To) || string.IsNullOrWhiteSpace(this.ComposeModel.Message))
+            if (string.IsNullOrWhiteSpace(Subject) || string.IsNullOrWhiteSpace(To) || string.IsNullOrWhiteSpace(Message))
             {
                 await new Windows.UI.Popups.MessageDialog("Ej fullständiga uppgifter ifyllda för att kunna skicka.").ShowAsync();
                 return;
@@ -96,7 +129,7 @@ namespace FlashbackUwp.ViewModels
                 Busy.SetBusy(true,"Skickar meddelande...");
                 Error = null;
 
-                var result = await _messageService.PostMessage(ComposeModel.To, ComposeModel.Subject, ComposeModel.Message, ComposeModel.PostToken);
+                var result = await _messageService.PostMessage(To, Subject, Message, PostToken);
 
                 if (result)
                 {

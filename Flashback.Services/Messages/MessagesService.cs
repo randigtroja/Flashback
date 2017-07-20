@@ -153,11 +153,11 @@ namespace Flashback.Services.Messages
         {
             var postData = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("message", message.FormatToEncodedPostable()),
+                new KeyValuePair<string, string>("message", message),
                 new KeyValuePair<string, string>("s",""),
                 new KeyValuePair<string, string>("do","insertpm"),
-                new KeyValuePair<string, string>("recipients%5B%5D",to.FormatToEncodedPostable()),
-                new KeyValuePair<string, string>("title",subject.FormatToEncodedPostable()),
+                new KeyValuePair<string, string>("recipients[]",to),
+                new KeyValuePair<string, string>("title",subject),
                 new KeyValuePair<string, string>("receipt","0"),
                 new KeyValuePair<string, string>("signature","1"),
                 new KeyValuePair<string, string>("parseurl","1"),
@@ -168,10 +168,10 @@ namespace Flashback.Services.Messages
                 new KeyValuePair<string, string>("forward",""),
                 new KeyValuePair<string, string>("csrftoken",token)
             };
+            
+            var postContent = new FormUrlEncodedContent(postData);            
 
-            var postContent = new FormUrlEncodedContent(postData);
-
-            var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);
+            var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);                        
 
             return response.IsSuccessStatusCode;
         }
