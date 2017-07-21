@@ -164,7 +164,8 @@ namespace Flashback.Services.Threads
             }
 
             var poster = thread.QuerySelectorAll("div#posts div.post");
-            string html = BuildPageFromForumThreads(poster);           
+
+            string html = _options.GetHtmlHeaders() +  BuildHtmlForForumThreads(poster) + _options.GetHtmlFooter();           
 
             return new ForumThread()
             {
@@ -179,92 +180,16 @@ namespace Flashback.Services.Threads
         }
 
         /// <summary>
-        /// Bygger upp html som ska visas i appens webview.
-        /// todo: städa upp en del här
+        /// Bygger upp html för enbart alla inlägg i en tråd        
         /// </summary>
         /// <param name="poster"></param>
         /// <returns></returns>
-        private string BuildPageFromForumThreads(IHtmlCollection<IElement> poster)
+        private string BuildHtmlForForumThreads(IHtmlCollection<IElement> poster)
         {
             if (poster == null)
                 return "";
 
-            var sb = new StringBuilder();
-
-            string spoilerScript = "<script>var elements = document.querySelectorAll('[data-toggle=\"hidden\"]');" +
-                                       "Array.prototype.forEach.call(elements, function(el, i) {el.onclick = function() {" +
-                                       "el.nextElementSibling.classList.toggle(\"hidden\");" +
-                                       "}});" +
-                                       "</script>";
-
-            string foreColor = _options.GetForeColor();
-            string quotesBackground = _options.GetQuotesBackground();
-            string quotesBorder = _options.GetQuotesBorder();
-            string fontSize = _options.FontSize;
-            string accentColor = _options.AccentColor;
-            string backgroundColor = _options.GetBackgroundColor();
-
-            var htmlHeaders = "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\" />" +
-                "<style TYPE=\"text/css\">" +
-                "div.post-bbcode-quote {color:" + foreColor + ";" +
-                "background:" + quotesBackground + "; " +
-                "border-style:solid;border-color:" + quotesBorder + "; " +
-                "border-width:1px; " +
-                "font-size:" + fontSize + "; };" +
-                "td.post-quote img {border: 0px;}" +
-                "a {color:" + accentColor + ";} " +
-                "div.post-bbcode-quote-wrapper { width:95%;} " +
-                "table{table-layout:fixed;}  " +
-                "blockquote { width: 95%;margin-left:20px; background:" + quotesBackground + "; " +
-                "border-style:solid;border-color:" + quotesBorder + ";border-width:1px;} " +
-                "i { width:90%;} img.avatar { width:40px;vertical-align:text-bottom; margin-right:12px; }" +
-                ".hidden {display: none;}" +
-                ".post-bbcode-spoiler {color: " + foreColor + "; " +
-                "background:" + quotesBackground + "; " +
-                "border-style:solid;border-color:" + quotesBorder + "; " +
-                "border-width:1px; " +
-                "font-size:" + fontSize + "; };" +
-                "</style>";
-            
-            sb.AppendLine("<html>");
-            sb.AppendLine("<head>");
-            sb.AppendLine(htmlHeaders);
-            sb.AppendLine(
-                "<script type=\"text/javascript\">" +
-                    "window.onload = function() { document.addEventListener(\'touchstart\', handleTouchStart, false);" +
-                    "document.addEventListener(\'touchmove\', handleTouchMove, false);" +
-                    "var xDown = null;" +
-                    "var yDown = null;" +
-                    "function handleTouchStart(evt) {" +                        
-                        "xDown = evt.touches[0].clientX;" +
-                        "yDown = evt.touches[0].clientY;" +
-                    "};" +
-                    "function handleTouchMove(evt) {" +
-                        "if ( ! xDown || ! yDown ) {" +
-                            "return;" +
-                    "}" +
-                    "var xUp = evt.touches[0].clientX;" +
-                    "var yUp = evt.touches[0].clientY;" +
-                    "var xDiff = xDown - xUp;" +
-                    "var yDiff = yDown - yUp;" +
-                    "if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/" +
-                    "if ( xDiff > 0 ) {" +                    
-                        "window.external.notify('left');" +
-                    "} else {" +                
-                        "window.external.notify('right');" +
-                    "} " +
-                    "} else {if ( yDiff > 0 ) {" +                    
-                    "} else {" +                        
-                    "}" +
-                "}" +
-                "/* reset values */" +
-                "xDown = null;" +
-                "yDown = null;" +
-                "}};</script>");            
-            sb.AppendLine("</head>");
-            sb.AppendLine("<body style=\"margin:0px;font-family:'Segoe UI';background-color:" + backgroundColor + ";font-size: " + fontSize + ";\">");
-            sb.AppendLine("<div id=\"pageWrapper\" style=\"width:100%; color:" + foreColor + ";word-wrap: break-word\">");
-            sb.AppendLine("<div style=\"display:none\">" + Guid.NewGuid() + "</div>"); // verkar inte alltid slängas loadedeventet annars. Nån cache?
+            StringBuilder sb = new StringBuilder();
 
             foreach (var post in poster)
             {
@@ -336,15 +261,7 @@ namespace Flashback.Services.Threads
                 sb.AppendLine("<hr noshade>");
                 sb.AppendLine("<br>");
             }
-
-            sb.AppendLine(spoilerScript);
-            sb.AppendLine("</body>");
-            sb.AppendLine("</html>");
-
-#if DEBUG
-            Debug.Write(sb.ToString());
-#endif
-
+           
             return sb.ToString();
         }
 

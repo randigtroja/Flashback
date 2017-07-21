@@ -73,7 +73,9 @@
         </controls:PageHeader>
 
         <!--  content  -->
-        <WebView Grid.Row="1" x:Name="WebView" extensions:HtmlWebViewExtender.HTML="{Binding Message.Message}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}"></WebView>
+        <ScrollViewer Padding="12,8,0,0" Grid.Row="1">
+            <WebView x:Name="WebView" extensions:HtmlWebViewExtender.HTML="{Binding Message.Message}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}"></WebView>
+        </ScrollViewer>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <AppBarButton Name="BottonPrimaryHome" Icon="MailReply" Label="Svara" Click="{x:Bind ViewModel.Reply}" />

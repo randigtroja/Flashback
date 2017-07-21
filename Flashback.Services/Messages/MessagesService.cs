@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp.Parser.Html;
 using Flashback.Model;
@@ -61,9 +60,7 @@ namespace Flashback.Services.Messages
                             item.IsUnread = true;
                         }
                     }
-
-                    
-                    
+                                       
                     Uri uri = new Uri("http://www.flashback.org" + "/" + title.Attributes["href"].Value.Replace("&amp;", "&"));
 
                     var parameterValue = uri.Query.Split('&')
@@ -72,20 +69,6 @@ namespace Flashback.Services.Messages
                                         .FirstOrDefault();
 
                     item.Id = parameterValue;
-
-
-                        // Verkar inte behövas längre?
-
-                        //var parameterValue2 = uri.Query.Split('&')
-                        //                    .Where(s => s.Split('=')[0] == "token")
-                        //                    .Select(s => s.Split('=')[1])
-                        //                    .FirstOrDefault();
-
-                        //item.Token = parameterValue2;
-
-
-
-                    
 
                     privateMessages.Add(item);
                 }
@@ -96,7 +79,7 @@ namespace Flashback.Services.Messages
 
         public async Task<ComposePrivateMessageModel> NewPrivateMessage(string id)
         {
-            string pmUrl = "";
+            string pmUrl;
 
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -112,7 +95,6 @@ namespace Flashback.Services.Messages
             var messageModel = await ParseNewPrivateMessage(result);
 
             return messageModel;
-
         }
 
         private async Task<ComposePrivateMessageModel> ParseNewPrivateMessage(string result)
@@ -212,9 +194,11 @@ namespace Flashback.Services.Messages
         private async Task<PrivateMessage> ParseMessage(string result)
         {
             var document = await new HtmlParser().ParseAsync(result);
+
             var privateMessage = new PrivateMessage();
 
             var postCheck = document.QuerySelector("div[id='post']");
+
             if (postCheck != null)
             {
                 var titleCheck = postCheck.QuerySelector("div div strong");
@@ -223,10 +207,17 @@ namespace Flashback.Services.Messages
                     privateMessage.Title = WebUtility.HtmlDecode(titleCheck.TextContent.FixaRadbrytningar());
                 }
 
-                var inlagg = postCheck.QuerySelector("div[class='post_message']");
-                if (inlagg != null)
+                var messageCheck = postCheck.QuerySelector("div[class='post_message']");
+                if (messageCheck != null)
                 {
-                    privateMessage.Message = inlagg.InnerHtml;
+                    var messageData = messageCheck.InnerHtml;
+
+                    if (_options.RenderEmoticons)
+                    {
+                        messageData = _options.ReplaceSmileys(messageData);
+                    }
+
+                    privateMessage.Message = _options.GetHtmlHeaders() + messageData + _options.GetHtmlFooter();
                 }
 
                 var tokenCheck = document.QuerySelector("input[name='csrftoken']");
