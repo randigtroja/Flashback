@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Messages;
+using FlashbackUwp.Views;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -33,7 +35,13 @@ namespace FlashbackUwp.ViewModels
 
         public async void Delete()
         {
-            
+            var ok = await _messagesService.DeleteMessage(Message.Id, Message.FolderId,Message.Token);
+
+            if (ok)
+            {
+                await new Windows.UI.Popups.MessageDialog("Meddelandet är raderat").ShowAsync();
+                await NavigationService.NavigateAsync(typeof(PrivateMessagesPage));
+            }
         }
 
         public async void Reply()

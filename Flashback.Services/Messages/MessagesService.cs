@@ -202,6 +202,7 @@ namespace Flashback.Services.Messages
 
 
             var message = await ParseMessage(result);
+            message.Id = id;
 
             return message;
         }
