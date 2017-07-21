@@ -209,8 +209,37 @@ namespace Flashback.Services.Messages
         private async Task<PrivateMessage> ParseMessage(string result)
         {
             var document = await new HtmlParser().ParseAsync(result);
+            var privateMessage = new PrivateMessage();
 
-            throw new NotImplementedException();
+            var postCheck = document.QuerySelector("div[id='post']");
+            if (postCheck != null)
+            {
+                var titleCheck = postCheck.QuerySelector("div div strong");
+                if (titleCheck != null)
+                {
+                    privateMessage.Title = WebUtility.HtmlDecode(titleCheck.TextContent.FixaRadbrytningar());
+                }
+
+                var inlagg = postCheck.QuerySelector("div[class='post_message']");
+                if (inlagg != null)
+                {
+                    privateMessage.Message = inlagg.InnerHtml;
+                }
+
+                var tokenCheck = document.QuerySelector("input[name='csrftoken']");
+                if (tokenCheck != null)
+                {
+                    privateMessage.Token = tokenCheck.Attributes["value"].Value;                        
+                }
+
+                var folderIdCheck = document.QuerySelector("input[name='folderid']");
+                if (folderIdCheck != null)
+                {
+                    privateMessage.FolderId = folderIdCheck.Attributes["value"].Value;
+                }               
+            }
+
+            return privateMessage;            
         }
     }
 }

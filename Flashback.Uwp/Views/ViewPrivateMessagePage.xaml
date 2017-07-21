@@ -8,6 +8,7 @@
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
     xmlns:converters="using:FlashbackUwp.Converters"
     xmlns:controls="using:Template10.Controls"
+    xmlns:extensions="using:FlashbackUwp.Extensions"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -64,7 +65,7 @@
         <!--  header  -->
         <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                    
                              EllipsisVisibility="Collapsed" 
-                             PrimaryCommandsVisibility="Collapsed" Text="Privata meddelanden">
+                             PrimaryCommandsVisibility="Collapsed" Text="{Binding Message.Title}">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.Reply}" Label="Svara" Icon="MailReply" x:Name="RefreshButton"/>
                 <AppBarButton Click="{x:Bind ViewModel.Delete}" Label="Radera" Icon="Delete" x:Name="AddNewMessageButton"/>
@@ -72,7 +73,7 @@
         </controls:PageHeader>
 
         <!--  content  -->
-        <WebView></WebView>
+        <WebView Grid.Row="1" x:Name="WebView" extensions:HtmlWebViewExtender.HTML="{Binding Message.Message}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}"></WebView>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <AppBarButton Name="BottonPrimaryHome" Icon="MailReply" Label="Svara" Click="{x:Bind ViewModel.Reply}" />

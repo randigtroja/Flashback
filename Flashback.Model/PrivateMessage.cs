@@ -12,5 +12,6 @@ namespace Flashback.Model
         public string Message { get; set; }         
         public bool IsUnread { get; set; }
         public string FolderId { get; set; }
+        public string Title { get; set; }
     }
 }
