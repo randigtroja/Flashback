@@ -46,7 +46,7 @@ namespace FlashbackUwp.ViewModels
 
         public async void Reply()
         {
-
+            await NavigationService.NavigateAsync(typeof(ComposePrivateMessagePage), Message.Id);
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
