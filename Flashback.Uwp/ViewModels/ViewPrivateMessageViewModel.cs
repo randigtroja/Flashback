@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Messages;
+using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
 
 namespace FlashbackUwp.ViewModels
@@ -11,7 +14,7 @@ namespace FlashbackUwp.ViewModels
     public class ViewPrivateMessageViewModel : FlashbackViewModelBase
     {
         private readonly MessagesService _messagesService;
-        
+        private readonly SettingsService _settings;
         private PrivateMessage _message;
       
 
@@ -30,7 +33,17 @@ namespace FlashbackUwp.ViewModels
 
         public ViewPrivateMessageViewModel()
         {
-            _messagesService = new MessagesService(App.CookieContainer);    
+            var c = (Color)Application.Current.Resources["SystemAccentColor"];
+            _settings = SettingsService.Instance;
+
+            _messagesService = new MessagesService(App.CookieContainer, new HtmlRenderOptions()
+            {
+                IsDarkThemed = _settings.AppTheme == ApplicationTheme.Dark,
+                ShowAvatars = _settings.ShowAvatars,
+                AccentColor = string.Format("#{0:X2}{1:X2}{2:X2}", c.R, c.G, c.B),
+                FontSize = _settings.FontSize,
+                RenderEmoticons = _settings.UseEmoticons
+            });    
         }
 
         public async void Delete()

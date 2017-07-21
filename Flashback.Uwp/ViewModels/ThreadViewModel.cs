@@ -74,7 +74,7 @@ namespace FlashbackUwp.ViewModels
             _settings = SettingsService.Instance;
             _fileService = new FileService();
 
-            _threadService = new ThreadsService(App.CookieContainer, new ThreadRenderOptions()
+            _threadService = new ThreadsService(App.CookieContainer, new HtmlRenderOptions()
             {
                 IsDarkThemed = _settings.AppTheme == ApplicationTheme.Dark,
                 ShowAvatars = _settings.ShowAvatars,

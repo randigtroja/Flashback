@@ -67,7 +67,7 @@ namespace FlashbackUwp.ViewModels
 
         public ComposePrivateMessageViewModel()
         {
-            _messageService = new MessagesService(App.CookieContainer);            
+            _messageService = new MessagesService(App.CookieContainer,null);            
 
             MayPost = true;
         }

@@ -15,9 +15,9 @@ namespace Flashback.Services.Threads
     public class ThreadsService
     {
         private readonly FlashbackHttpClient _httpClient;
-        private readonly ThreadRenderOptions _options;
+        private readonly HtmlRenderOptions _options;
         
-        public ThreadsService(CookieContainer container, ThreadRenderOptions options)
+        public ThreadsService(CookieContainer container, HtmlRenderOptions options)
         {
             _httpClient = new FlashbackHttpClient(container);
             _options = options;
@@ -99,7 +99,7 @@ namespace Flashback.Services.Threads
         /// Hämtar en tråd
         /// </summary>
         /// <param name="id">Id till tråden. Kan skickas in med vilken sida man vill hämta på, eller "s" på slutet för sista sidan</param>
-        /// <returns>En modell över en forumtråd. Bygger html utefter inskickad ThreadRenderOptions till ThreadService</returns>
+        /// <returns>En modell över en forumtråd. Bygger html utefter inskickad HtmlRenderOptions till ThreadService</returns>
         public async Task<ForumThread> GetForumThread(string id)
         {
             var result = await _httpClient.GetStringAsync("https://www.flashback.org/" + id);

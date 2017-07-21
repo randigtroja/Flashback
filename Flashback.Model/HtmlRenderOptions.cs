@@ -1,10 +1,10 @@
 ﻿namespace Flashback.Model
 {
     /// <summary>
-    /// Används för att styra hur html-ska byggas upp för forumtrådar
+    /// Används för att styra hur html-ska byggas upp för forumtrådar och privata meddelanden
     /// Värden kommer från appens egna inställningar
     /// </summary>
-    public class ThreadRenderOptions
+    public class HtmlRenderOptions
     {
         public bool IsDarkThemed { get; set; }
         public string AccentColor { get; set; }

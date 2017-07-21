@@ -31,7 +31,7 @@ namespace FlashbackUwp.ViewModels
 
         public PrivateMessagesViewModel()
         {
-            _messagesService = new MessagesService(App.CookieContainer);
+            _messagesService = new MessagesService(App.CookieContainer, null);
             Messages = new ObservableCollection<PrivateMessage>();
         }
 

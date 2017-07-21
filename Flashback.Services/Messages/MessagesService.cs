@@ -11,10 +11,12 @@ namespace Flashback.Services.Messages
 {
     public class MessagesService
     {
+        private readonly HtmlRenderOptions _options;
         private readonly FlashbackHttpClient _httpClient;
 
-        public MessagesService(CookieContainer container)
+        public MessagesService(CookieContainer container, HtmlRenderOptions options)
         {
+            _options = options;
             _httpClient = new FlashbackHttpClient(container);
         }
 
