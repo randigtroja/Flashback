@@ -646,7 +646,7 @@ namespace Flashback.Services.Threads
                     new KeyValuePair<string, string>("emailupdate", "0") // todo: läs ut användarens inställningar eller bara skita i det som tidigare?
                 };
 
-            var postContent = new FormUrlEncodedContent(postData);
+            var postContent = new FlashbackStringUrlContent(postData);
           
             var response = await _httpClient.PostAsync("https://www.flashback.org/subscription.php", postContent);
 
