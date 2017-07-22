@@ -766,7 +766,44 @@ namespace Flashback.Services.Threads
 
         private async Task<PostReplyModel> ParsePostReply(string result)
         {
-            return new PostReplyModel(); // Todo
+            var model = new PostReplyModel();
+
+            var parser = new HtmlParser();
+
+            var reply = await parser.ParseAsync(result);
+
+            var titleCheck = reply.QuerySelector("div.page-title h1 a");
+            model.Title = titleCheck != null ? titleCheck.TextContent : "";
+
+            var userCheck = reply.QuerySelector("input[name='loggedinuser']");
+            if (userCheck != null)
+            {
+                model.UserId = userCheck.Attributes["value"].Value;
+            }
+
+            var threadIdCheck = reply.QuerySelector("input[name='t'");
+            if (threadIdCheck != null)
+            {
+                model.ThreadId = threadIdCheck.Attributes["value"].Value;
+            }
+
+            var subscriptionTypeCheck = reply.QuerySelector("select[name='emailupdate] option[selected]");
+            if (subscriptionTypeCheck != null)
+            {
+                model.SubscriptionType = subscriptionTypeCheck.Attributes["value"].Value;
+            }
+            else
+            {
+                model.SubscriptionType = "9999";
+            }
+
+            var messageCheck = reply.QuerySelector("");
+            if (messageCheck != null)
+            {
+                model.Message = WebUtility.HtmlDecode(messageCheck.InnerHtml);
+            }
+            
+            return model;
         }
     }
 }
