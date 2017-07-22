@@ -11,6 +11,42 @@ namespace FlashbackUwp.ViewModels
     {
         private readonly ThreadsService _threadService;
         private readonly SettingsService _settings;
+        private string _title;
+        private string _message;
+        private string _userId;
+        private string _threadId;
+        private string _subscriptionType;
+
+        public string Title
+        {
+            get { return _title; }
+            set { Set(ref _title, value); }
+        }
+
+        public string Message
+        {
+            get { return _message; }
+            set { Set(ref _message, value); }
+        }
+
+        public string UserId
+        {
+            get { return _userId; }
+            set { Set(ref _userId, value); }
+        }
+
+        public string ThreadId
+        {
+            get { return _threadId; }
+            set { Set(ref _threadId, value); }
+        }
+
+        public string SubscriptionType
+        {
+            get { return _subscriptionType; }
+            set { Set(ref _subscriptionType, value); }
+        }
+
 
         public PostReplyViewModel()
         {
@@ -31,7 +67,13 @@ namespace FlashbackUwp.ViewModels
 
         private async Task LoadViewModel(string replyRequestId, bool replyRequestIsQuote)
         {
-            throw new System.NotImplementedException();
+            var model = await _threadService.GetReply(replyRequestId, replyRequestIsQuote);
+
+            Title = model.Title;
+            Message = model.Message;
+            UserId = model.UserId;
+            ThreadId = model.ThreadId;
+            SubscriptionType = model.SubscriptionType;
         }
     }
 }
