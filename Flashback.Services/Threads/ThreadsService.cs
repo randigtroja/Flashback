@@ -743,5 +743,30 @@ namespace Flashback.Services.Threads
             return searchResult;
 
         }
+
+        public async Task<PostReplyModel> GetReply(string id, bool isQuote)
+        {
+            string url;
+
+            if (isQuote)
+            {
+                url = "https://www.flashback.org/newreply.php?do=newreply&p=" + id;
+            }
+            else
+            {
+                url = "https://www.flashback.org/newreply.php?do=newreply&noquote=1&p=" + id;
+            }
+
+            var result = await _httpClient.GetStringAsync(url);
+
+            var reply = await ParsePostReply(result);
+
+            return reply;
+        }
+
+        private async Task<PostReplyModel> ParsePostReply(string result)
+        {
+            return new PostReplyModel(); // Todo
+        }
     }
 }

@@ -284,6 +284,8 @@ namespace FlashbackUwp.ViewModels
 
         public async void WebView_OnScriptNotify(object sender, NotifyEventArgs e)
         {
+
+
             if (e.Value.Contains("left"))
             {
                 await this.NextPage();
@@ -293,6 +295,10 @@ namespace FlashbackUwp.ViewModels
             {
                 await this.PrevioustPage();
                 return;
+            }
+            else if (e.Value.Contains("post"))
+            {
+                await NavigationService.NavigateAsync(typeof(PostReplyPage), new PostReplyRequest() {Id = e.Value.Replace("post", "") , IsQuote = true});
             }
         }
     }

@@ -117,6 +117,7 @@
     <Compile Include="ViewModels\NewPostsViewModel.cs" />
     <Compile Include="ViewModels\NewTopicsViewModel.cs" />
     <Compile Include="ViewModels\NyheterViewModel.cs" />
+    <Compile Include="ViewModels\PostReplyViewModel.cs" />
     <Compile Include="ViewModels\PrivateMessagesViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
@@ -158,6 +159,9 @@
     </Compile>
     <Compile Include="Views\NewTopicsPage.xaml.cs">
       <DependentUpon>NewTopicsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PostReplyPage.xaml.cs">
+      <DependentUpon>PostReplyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PrivateMessagesPage.xaml.cs">
       <DependentUpon>PrivateMessagesPage.xaml</DependentUpon>
@@ -253,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewTopicsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PostReplyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
