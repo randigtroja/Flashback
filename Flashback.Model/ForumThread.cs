@@ -9,6 +9,7 @@
         public int MaxPages { get; set; }
         public string PagenumberText => string.Format("{0}/{1}", CurrentPage, MaxPages);
         public string ParentId { get; set; }
-        public string Html { get; set; }        
+        public string Html { get; set; }
+        public string ReplyId { get; set; }
     }
 }
