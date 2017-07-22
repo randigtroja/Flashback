@@ -25,6 +25,7 @@ namespace FlashbackUwp.Views
         public SearchPage()
         {
             this.InitializeComponent();
+           NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
 }
