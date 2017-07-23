@@ -72,7 +72,7 @@
                              EllipsisVisibility="Collapsed" 
                              PrimaryCommandsVisibility="Collapsed">
             <controls:PageHeader.PrimaryCommands>
-                <AppBarButton Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.Refresh}" IsEnabled="{Binding IsLoggedIn}" />
+                <AppBarButton Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.PostReply}" IsEnabled="{Binding IsLoggedIn}" />
                 <AppBarButton Icon=" Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
                 <AppBarButton Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
                 <AppBarButton Icon="Pin" Label="Pinna" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
@@ -117,7 +117,7 @@
         </ScrollViewer>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Visibility="Collapsed" Grid.Row="2">
-            <AppBarButton Name="BottonAddFavourite" Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.Refresh}" IsEnabled="{Binding IsLoggedIn}" />
+            <AppBarButton Name="BottonAddFavourite" Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.PostReply}" IsEnabled="{Binding IsLoggedIn}" />
             <AppBarButton Name="BottonReply" Icon=" Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
             <AppBarButton Name="BottonPin" Icon="Pin" Label="Pinna" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />

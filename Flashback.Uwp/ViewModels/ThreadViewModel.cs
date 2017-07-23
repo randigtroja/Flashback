@@ -248,6 +248,11 @@ namespace FlashbackUwp.ViewModels
             await LoadViewModel(ForumThread.Id.GetCleanIdNextPage(ForumThread.CurrentPage));
         }
 
+        public async Task PostReply()
+        {
+            await NavigationService.NavigateAsync(typeof(PostReplyPage),new PostReplyRequest(){Id = this.ForumThread.ReplyId, IsQuote = false});
+        }
+
         public async Task ShowPicker()
         {
             InputScope scope = new InputScope();

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Threads;
 using FlashbackUwp.Services.SettingsServices;
+using FlashbackUwp.Views;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -67,13 +69,27 @@ namespace FlashbackUwp.ViewModels
 
         private async Task LoadViewModel(string replyRequestId, bool replyRequestIsQuote)
         {
-            var model = await _threadService.GetReply(replyRequestId, replyRequestIsQuote);
+            try
+            {
+                Busy.SetBusy(true,"Laddar...");
+                Error = null;
 
-            Title = model.Title;
-            Message = model.Message;
-            UserId = model.UserId;
-            ThreadId = model.ThreadId;
-            SubscriptionType = model.SubscriptionType;
+                var model = await _threadService.GetReply(replyRequestId, replyRequestIsQuote);
+
+                Title = model.Title;
+                Message = model.Message;
+                UserId = model.UserId;
+                ThreadId = model.ThreadId;
+                SubscriptionType = model.SubscriptionType;
+            }
+            catch (Exception e)
+            {
+                Error = e.Message;
+            }
+            finally
+            {
+                Busy.SetBusy(false);
+            }            
         }
     }
 }

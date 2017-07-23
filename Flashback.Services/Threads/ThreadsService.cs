@@ -165,6 +165,16 @@ namespace Flashback.Services.Threads
 
             var poster = thread.QuerySelectorAll("div#posts div.post");
 
+            var replyId ="";
+            foreach (var post in poster)
+            {
+                replyId = post.Attributes["id"].Value;
+                replyId = replyId.Replace("post", "");
+
+                if (!string.IsNullOrWhiteSpace(replyId))                
+                    break;                
+            }
+
             string html = _options.GetHtmlHeaders() +  BuildHtmlForForumThreads(poster) + _options.GetHtmlFooter();           
 
             return new ForumThread()
@@ -175,7 +185,8 @@ namespace Flashback.Services.Threads
                 MaxPages = maxPages,
                 ParentId = parentId,
                 Html = html,
-                Id = realId
+                Id = realId,
+                ReplyId = replyId
             };
         }
 
@@ -781,13 +792,13 @@ namespace Flashback.Services.Threads
                 model.UserId = userCheck.Attributes["value"].Value;
             }
 
-            var threadIdCheck = reply.QuerySelector("input[name='t'");
+            var threadIdCheck = reply.QuerySelector("input[name='t']");
             if (threadIdCheck != null)
             {
                 model.ThreadId = threadIdCheck.Attributes["value"].Value;
             }
 
-            var subscriptionTypeCheck = reply.QuerySelector("select[name='emailupdate] option[selected]");
+            var subscriptionTypeCheck = reply.QuerySelector("select[name='emailupdate'] option[selected]");
             if (subscriptionTypeCheck != null)
             {
                 model.SubscriptionType = subscriptionTypeCheck.Attributes["value"].Value;
@@ -797,7 +808,7 @@ namespace Flashback.Services.Threads
                 model.SubscriptionType = "9999";
             }
 
-            var messageCheck = reply.QuerySelector("");
+            var messageCheck = reply.QuerySelector("textarea");
             if (messageCheck != null)
             {
                 model.Message = WebUtility.HtmlDecode(messageCheck.InnerHtml);
