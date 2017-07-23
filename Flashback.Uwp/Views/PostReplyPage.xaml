@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
     xmlns:converters="using:FlashbackUwp.Converters"
+    xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d">
 
 
@@ -19,6 +20,27 @@
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                    
+                             EllipsisVisibility="Collapsed" 
+                             PrimaryCommandsVisibility="Collapsed" Text="{Binding Title}">
+        </controls:PageHeader>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <TextBox MinHeight="500" Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         TextWrapping="Wrap"                          
+                         AcceptsReturn="True"
+                         InputScope="Text">
+                </TextBox>
+                <Button  Width="200" HorizontalAlignment="Left" Content="Svara" Margin="0,12,0,0">
+                </Button>
+            </StackPanel>
+            
+        </Grid>
     </Grid>
 </Page>
