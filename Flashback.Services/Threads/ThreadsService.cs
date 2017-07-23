@@ -113,7 +113,9 @@ namespace Flashback.Services.Threads
             var parser = new HtmlParser();
 
             var thread = await parser.ParseAsync(result);
-            
+
+            bool userLoggedIn = result.Contains("onclick=\"return log_out()\">Logga ut</a>");
+
             var pageNameCheck = thread.QuerySelector("title");
             string pageName = "";
 
@@ -175,7 +177,11 @@ namespace Flashback.Services.Threads
                     break;                
             }
 
-            string html = _options.GetHtmlHeaders() +  BuildHtmlForForumThreads(poster) + _options.GetHtmlFooter();           
+            string html = _options.GetHtmlHeaders() +  BuildHtmlForForumThreads(poster, userLoggedIn) + _options.GetHtmlFooter();
+
+#if DEBUG
+            Debug.WriteLine(html);                
+#endif
 
             return new ForumThread()
             {
@@ -194,8 +200,9 @@ namespace Flashback.Services.Threads
         /// Bygger upp html för enbart alla inlägg i en tråd        
         /// </summary>
         /// <param name="poster"></param>
+        /// <param name="userLoggedIn">Om vi ska rendera ut saker som enbart gäller för inloggade användare</param>
         /// <returns></returns>
-        private string BuildHtmlForForumThreads(IHtmlCollection<IElement> poster)
+        private string BuildHtmlForForumThreads(IHtmlCollection<IElement> poster, bool userLoggedIn)
         {
             if (poster == null)
                 return "";
@@ -260,13 +267,19 @@ namespace Flashback.Services.Threads
                 {
                     postMessage = _options.ReplaceSmileys(postMessage);
                 }
-
+               
                 sb.AppendLine("<a id=\"" + postLink + "\" href=\"#" + postLink +  "\"></a>");
                 sb.AppendLine("<p>");
                 sb.AppendLine(avatar);
                 sb.AppendLine("<strong>");
                 sb.AppendLine(userName);
                 sb.AppendLine("</strong>");
+
+                if (userLoggedIn)
+                {
+                    sb.AppendLine("<span style=\"align='right'\"><input type=\"button\" onclick=\"prepareQuote('" + postLink.Replace("p","post") + "')\" value=\"Citera\" /></span>");
+                }
+
                 sb.AppendLine("</p>");
                 sb.AppendLine(postMessage);
                 sb.AppendLine("<hr noshade>");
