@@ -35,7 +35,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:AktuellaAmnenPage">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:AktuellaAmnenPage">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xEA5C;" FontSize="20" Width="48" Height="48" />
                     <TextBlock Margin="12,0,0,0"
@@ -44,7 +44,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NewTopicsPage">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:NewTopicsPage">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE8F4;" FontSize="20" Width="48" Height="48" />
                     <TextBlock Margin="12,0,0,0"
@@ -53,7 +53,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NewPostsPage">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:NewPostsPage">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE8E5;" FontSize="20" Width="48" Height="48" />
 
@@ -63,7 +63,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:FavouritesPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:FavouritesPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE24A;" FontSize="20" Width="48" Height="48" />
                     <TextBlock Margin="12,0,0,0"
@@ -72,7 +72,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MyQuotedPostsPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:MyQuotedPostsPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE89B;" FontSize="20" Width="48" Height="48" />
                     <TextBlock Margin="12,0,0,0"
@@ -81,7 +81,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MyStartedThreadsPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:MyStartedThreadsPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE932;" FontSize="20" Width="48" Height="48" />
                     <TextBlock Margin="12,0,0,0"
@@ -90,7 +90,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:PrivateMessagesPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:PrivateMessagesPage" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE715;" FontSize="20" Width="48" Height="48" />
                     <TextBlock Margin="12,0,0,0"
@@ -100,7 +100,7 @@
             </Controls:HamburgerButtonInfo>
             
 
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:NewsPage">
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:NewsPage">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE774;" FontSize="20" Width="48" Height="48" />
                     <TextBlock Margin="12,0,0,0"
