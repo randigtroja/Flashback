@@ -25,6 +25,7 @@ namespace FlashbackUwp.Views
         public NewsPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }      
     }
 }
