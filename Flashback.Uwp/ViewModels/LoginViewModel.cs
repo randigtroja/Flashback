@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Flashback.Services.Auth;
+using FlashbackUwp.Services.SecurityServices;
 using FlashbackUwp.Views;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -28,7 +29,8 @@ namespace FlashbackUwp.ViewModels
             Messenger.Default.Send(isSuccess, "LoggedInStatus");
 
             if (isSuccess)
-            {
+            {                
+                await App.SaveCookies();
                 await new Windows.UI.Popups.MessageDialog("Ok. Du är inloggad!").ShowAsync();
                 await NavigationService.NavigateAsync(typeof(ForumMainList));
             }

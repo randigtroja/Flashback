@@ -107,19 +107,8 @@ namespace FlashbackUwp
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            EncryptionService encryptionService = new EncryptionService();
-            
-            var cookies = await encryptionService.GetCookieData();
-            if (cookies != null && cookies.Any())
-            {
-                foreach (var cookie in cookies)
-                {
-                    CookieContainer.Add(new Uri("https://www.flashback.org"), cookie);
-                }
-            }            
-
-            Messenger.Default.Send<bool>(IsUserLoggedIn(), "LoggedInStatus");
-            
+            await LoadSavedCookies();
+                        
             AdditionalKinds cause = DetermineStartCause(args);
             if (cause == AdditionalKinds.SecondaryTile)
             {
@@ -143,21 +132,44 @@ namespace FlashbackUwp
                 NavigationService.Navigate(typeof(Views.ForumMainList));
             }            
         }
+        
+        public override async void OnResuming(object s, object e, AppExecutionState previousExecutionState)
+        {
+            await LoadSavedCookies();
 
-        public override async Task OnSuspendingAsync(object s, SuspendingEventArgs e, bool prelaunchActivated)
-        {                          
-            var encryptionService = new EncryptionService();           
-            var saveOk = await encryptionService.WriteCookieData(CookieContainer);
+            base.OnResuming(s, e, previousExecutionState);
+        }
 
-            Debug.WriteLine("Status vid att försöka spara ner " + CookieContainer.Count + " st cookies:" + saveOk);
-            
-            await base.OnSuspendingAsync(s, e, prelaunchActivated);
+        private async Task LoadSavedCookies()
+        {
+            var encryptionService = new EncryptionService();
+
+            var cookies = await encryptionService.GetCookieData();
+            if (cookies != null && cookies.Any())
+            {
+                foreach (var cookie in cookies)
+                {
+                    CookieContainer.Add(new Uri("https://www.flashback.org"), cookie);
+                }
+            }
+
+            Messenger.Default.Send<bool>(IsUserLoggedIn(), "LoggedInStatus");
+
+            await Task.CompletedTask;
+        }
+
+        public static async Task SaveCookies()
+        {
+            var encryptionService = new EncryptionService();
+            var saveOk = await encryptionService.WriteCookieData(App.CookieContainer);
+
             await Task.CompletedTask;
         }
 
         public static async Task Logout()
         {           
             await new AuthService(CookieContainer).Logout(GetSessionhash());
+
             CookieContainer = new CookieContainer();
 
             var encryptionService = new EncryptionService();
