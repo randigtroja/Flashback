@@ -13,11 +13,20 @@ namespace FlashbackUwp.ViewModels
     {
         private readonly ThreadsService _threadService;
         private readonly SettingsService _settings;
+
         private string _title;
         private string _message;
         private string _userId;
         private string _threadId;
         private string _subscriptionType;
+        private string _postId;
+        private bool _mayPost;
+
+        public bool MayPost
+        {
+            get { return _mayPost; }
+            set { Set(ref _mayPost, value); }
+        }
 
         public string Title
         {
@@ -49,11 +58,18 @@ namespace FlashbackUwp.ViewModels
             set { Set(ref _subscriptionType, value); }
         }
 
+        public string PostId
+        {
+            get { return _postId; }
+            set { Set(ref _postId, value); }
+        }
+
 
         public PostReplyViewModel()
         {
             _threadService = new ThreadsService(App.CookieContainer, null);
             _settings = SettingsService.Instance;
+            MayPost = true;
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
@@ -73,7 +89,7 @@ namespace FlashbackUwp.ViewModels
             {
                 Busy.SetBusy(true,"Laddar...");
                 Error = null;
-
+                    
                 var model = await _threadService.GetReply(replyRequestId, replyRequestIsQuote);
 
                 Title = model.Title;
@@ -81,15 +97,46 @@ namespace FlashbackUwp.ViewModels
                 UserId = model.UserId;
                 ThreadId = model.ThreadId;
                 SubscriptionType = model.SubscriptionType;
+                PostId = replyRequestId;
             }
             catch (Exception e)
             {
-                Error = e.Message;
+                Error = e.Message;                
             }
             finally
             {
                 Busy.SetBusy(false);
             }            
+        }
+
+        public async Task PostMessage()
+        {
+            var dialog = new Windows.UI.Popups.MessageDialog("Vill du skicka meddelandet?", "Bekräfta");
+
+            dialog.Commands.Add(new Windows.UI.Popups.UICommand("Ja") { Id = 0 });
+            dialog.Commands.Add(new Windows.UI.Popups.UICommand("Avbryt") { Id = 1 });
+
+            dialog.DefaultCommandIndex = 0;
+            dialog.CancelCommandIndex = 1;
+
+            var resultDialog = await dialog.ShowAsync();
+
+            if (resultDialog.Label == "Ja")
+            {
+                MayPost = false;
+
+                var result = await _threadService.PostReply(Message, ThreadId, PostId, UserId, SubscriptionType);
+
+                if (result)
+                {
+                    await new Windows.UI.Popups.MessageDialog("Inlägget är skickat! Gå tillbaka för att ladda om").ShowAsync();
+                }
+                else
+                {
+                    await new Windows.UI.Popups.MessageDialog("Fel vid skickande av meddelande").ShowAsync();
+                    MayPost = true;
+                }
+            }
         }
     }
 }
