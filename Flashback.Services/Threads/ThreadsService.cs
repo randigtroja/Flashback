@@ -829,5 +829,31 @@ namespace Flashback.Services.Threads
             
             return model;
         }
+
+        public async Task<bool> PostReply(string message,string threadId, string postId, string userId, string subsciptionType)
+        {
+            var postData = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("message", message),
+                new KeyValuePair<string, string>("s", ""),
+                new KeyValuePair<string, string>("do", "postreply"),
+                new KeyValuePair<string, string>("t", threadId),
+                new KeyValuePair<string, string>("p", postId),
+                new KeyValuePair<string, string>("posthash", ""),
+                new KeyValuePair<string, string>("poststarttime", ""),
+                new KeyValuePair<string, string>("loggedinuser", userId),
+                new KeyValuePair<string, string>("signature", "1"),
+                new KeyValuePair<string, string>("parseurl", "1"),
+                new KeyValuePair<string, string>("disablesmilies", "0"),
+                new KeyValuePair<string, string>("emailupdate", subsciptionType),
+                new KeyValuePair<string, string>("stoken", "")
+            };
+
+            var postContent = new FlashbackStringUrlContent(postData);
+
+            var response = await _httpClient.PostAsync("https://www.flashback.org/newreply.php", postContent);
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }
