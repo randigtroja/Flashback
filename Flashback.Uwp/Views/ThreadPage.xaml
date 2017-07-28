@@ -110,11 +110,10 @@
         </controls:PageHeader>
 
         <!--  content  -->
-        <ScrollViewer Padding="12,8,0,0" Grid.Row="1">
-            <WebView x:Name="WebView" NavigationCompleted="{x:Bind ViewModel.BrowserReady}" ScriptNotify="{x:Bind ViewModel.WebView_OnScriptNotify}"  NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding ForumThread.Html}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}" >
+        <WebView Grid.Row="1" x:Name="WebView" NavigationCompleted="{x:Bind ViewModel.BrowserReady}" ScriptNotify="{x:Bind ViewModel.WebView_OnScriptNotify}"  NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding ForumThread.Html}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}" />
                 
-            </WebView>
-        </ScrollViewer>
+            
+        
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Visibility="Collapsed" Grid.Row="2">
             <AppBarButton Name="BottonAddFavourite" Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.PostReply}" IsEnabled="{Binding IsLoggedIn}" />

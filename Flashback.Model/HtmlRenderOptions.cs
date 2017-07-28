@@ -84,7 +84,7 @@ namespace Flashback.Model
             var htmlHeaders = 
                             "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\" />" +
                                 "<style TYPE=\"text/css\">" +
-                                    "div.post-bbcode-quote {color:" + foreColor + ";background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";border-width:1px;font-size:" + fontSize + "; };" +
+                                    "div.post-bbcode-quote {color:" + foreColor + ";background:" + quotesBackground + ";border-style:solid;padding:12px;border-color:" + quotesBorder + ";border-width:1px;font-size:" + fontSize + "; };" +
                                     "td.post-quote img {border: 0px;}" +
                                     "a {color:" + accentColor + ";} " +
                                     "div.post-bbcode-quote-wrapper { width:95%;} " +
@@ -148,7 +148,7 @@ namespace Flashback.Model
                           "</script>");
 
             sb.AppendLine("</head>");
-            sb.AppendLine("<body style=\"margin:0px;font-family:'Segoe UI';background-color:" + backgroundColor + ";font-size: " + fontSize + ";\">");
+            sb.AppendLine("<body style=\"margin:12px;font-family:'Segoe UI';background-color:" + backgroundColor + ";font-size: " + fontSize + ";\">");
             sb.AppendLine("<div id=\"pageWrapper\" style=\"width:100%; color:" + foreColor + ";word-wrap: break-word\">");
             sb.AppendLine("<div style=\"display:none\">" + Guid.NewGuid() + "</div>"); // verkar inte alltid slängas loadedeventet annars. Nån cache?
 
