@@ -105,6 +105,7 @@
     <Compile Include="Services\FileServices\FileService.cs" />
     <Compile Include="Services\SecurityServices\EncryptionService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="Triggers\DeviceStateTrigger.cs" />
     <Compile Include="ViewModels\AktuellaAmnenViewModel.cs" />
     <Compile Include="ViewModels\ComposePrivateMessageViewModel.cs" />
     <Compile Include="ViewModels\FavouritesViewModel.cs" />
