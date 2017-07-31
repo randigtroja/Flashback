@@ -31,12 +31,12 @@ namespace FlashbackUwp.ViewModels
             if (isSuccess)
             {                
                 await App.SaveCookies();
-                await new Windows.UI.Popups.MessageDialog("Ok. Du är inloggad!").ShowAsync();
+                Messenger.Default.Send<string>("Ok! Du är inloggad!", "ShowInformation");
                 await NavigationService.NavigateAsync(typeof(ForumMainList));
             }
             else
-            {
-                await new Windows.UI.Popups.MessageDialog("Felaktigt lösenord/användarnamn!").ShowAsync();
+            {                
+                Messenger.Default.Send<string>("Felaktigt lösenord/användarnamn!", "ShowError");
             }           
         }
     }

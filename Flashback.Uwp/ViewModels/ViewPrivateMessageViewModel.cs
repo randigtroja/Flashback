@@ -8,6 +8,7 @@ using Flashback.Model;
 using Flashback.Services.Messages;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -51,8 +52,8 @@ namespace FlashbackUwp.ViewModels
             var ok = await _messagesService.DeleteMessage(Message.Id, Message.FolderId,Message.Token);
 
             if (ok)
-            {
-                await new Windows.UI.Popups.MessageDialog("Meddelandet är raderat").ShowAsync();
+            {                
+                Messenger.Default.Send<string>("Meddelandet är raderat", "ShowInformation");
                 await NavigationService.NavigateAsync(typeof(PrivateMessagesPage));
             }
         }

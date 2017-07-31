@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using FlashbackUwp.Services.FileServices;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -62,8 +63,8 @@ namespace FlashbackUwp.ViewModels
             };
 
             if (!ValidateAndFixPaths(forum))
-            {                
-                await new Windows.UI.Popups.MessageDialog("Ej kompletta uppgifter (fyll i namn, och sökvägen)").ShowAsync();
+            {                                
+                Messenger.Default.Send<string>("Ej kompletta uppgifter (fyll i namn, och sökvägen)", "ShowError");
                 return;
             }
 

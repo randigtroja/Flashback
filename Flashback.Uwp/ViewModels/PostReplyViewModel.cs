@@ -6,6 +6,7 @@ using Flashback.Model;
 using Flashback.Services.Threads;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -101,7 +102,7 @@ namespace FlashbackUwp.ViewModels
             }
             catch (Exception e)
             {
-                Error = e.Message;                
+                Error = e.ToString();
             }
             finally
             {
@@ -128,12 +129,12 @@ namespace FlashbackUwp.ViewModels
                 var result = await _threadService.PostReply(Message, ThreadId, PostId, UserId, SubscriptionType);
 
                 if (result)
-                {
-                    await new Windows.UI.Popups.MessageDialog("Inlägget är skickat! Gå tillbaka för att ladda om").ShowAsync();
+                {                    
+                    Messenger.Default.Send<string>("Inlägget är skickat! Gå tillbaka för att ladda om", "ShowInformation");
                 }
                 else
-                {
-                    await new Windows.UI.Popups.MessageDialog("Fel vid skickande av meddelande").ShowAsync();
+                {                    
+                    Messenger.Default.Send<string>("Fel vid skickande av meddelande!", "ShowError");
                     MayPost = true;
                 }
             }

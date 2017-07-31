@@ -88,7 +88,7 @@ namespace FlashbackUwp.ViewModels
             }
             catch (Exception e)
             {
-                Error = e.Message;
+                Error = e.ToString();
             }
             finally
             {

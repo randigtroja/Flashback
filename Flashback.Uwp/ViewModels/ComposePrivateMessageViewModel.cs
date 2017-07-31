@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Messages;
 using FlashbackUwp.Views;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -105,7 +106,7 @@ namespace FlashbackUwp.ViewModels
             }
             catch (Exception e)
             {
-                Error = e.Message;
+                Error = e.ToString();
             }
             finally
             {
@@ -117,8 +118,8 @@ namespace FlashbackUwp.ViewModels
         {
 
             if (string.IsNullOrWhiteSpace(Subject) || string.IsNullOrWhiteSpace(To) || string.IsNullOrWhiteSpace(Message))
-            {
-                await new Windows.UI.Popups.MessageDialog("Ej fullständiga uppgifter ifyllda för att kunna skicka.").ShowAsync();
+            {                
+                Messenger.Default.Send<string>("Ej fullständiga uppgifter ifyllda för att kunna skicka", "ShowError");
                 return;
             }
 
@@ -133,11 +134,11 @@ namespace FlashbackUwp.ViewModels
 
                 if (result)
                 {
-                    await new Windows.UI.Popups.MessageDialog("Meddelande är skickat!").ShowAsync();
+                    Messenger.Default.Send<string>("Meddelandet är skickat!", "ShowInformation");
                 }
                 else
                 {
-                    await new Windows.UI.Popups.MessageDialog("Något gick fel vid skickande av meddelande.").ShowAsync();
+                    Messenger.Default.Send<string>("Något gick fel vid skickande av meddelande", "ShowError");
                 }
             }
             catch (Exception e)

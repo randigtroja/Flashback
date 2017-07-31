@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Template10.Common;
@@ -10,6 +11,8 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using GalaSoft.MvvmLight.Messaging;
 using Template10.Mvvm;
 
 namespace FlashbackUwp.Views
@@ -28,7 +31,11 @@ namespace FlashbackUwp.Views
             
             _settings.RefreshTitleBarColor();
 
+            Messenger.Default.Register<string>(this, "ShowWarning", ShowWarning);
+            Messenger.Default.Register<string>(this, "ShowError", ShowError);
+            Messenger.Default.Register<string>(this, "ShowInformation", ShowInformation);
         }
+        
 
         public Shell(INavigationService navigationService) : this()
         {
@@ -41,6 +48,33 @@ namespace FlashbackUwp.Views
             HamburgerMenu.RefreshStyles(_settings.AppTheme, true);
             HamburgerMenu.IsFullScreen = _settings.IsFullScreen;
             HamburgerMenu.HamburgerButtonVisibility = _settings.ShowHamburgerButton ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public async void ShowInformation(string message)
+        {           
+            FlashbackNotifierText.Text = message;
+            FlasbackhNotifierGrid.Background = new SolidColorBrush(Colors.Green);
+            FlashbackNotifier.IsOpen = true;
+            await Task.Delay(2000);
+            FlashbackNotifier.IsOpen = false;
+        }
+
+        public async void ShowWarning(string message)
+        {
+            FlashbackNotifierText.Text = message;
+            FlasbackhNotifierGrid.Background = new SolidColorBrush(Colors.Orange);
+            FlashbackNotifier.IsOpen = true;
+            await Task.Delay(3000);
+            FlashbackNotifier.IsOpen = false;
+        }
+
+        public async void ShowError(string message)
+        {
+            FlashbackNotifierText.Text = message;
+            FlasbackhNotifierGrid.Background = new SolidColorBrush(Colors.Crimson);
+            FlashbackNotifier.IsOpen = true;
+            await Task.Delay(4000);
+            FlashbackNotifier.IsOpen = false;
         }
     }
 }

@@ -122,7 +122,7 @@ namespace FlashbackUwp.ViewModels
             }
             catch (Exception e)
             {
-                Error = e.Message;                
+                Error = e.ToString();
             }
             finally
             {
@@ -163,11 +163,11 @@ namespace FlashbackUwp.ViewModels
             {
 
                 Messenger.Default.Send<bool>(true, "FavoritesUpdated");
-                await new Windows.UI.Popups.MessageDialog("Ok, tråden är tillagd till favoriterna!").ShowAsync();
+                Messenger.Default.Send<string>("Ok, tråden är tillagd till favoriterna!", "ShowInformation");                
             }
             else 
-            {
-                await new Windows.UI.Popups.MessageDialog("Fel vid tillägg av favorit").ShowAsync();
+            {                
+                Messenger.Default.Send<string>("Fel vid tillägg av favorit!", "ShowError");
             } 
         }
 

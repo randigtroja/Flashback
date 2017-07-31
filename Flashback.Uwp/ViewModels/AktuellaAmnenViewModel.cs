@@ -9,6 +9,7 @@ using Flashback.Model;
 using Flashback.Services.Threads;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
+using GalaSoft.MvvmLight.Messaging;
 using Template10.Services.NavigationService;
 
 namespace FlashbackUwp.ViewModels
@@ -86,7 +87,7 @@ namespace FlashbackUwp.ViewModels
             }
             catch (Exception e)
             {
-                Error = e.Message;
+                Error = e.ToString();               
             }
             finally
             {
