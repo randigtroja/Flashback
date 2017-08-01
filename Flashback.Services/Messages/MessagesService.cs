@@ -217,6 +217,8 @@ namespace Flashback.Services.Messages
                         messageData = _options.ReplaceSmileys(messageData);
                     }
 
+                    messageData = messageData.Replace("/leave.php?u=", "");
+
                     privateMessage.Message = _options.GetHtmlHeaders() + messageData + _options.GetHtmlFooter();
                 }
 
