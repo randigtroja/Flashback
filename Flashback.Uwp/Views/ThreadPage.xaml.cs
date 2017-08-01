@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Flashback.Model;
 using FlashbackUwp.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Common;
@@ -31,7 +32,7 @@ namespace FlashbackUwp.Views
         public ThreadPage()
         {
             this.InitializeComponent();
-            Messenger.Default.Register<string>(this, "ScrollToPost", ScrollToPost);
+            Messenger.Default.Register<string>(this, FlashbackConstants.MessengerBrowserScrollToPost, ScrollToPost);
         }
 
         private async void ScrollToPost(string postId)

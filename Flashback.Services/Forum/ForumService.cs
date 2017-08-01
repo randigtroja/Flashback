@@ -137,7 +137,7 @@ namespace Flashback.Services.Forum
                     totalPages = int.Parse(match.Groups[2].Value);
                 }
             }            
-
+            
             return new ForumList()
             {
                 Items = new ObservableCollection<FbItem>(forum),

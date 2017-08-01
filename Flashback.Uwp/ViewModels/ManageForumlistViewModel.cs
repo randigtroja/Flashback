@@ -64,7 +64,7 @@ namespace FlashbackUwp.ViewModels
 
             if (!ValidateAndFixPaths(forum))
             {                                
-                Messenger.Default.Send<string>("Ej kompletta uppgifter (fyll i namn, och sökvägen)", "ShowError");
+                Messenger.Default.Send<string>("Ej kompletta uppgifter (fyll i namn, och sökvägen)", FlashbackConstants.MessengerShowError);
                 return;
             }
 

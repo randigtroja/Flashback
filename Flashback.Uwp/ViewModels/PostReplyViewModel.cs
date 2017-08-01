@@ -130,11 +130,11 @@ namespace FlashbackUwp.ViewModels
 
                 if (result)
                 {                    
-                    Messenger.Default.Send<string>("Inlägget är skickat! Gå tillbaka för att ladda om", "ShowInformation");
+                    Messenger.Default.Send<string>("Inlägget är skickat! Gå tillbaka för att ladda om", FlashbackConstants.MessengerShowInformation);
                 }
                 else
                 {                    
-                    Messenger.Default.Send<string>("Fel vid skickande av meddelande!", "ShowError");
+                    Messenger.Default.Send<string>("Fel vid skickande av meddelande!", FlashbackConstants.MessengerShowError);
                     MayPost = true;
                 }
             }

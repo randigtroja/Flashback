@@ -12,6 +12,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Flashback.Model;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Mvvm;
 
@@ -31,9 +32,9 @@ namespace FlashbackUwp.Views
             
             _settings.RefreshTitleBarColor();
 
-            Messenger.Default.Register<string>(this, "ShowWarning", ShowWarning);
-            Messenger.Default.Register<string>(this, "ShowError", ShowError);
-            Messenger.Default.Register<string>(this, "ShowInformation", ShowInformation);
+            Messenger.Default.Register<string>(this, FlashbackConstants.MessengerShowWarning, ShowWarning);
+            Messenger.Default.Register<string>(this, FlashbackConstants.MessengerShowError, ShowError);
+            Messenger.Default.Register<string>(this, FlashbackConstants.MessengerShowInformation, ShowInformation);
         }
         
 

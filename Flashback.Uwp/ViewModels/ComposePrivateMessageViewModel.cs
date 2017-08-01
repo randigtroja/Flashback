@@ -119,7 +119,7 @@ namespace FlashbackUwp.ViewModels
 
             if (string.IsNullOrWhiteSpace(Subject) || string.IsNullOrWhiteSpace(To) || string.IsNullOrWhiteSpace(Message))
             {                
-                Messenger.Default.Send<string>("Ej fullständiga uppgifter ifyllda för att kunna skicka", "ShowError");
+                Messenger.Default.Send<string>("Ej fullständiga uppgifter ifyllda för att kunna skicka", FlashbackConstants.MessengerShowError);
                 return;
             }
 
@@ -134,11 +134,11 @@ namespace FlashbackUwp.ViewModels
 
                 if (result)
                 {
-                    Messenger.Default.Send<string>("Meddelandet är skickat!", "ShowInformation");
+                    Messenger.Default.Send<string>("Meddelandet är skickat!", FlashbackConstants.MessengerShowInformation);
                 }
                 else
                 {
-                    Messenger.Default.Send<string>("Något gick fel vid skickande av meddelande", "ShowError");
+                    Messenger.Default.Send<string>("Något gick fel vid skickande av meddelande", FlashbackConstants.MessengerShowError);
                 }
             }
             catch (Exception e)

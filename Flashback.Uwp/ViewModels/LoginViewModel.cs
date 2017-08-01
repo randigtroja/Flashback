@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Flashback.Model;
 using Flashback.Services.Auth;
 using FlashbackUwp.Services.SecurityServices;
 using FlashbackUwp.Views;
@@ -26,12 +27,12 @@ namespace FlashbackUwp.ViewModels
         {
             var isSuccess = await _authSerivce.TryLogin(UserName, Password);
             Debug.WriteLine("Användarens IsLoggedIn sätts till: " + isSuccess);
-            Messenger.Default.Send(isSuccess, "LoggedInStatus");
+            Messenger.Default.Send(isSuccess, FlashbackConstants.MessengerLoggedInStatus);
 
             if (isSuccess)
             {                
                 await App.SaveCookies();
-                Messenger.Default.Send<string>("Ok! Du är inloggad!", "ShowInformation");
+                Messenger.Default.Send<string>("Ok! Du är inloggad!", FlashbackConstants.MessengerShowInformation);
                 await NavigationService.NavigateAsync(typeof(ForumMainList));
             }
             else

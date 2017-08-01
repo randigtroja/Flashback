@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Flashback.Model;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Mvvm;
 
@@ -27,7 +28,7 @@ namespace FlashbackUwp.ViewModels
 
         public ShellViewModel()
         {
-            Messenger.Default.Register<bool>(this, "LoggedInStatus", (result) => IsLoggedIn = result);            
+            Messenger.Default.Register<bool>(this, FlashbackConstants.MessengerLoggedInStatus, (result) => IsLoggedIn = result);            
         }
 
         public async Task Logout()

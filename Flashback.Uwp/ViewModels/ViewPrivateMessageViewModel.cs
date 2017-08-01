@@ -53,7 +53,7 @@ namespace FlashbackUwp.ViewModels
 
             if (ok)
             {                
-                Messenger.Default.Send<string>("Meddelandet är raderat", "ShowInformation");
+                Messenger.Default.Send<string>("Meddelandet är raderat", FlashbackConstants.MessengerShowInformation);
                 await NavigationService.NavigateAsync(typeof(PrivateMessagesPage));
             }
         }

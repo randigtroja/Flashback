@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using Flashback.Model;
+using GalaSoft.MvvmLight.Messaging;
 using Template10.Mvvm;
 
 namespace FlashbackUwp.ViewModels
@@ -16,7 +17,7 @@ namespace FlashbackUwp.ViewModels
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    Messenger.Default.Send<string>("Fel uppstod! " + value, "ShowError");
+                    Messenger.Default.Send<string>("Fel uppstod! " + value, FlashbackConstants.MessengerShowError);
                 }                
             }
         }

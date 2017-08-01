@@ -27,7 +27,7 @@ namespace FlashbackUwp.ViewModels
             _favourites = new ObservableCollection<FbFavourite>();
             _settings = SettingsService.Instance;
 
-            Messenger.Default.Register<bool>(this, "FavoritesUpdated", (result) => Refresh());
+            Messenger.Default.Register<bool>(this, FlashbackConstants.MessengerFavoritesUpdated, (result) => Refresh());
         }
 
         public ObservableCollection<FbFavourite> Favourites

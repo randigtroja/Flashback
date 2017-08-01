@@ -138,7 +138,7 @@ namespace FlashbackUwp.ViewModels
             {
                 _hasScrolled = true;
                 var index = _requestedId.IndexOf("#");
-                Messenger.Default.Send<string>(_requestedId.Substring(0, index), "ScrollToPost");
+                Messenger.Default.Send<string>(_requestedId.Substring(0, index), FlashbackConstants.MessengerBrowserScrollToPost);
             }
         }
 
@@ -162,12 +162,12 @@ namespace FlashbackUwp.ViewModels
             if (result)
             {
 
-                Messenger.Default.Send<bool>(true, "FavoritesUpdated");
-                Messenger.Default.Send<string>("Ok, tråden är tillagd till favoriterna!", "ShowInformation");                
+                Messenger.Default.Send<bool>(true, FlashbackConstants.MessengerFavoritesUpdated);
+                Messenger.Default.Send<string>("Ok, tråden är tillagd till favoriterna!", FlashbackConstants.MessengerShowInformation);                
             }
             else 
             {                
-                Messenger.Default.Send<string>("Fel vid tillägg av favorit!", "ShowError");
+                Messenger.Default.Send<string>("Fel vid tillägg av favorit!", FlashbackConstants.MessengerShowError);
             } 
         }
 

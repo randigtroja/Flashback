@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
+using Flashback.Model;
 using Flashback.Services.Auth;
 using FlashbackUwp.Services.SecurityServices;
 using GalaSoft.MvvmLight.Messaging;
@@ -153,7 +154,7 @@ namespace FlashbackUwp
                 }
             }
 
-            Messenger.Default.Send<bool>(IsUserLoggedIn(), "LoggedInStatus");
+            Messenger.Default.Send<bool>(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
 
             await Task.CompletedTask;
         }
@@ -175,7 +176,7 @@ namespace FlashbackUwp
             var encryptionService = new EncryptionService();
             await encryptionService.WriteCookieData(CookieContainer);
 
-            Messenger.Default.Send<bool>(IsUserLoggedIn(), "LoggedInStatus");
+            Messenger.Default.Send<bool>(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
         }
     }
 }
