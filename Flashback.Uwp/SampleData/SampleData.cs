@@ -196,5 +196,51 @@ namespace FlashbackUwp.SampleData
 
             };
         }
+
+        public static ObservableCollection<FbFavourite> GetDefaultFavourites()
+        {
+            return new ObservableCollection<FbFavourite>
+            {
+                new FbFavourite
+                {
+                    Name = "varör är beatles bäst?",
+                    ShowPostCount = true,
+                    PostCount = 1234,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    LastPost = "Senaste inlägg av XXXX 2017-05-01",
+                    IsUnread = true
+                },
+                new FbFavourite
+                {
+                    Name = "paul eller lennon?",
+                    ShowPostCount = true,
+                    PostCount = 367,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    LastPost = "Senaste inlägg av XXXX 2017-05-01",
+                    IsUnread = true
+                },
+                new FbFavourite()
+                {
+                    Name = "stora tråden om beatles",
+                    ShowPostCount = true,
+                    PostCount = 12819,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    LastPost = "Senaste inlägg av XXXX 2017-05-01"
+                },
+                new FbFavourite()
+                {
+                    Name = "Rickenbacker?",
+                    ShowPostCount = true,
+                    PostCount = 4,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    LastPost = "Senaste inlägg av XXXX 2017-05-01"
+                }
+
+            };
+        }
     }
 }

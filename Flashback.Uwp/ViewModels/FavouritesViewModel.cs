@@ -10,6 +10,7 @@ using Flashback.Services.Threads;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
 using GalaSoft.MvvmLight.Messaging;
+using Template10.Mvvm;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -18,6 +19,9 @@ namespace FlashbackUwp.ViewModels
         private readonly ThreadsService _threadsService;
         private ObservableCollection<FbFavourite> _favourites;
         private readonly SettingsService _settings;
+
+        DelegateCommand _removeFavouriteCommand;
+        public DelegateCommand RemoveFavouriteCommand => _removeFavouriteCommand ?? (_removeFavouriteCommand = new DelegateCommand(async () => await RemoveFavourite()));
 
         public bool IsDataLoaded => Favourites != null && Favourites.Any();
 
@@ -28,6 +32,11 @@ namespace FlashbackUwp.ViewModels
             _settings = SettingsService.Instance;
 
             Messenger.Default.Register<bool>(this, FlashbackConstants.MessengerFavoritesUpdated, (result) => Refresh());
+
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                Favourites = SampleData.SampleData.GetDefaultFavourites();
+            }
         }
 
         public ObservableCollection<FbFavourite> Favourites
@@ -66,6 +75,11 @@ namespace FlashbackUwp.ViewModels
         public async void Refresh()
         {
             await LoadViewModel();
+        }
+
+        private async Task RemoveFavourite()
+        {
+            
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
