@@ -20,9 +20,9 @@ namespace FlashbackUwp.ViewModels
         private ObservableCollection<FbFavourite> _favourites;
         private readonly SettingsService _settings;
 
-        DelegateCommand _removeFavouriteCommand;
-        public DelegateCommand RemoveFavouriteCommand => _removeFavouriteCommand ?? (_removeFavouriteCommand = new DelegateCommand(async () => await RemoveFavourite()));
-
+        private DelegateCommand<FbFavourite> _deleteItem = default(DelegateCommand<FbFavourite>);
+        public DelegateCommand<FbFavourite> DeleteItem => _deleteItem ?? (_deleteItem = new DelegateCommand<FbFavourite>(ExecuteDeleteItemCommand, CanExecuteDeleteItemCommand));
+        
         public bool IsDataLoaded => Favourites != null && Favourites.Any();
 
         public FavouritesViewModel()
@@ -77,9 +77,29 @@ namespace FlashbackUwp.ViewModels
             await LoadViewModel();
         }
 
-        private async Task RemoveFavourite()
+        private bool CanExecuteDeleteItemCommand(FbFavourite item)
         {
-            
+            return true;
+        }
+
+        private async void ExecuteDeleteItemCommand(FbFavourite item)
+        {
+            try
+            {
+                Error = null;
+
+                var result = await _threadsService.RemoveFavourite(item);
+
+                if (result)
+                {
+                    this.Favourites.Remove(item);
+                    Messenger.Default.Send<string>(item.Name + " är borttagen från favoriterna!", FlashbackConstants.MessengerShowInformation);
+                }
+            }
+            catch (Exception e)
+            {
+                Error = e.ToString();
+            }
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)

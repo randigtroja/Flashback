@@ -594,6 +594,25 @@ namespace Flashback.Services.Threads
             return response.IsSuccessStatusCode;
         }
 
+        public async Task<bool> RemoveFavourite(FbFavourite favouriteItem)
+        {            
+            var postData = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("s", ""),
+                new KeyValuePair<string, string>("do", favouriteItem.Type == FbItemType.Forum ? "dostuff-forum" : "dostuff"),
+                new KeyValuePair<string, string>("folderid", "0"),
+                new KeyValuePair<string, string>(favouriteItem.FbId, "yes"),
+                new KeyValuePair<string, string>("what", "delete"),
+                new KeyValuePair<string, string>("stoken", "")
+            };
+
+            var postContent = new FlashbackStringUrlContent(postData);
+
+            var response = await _httpClient.PostAsync("https://www.flashback.org/subscription.php", postContent);
+
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<List<FbItem>> GetMyQuotedPosts(string userId)
         {
             // här kan vi göra på två sätt.

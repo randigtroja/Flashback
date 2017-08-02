@@ -8,6 +8,9 @@
     xmlns:converters="using:FlashbackUwp.Converters"
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:model="using:Flashback.Model"
+    x:Name="Page"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -17,7 +20,35 @@
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
         <converters:ColorConverter x:Key="ColorConverter" />
-        <converters:UnreadMessageBrushconverter x:Key="UnreadMessageBrushconverter"/>                                                
+        <converters:UnreadMessageBrushconverter x:Key="UnreadMessageBrushconverter"/>
+
+        <DataTemplate x:Key="FavouriteItemTemplate"
+                      x:DataType="model:FbFavourite">
+            <controls1:SlidableListItem 
+                                        RightIcon="Delete"                         
+                                        IsPointerReleasedOnSwipingHandled="True"
+                                        RightLabel="Ta bort"                                        
+                                        RightBackground="Crimson"                        
+                                        RightForeground="White"
+                                        ActivationWidth="100"
+                                        MouseSlidingEnabled="True" 
+                                        IsLeftCommandEnabled="False"
+                                        RightCommand="{Binding Path=DataContext.DeleteItem, ElementName=Page, Mode=OneWay}"
+                                        RightCommandParameter="{Binding}">
+                <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0"  Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"/>
+                    </StackPanel>
+                    <StackPanel Margin="12,0,0,0">
+                        <TextBlock Width="1000" Text="{Binding Path=Name}" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="{Binding Path=LastPost}" Margin="0,-1,0,0" FontWeight="Normal" Foreground="{Binding IsUnread, Converter={StaticResource UnreadMessageBrushconverter}}" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </controls1:SlidableListItem>
+        </DataTemplate>
+
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -82,28 +113,16 @@
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh" x:Name="RefreshButton" Visibility="Collapsed"/>
             </controls:PageHeader.PrimaryCommands>
-            <!--<interactivity:Interaction.Behaviors>
-                <behaviors:EllipsisBehavior Visibility="Auto" x:Name="EllipsisBehavior" />
-            </interactivity:Interaction.Behaviors>-->            
         </controls:PageHeader>
 
         <!--  content  -->
-
-        <ListView ItemsSource="{Binding Path=Favourites}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0"  Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
-                            <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"/>
-                        </StackPanel>
-                        <StackPanel Margin="12,0,0,0">
-                            <TextBlock Width="1000" Text="{Binding Path=Name}" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="{Binding Path=LastPost}" Margin="0,-1,0,0" FontWeight="Normal" Foreground="{Binding IsUnread, Converter={StaticResource UnreadMessageBrushconverter}}" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <ListView ItemsSource="{Binding Path=Favourites}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1" SelectionMode="None" ItemTemplate="{StaticResource FavouriteItemTemplate}" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,1" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Visibility="Collapsed" Grid.Row="2">
