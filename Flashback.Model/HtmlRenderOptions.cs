@@ -17,10 +17,10 @@ namespace Flashback.Model
 
         private string GetForeColor()
         {
-            if (this.IsDarkThemed)
+            if (IsDarkThemed)
                 return "#ffffff";
-            else
-                return "#000000";
+
+            return "#000000";
         }
 
         private string GetBackgroundColor()

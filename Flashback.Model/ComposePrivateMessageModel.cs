@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Flashback.Model
+﻿namespace Flashback.Model
 {
     public class ComposePrivateMessageModel
     {
@@ -12,6 +8,5 @@ namespace Flashback.Model
         public string To { get; set; }
         public string Message { get; set; }
         public string PostToken { get; set; }
-
     }
 }

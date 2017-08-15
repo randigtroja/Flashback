@@ -29,7 +29,7 @@ namespace FlashbackUwp.Views
             this.InitializeComponent();
         }
 
-        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        private async void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {            
             // så jävla fult men orkar inte just nu med vymodelcommandbinding. // TODO
             FbItem forumToDelete = (sender as Button).DataContext as FbItem;
@@ -38,7 +38,7 @@ namespace FlashbackUwp.Views
             var model = DataContext as ManageForumlistViewModel;
             if (model != null)
             {
-                model.DeleteForum(forumToDelete);
+                await model.DeleteForum(forumToDelete);
             }            
         }
     }

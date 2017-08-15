@@ -404,12 +404,10 @@ namespace Flashback.Services.Threads
             {
                 foreach (var forum in favouritesForumCheck)
                 {
-
-
                     FbFavourite item = new FbFavourite() { Type = FbItemType.Forum};
 
                     var titleCheck = forum.QuerySelector("td:nth-child(2) div a:nth-child(1)");
-                    string title = "";
+                    
                     if (titleCheck != null)
                     {
                         item.Name = WebUtility.HtmlDecode(titleCheck.TextContent).FixaRadbrytningar();
