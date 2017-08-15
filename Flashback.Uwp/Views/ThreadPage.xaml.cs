@@ -51,7 +51,7 @@ namespace FlashbackUwp.Views
 
         private void WebView_OnNewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {            
-            if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/t")) // intern FB-trådlänk
+            if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/t") || args.Uri.AbsoluteUri.Contains("https://www.flashback.org/sp")) // intern FB-trådlänk
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
 
@@ -69,8 +69,7 @@ namespace FlashbackUwp.Views
             }
             else
             {
-                var openUrl = Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));
-                
+                var openUrl = Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));                
             }
 
             args.Handled = true;

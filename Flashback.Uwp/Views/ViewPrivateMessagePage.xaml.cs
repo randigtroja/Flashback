@@ -32,7 +32,7 @@ namespace FlashbackUwp.Views
         {
             args.Handled = true;
 
-            if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/t")) // intern FB-trådlänk
+            if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/t") || args.Uri.AbsoluteUri.Contains("https://www.flashback.org/sp")) // intern FB-trådlänk eller fb-singlepost
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
 
@@ -47,7 +47,7 @@ namespace FlashbackUwp.Views
                 var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
 
                 nav?.Navigate(typeof(Views.ForumMainList), id);
-            }
+            }            
             else
             {
                 var dialog = new Windows.UI.Popups.MessageDialog("Vill du verkligen öppna en länk till extern sida? Tänk på att länkar som öppnas från privata meddelanden kan utnytjas för att spåra dig!" 

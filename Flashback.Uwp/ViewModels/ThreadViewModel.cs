@@ -97,7 +97,7 @@ namespace FlashbackUwp.ViewModels
                 Error = null;
                 _requestedId = id;
 
-                if (!id.Contains("#") && !id.StartsWith("p") && _settings.UseSmartNavigation && !_firstLoadDone)
+                if (!id.Contains("#") && !id.StartsWith("p") && !id.StartsWith("sp") && _settings.UseSmartNavigation && !_firstLoadDone)
                 {
                     // Så länge vi inte navigerar till ett specifikt citerat inlägg och kör med inställningen smartnavigering
                     // så kollat vi om vi har besökt tråden tidigare. Har vi det hoppar vi till senast besökta sida i den.
@@ -144,7 +144,11 @@ namespace FlashbackUwp.ViewModels
 
         public async void NavigateToParentForum()
         {
-            if (!string.IsNullOrWhiteSpace(ForumThread.ParentId))
+            if (!string.IsNullOrWhiteSpace(ForumThread.ParentId) && ForumThread.ParentId.StartsWith("p"))
+            {
+                await NavigationService.NavigateAsync(typeof(ThreadPage), ForumThread.ParentId);
+            }
+            else if (!string.IsNullOrWhiteSpace(ForumThread.ParentId))
             {
                 await NavigationService.NavigateAsync(typeof(ForumMainList), ForumThread.ParentId);
             }

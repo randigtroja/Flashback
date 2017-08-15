@@ -103,9 +103,63 @@ namespace Flashback.Services.Threads
         public async Task<ForumThread> GetForumThread(string id)
         {
             var result = await _httpClient.GetStringAsync("https://www.flashback.org/" + id);
-            var forum = await ParseThread(result);
-            
-            return forum;
+
+            if (id.StartsWith("sp"))
+            {
+                var forumPost = await ParseSinglePost(result);
+
+                return forumPost;
+            }
+            else
+            {
+                var forumThread = await ParseThread(result);
+
+                return forumThread;
+            }            
+        }
+
+        private async Task<ForumThread> ParseSinglePost(string result)
+        {
+            var parser = new HtmlParser();
+
+            var singlePost = await parser.ParseAsync(result);
+
+            var pageNameCheck = singlePost.QuerySelector("title");
+            bool userLoggedIn = singlePost.QuerySelector("a.btn-quote-multiple") != null; // hack - denna knapp verkar bara renderas när man är inloggad
+            string pageName = WebUtility.HtmlDecode(pageNameCheck.TextContent).Replace("Flashback Forum - ", "");
+
+            var parentCheck = singlePost.QuerySelector("div.well strong a");
+            string parentId = "";
+
+            if (parentCheck != null)
+            {
+                parentId = parentCheck.Attributes["href"].Value.Replace("/", "");
+            }
+
+            var replyIdCheck = singlePost.QuerySelector("div#post div.post");
+            string replyId = "";
+            if (replyIdCheck != null)
+            {
+                replyId = replyIdCheck.Attributes["id"].Value;
+                replyId = replyId.Replace("post", "");
+            }
+
+            var post = singlePost.QuerySelectorAll("div#post");
+            string html = _options.GetHtmlHeaders() + BuildHtmlForForumThreads(post, userLoggedIn) + _options.GetHtmlFooter();
+
+            return new ForumThread()
+            {
+                Title = pageName,
+                CurrentPage = 1,
+                ShowNavigation = false,
+                MaxPages = 1,
+                ParentId = parentId,
+                Html = html,
+                Id = parentId,
+                ReplyId = replyId
+            };
+
+
         }
 
         private async Task<ForumThread> ParseThread(string result)
