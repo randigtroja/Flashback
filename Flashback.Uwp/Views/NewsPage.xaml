@@ -13,7 +13,12 @@
         <viewModels:NyheterViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
@@ -45,13 +50,10 @@
         </VisualStateManager.VisualStateGroups>
 
         <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}"
-                             RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="Nyheter" />
+        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0" Text="Nyheter" />
 
         <!--  content  -->
-        <ListView ItemsSource="{Binding Path=Nyheter}" ItemClick="{x:Bind ViewModel.RssNavigate}" IsItemClickEnabled="True" Padding="12,8,0,0" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="pageHeader">
+        <ListView ItemsSource="{Binding Path=Nyheter}" ItemClick="{x:Bind ViewModel.RssNavigate}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -64,5 +66,5 @@
             </ListView.ItemTemplate>
         </ListView>
 
-    </RelativePanel>
+    </Grid>
 </Page>
