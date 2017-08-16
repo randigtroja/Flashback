@@ -8,6 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
     xmlns:converters="using:FlashbackUwp.Converters"
+    xmlns:triggers="using:FlashbackUwp.Triggers"
+    IsTabStop="True"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -29,6 +31,18 @@
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup x:Name="DeviceStates">
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <triggers:DeviceStateTrigger DeviceFamily="Windows.Mobile"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="OpenHamburgerMenuButton.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
@@ -80,7 +94,7 @@
 
         <!--  content  -->
 
-        <ListView ItemsSource="{Binding Path=Topics}" ItemClick="{x:Bind ViewModel.NavigateToForum}" IsItemClickEnabled="True" Grid.Row="1" Padding="12,8,0,0">
+        <ListView ItemsSource="{Binding Path=Topics}" x:Name="ListTopics" ItemClick="{x:Bind ViewModel.NavigateToForum}" IsItemClickEnabled="True" Grid.Row="1" Padding="12,8,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
@@ -98,6 +112,11 @@
         </ListView>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
+            <CommandBar.Content>
+                <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                </AppBarButton>
+            </CommandBar.Content>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
         </CommandBar>
 

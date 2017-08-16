@@ -10,6 +10,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Template10.Behaviors"
     xmlns:converters="using:FlashbackUwp.Converters"
+    xmlns:triggers="using:FlashbackUwp.Triggers"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -32,6 +33,18 @@
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup x:Name="DeviceStates">
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <triggers:DeviceStateTrigger DeviceFamily="Windows.Mobile"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="OpenHamburgerMenuButton.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
@@ -123,6 +136,11 @@
         </ListView>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
+            <CommandBar.Content>
+                <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" x:Name="OpenHamburgerMenuButton" Visibility="Collapsed" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                </AppBarButton>
+            </CommandBar.Content>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
             <AppBarButton Name="BottonPrimarySearch" Icon="Find" Label="Sök" Click="{x:Bind ViewModel.NavigateToSearch}" />
         </CommandBar>

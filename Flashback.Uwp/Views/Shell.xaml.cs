@@ -49,6 +49,15 @@ namespace FlashbackUwp.Views
             HamburgerMenu.RefreshStyles(_settings.AppTheme, true);
             HamburgerMenu.IsFullScreen = _settings.IsFullScreen;
             HamburgerMenu.HamburgerButtonVisibility = _settings.ShowHamburgerButton ? Visibility.Visible : Visibility.Collapsed;
+
+            // Vi gömmer undan knappen för menyn om vi kör på telefon och visar sedan upp den i appbaren längst ner
+            if (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+            {
+                Shell.HamburgerMenu.HamburgerButtonVisibility = Visibility.Collapsed;
+                Shell.HamburgerMenu.VisualStateWideDisplayMode = SplitViewDisplayMode.Overlay;
+                Shell.HamburgerMenu.VisualStateNormalDisplayMode = SplitViewDisplayMode.Overlay;
+                Shell.HamburgerMenu.VisualStateNarrowDisplayMode = SplitViewDisplayMode.Overlay;
+            }
         }
 
         public async void ShowInformation(string message)

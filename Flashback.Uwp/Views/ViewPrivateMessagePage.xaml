@@ -9,6 +9,7 @@
     xmlns:converters="using:FlashbackUwp.Converters"
     xmlns:controls="using:Template10.Controls"
     xmlns:extensions="using:FlashbackUwp.Extensions"
+    xmlns:triggers="using:FlashbackUwp.Triggers"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -28,6 +29,18 @@
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup x:Name="DeviceStates">
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <triggers:DeviceStateTrigger DeviceFamily="Windows.Mobile"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="OpenHamburgerMenuButton.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
@@ -78,6 +91,11 @@
         </ScrollViewer>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
+            <CommandBar.Content>
+                <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                </AppBarButton>
+            </CommandBar.Content>
             <AppBarButton Name="BottonPrimaryHome" Icon="MailReply" Label="Svara" Click="{x:Bind ViewModel.Reply}" />
             <AppBarButton Name="BottonPrimaryNEw" Icon="Delete" Label="Radera" Click="{x:Bind ViewModel.Delete}" />
         </CommandBar>

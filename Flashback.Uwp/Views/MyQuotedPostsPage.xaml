@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
     xmlns:converters="using:FlashbackUwp.Converters"
+    xmlns:triggers="using:FlashbackUwp.Triggers"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -29,6 +30,18 @@
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
+
+            <VisualStateGroup x:Name="DeviceStates">
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <triggers:DeviceStateTrigger DeviceFamily="Windows.Mobile"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="OpenHamburgerMenuButton.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
@@ -93,6 +106,11 @@
         </ListView>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
+            <CommandBar.Content>
+                <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                </AppBarButton>
+            </CommandBar.Content>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
         </CommandBar>
 

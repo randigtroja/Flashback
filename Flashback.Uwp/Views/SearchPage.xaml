@@ -68,8 +68,8 @@
         <ScrollViewer Padding="12,8,0,0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                    <TextBox x:Name="SearchBox" MinWidth="280" Margin="0,0,12,0" Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,12">
+                    <TextBox x:Name="SearchBox" MinWidth="280" Margin="0,0,12,12" Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                        
                     </TextBox>
                     <Button Content="Sök" Click="{x:Bind ViewModel.LoadViewModel}" IsEnabled="{Binding CanSearch,Mode=TwoWay}">
