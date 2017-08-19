@@ -91,6 +91,11 @@
                 <AppBarButton Icon="Pin" Label="Pinna" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
                 <AppBarButton Icon="Unpin" Label="Ta bort" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
                 <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser" />
+                <AppBarButton Label="Dela tråd" Click="ShowShareTask">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </controls:PageHeader.PrimaryCommands>
             <controls:PageHeader.Content>
                 <RelativePanel HorizontalAlignment="Left">
@@ -140,6 +145,11 @@
             
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser"/>
+                <AppBarButton Label="Dela tråd" Click="ShowShareTask">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <AppBarButton Name="BottonPin" Icon="Pin" Label="Pinna tråd" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
                 <AppBarButton Name="BottonUnPin" Icon="Unpin" Label="Ta bort pinnad" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
                 <AppBarSeparator></AppBarSeparator>

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.StartScreen;
@@ -16,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
+using Flashback.Services;
 using FlashbackUwp.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Common;
@@ -33,6 +35,20 @@ namespace FlashbackUwp.Views
         {
             this.InitializeComponent();
             Messenger.Default.Register<string>(this, FlashbackConstants.MessengerBrowserScrollToPost, ScrollToPost);
+
+            DataTransferManager.GetForCurrentView().DataRequested += ThreadPage_DataRequested;
+        }
+
+        private void ThreadPage_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            var model = DataContext as ThreadViewModel;
+            if (model != null)
+            {
+                var id = model.ForumThread.Id.GetCleanId(false);
+                args.Request.Data.SetWebLink(new Uri("https://www.flashback.org/" + id));
+                args.Request.Data.Properties.Title = "Tråd på Flashback";
+                args.Request.Data.Properties.Description = "Jag hittade en intressant tråd på Flashback att läsa";
+            }
         }
 
         private async void ScrollToPost(string postId)
@@ -93,6 +109,11 @@ namespace FlashbackUwp.Views
                 var id = model.ForumThread.Id;
                 var openUrl = await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.flashback.org/" + id));
             }
+        }
+
+        private void ShowShareTask(object sender, RoutedEventArgs e)
+        {            
+            DataTransferManager.ShowShareUI();
         }
     }
 }
