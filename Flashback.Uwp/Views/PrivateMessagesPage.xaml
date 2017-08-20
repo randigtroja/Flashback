@@ -104,6 +104,7 @@
                     <FontIcon Glyph="&#xE700;"></FontIcon>
                 </AppBarButton>
             </CommandBar.Content>
+            <AppBarButton Icon="World" Label="Webb" Click="{x:Bind ViewModel.OpenWebb}"/>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
             <AppBarButton Name="BottonPrimaryNEw" Icon="Add" Label="Nytt PM" Click="{x:Bind ViewModel.NewMessage}" />
         </CommandBar>
