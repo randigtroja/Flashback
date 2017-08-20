@@ -105,7 +105,7 @@
                 </AppBarButton>
             </CommandBar.Content>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
-            <AppBarButton Name="BottonPrimaryNEw" Icon="Add" Label="Ladda om" Click="{x:Bind ViewModel.NewMessage}" />
+            <AppBarButton Name="BottonPrimaryNEw" Icon="Add" Label="Nytt PM" Click="{x:Bind ViewModel.NewMessage}" />
         </CommandBar>
     </Grid>
 </Page>
