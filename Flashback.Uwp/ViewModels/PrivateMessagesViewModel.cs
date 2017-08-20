@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Messages;
 using FlashbackUwp.Views;
+using Windows.System;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -83,6 +84,11 @@ namespace FlashbackUwp.ViewModels
             {
                 NavigationService.Navigate(typeof(ViewPrivateMessagePage), item.Id);
             }
+        }
+
+        public async void OpenWebb()
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://www.flashback.org/private.php"));
         }
     }
 }
