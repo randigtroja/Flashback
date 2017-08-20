@@ -88,26 +88,22 @@
         </controls:PageHeader>
 
         <!--  content  -->
-        <ScrollViewer Padding="12,8,0,0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
-                <ListView ItemsSource="{Binding Path=Topics}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0"  Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"></TextBlock>
-                                    <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"></TextBlock>
-                                </StackPanel>
-                                <StackPanel Margin="12,0,0,0">
-                                    <TextBlock Text="{Binding Path=Name}" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}"/>
-                                    <TextBlock Text="{Binding Path=Description}" Margin="0" FontWeight="Normal" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
-        </ScrollViewer>
+        <ListView ItemsSource="{Binding Path=Topics}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0"  Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
+                            <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"/>
+                        </StackPanel>
+                        <StackPanel Margin="12,0,0,0">
+                            <TextBlock Text="{Binding Path=Name}" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{Binding Path=Description}" Margin="0" FontWeight="Normal" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Grid x:Name="BottomBar" Grid.Row="2">
             <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands">
