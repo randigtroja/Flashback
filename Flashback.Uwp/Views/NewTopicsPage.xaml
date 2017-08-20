@@ -109,15 +109,13 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Grid x:Name="BottomBar" Grid.Row="2">
-            <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands">
-                <CommandBar.Content>
-                    <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                        <FontIcon Glyph="&#xE700;"></FontIcon>
-                    </AppBarButton>
-                </CommandBar.Content>
-                <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
-            </CommandBar>
-        </Grid>
+        <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
+            <CommandBar.Content>
+                <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                    <FontIcon Glyph="&#xE700;"/>
+                </AppBarButton>
+            </CommandBar.Content>
+            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+        </CommandBar>
     </Grid>
 </Page>
