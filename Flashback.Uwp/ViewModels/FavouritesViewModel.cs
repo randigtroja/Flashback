@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,6 +11,7 @@ using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Mvvm;
+using Windows.System;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -121,6 +122,11 @@ namespace FlashbackUwp.ViewModels
                 NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
 
             }
+        }
+
+        public async void OpenWebb()
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://www.flashback.org/subscription.php"));
         }
     }
 }
