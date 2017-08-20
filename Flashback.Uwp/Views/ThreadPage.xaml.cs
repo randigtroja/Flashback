@@ -46,7 +46,7 @@ namespace FlashbackUwp.Views
             {
                 var id = model.ForumThread.Id.GetCleanId(false);
                 args.Request.Data.SetWebLink(new Uri("https://www.flashback.org/" + id));
-                args.Request.Data.Properties.Title = "Tråd på Flashback";
+                args.Request.Data.Properties.Title = model.ForumThread.Title;
                 args.Request.Data.Properties.Description = "Jag hittade en intressant tråd på Flashback att läsa";
             }
         }
