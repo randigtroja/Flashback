@@ -171,7 +171,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool UseSmartNavigation
         {
-            get { return _helper.Read<bool>(nameof(UseSmartNavigation), true); }
+            get { return _helper.Read<bool>(nameof(UseSmartNavigation), false); }
             set { _helper.Write(nameof(UseSmartNavigation), value); }
         }
 

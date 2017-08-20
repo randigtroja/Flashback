@@ -65,7 +65,19 @@ namespace FlashbackUwp.ViewModels
         {
             get { return _settings.AppTheme.Equals(ApplicationTheme.Light); }
             set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; RaisePropertyChanged(); }
-        }        
+        }
+
+        public bool UseEmoticons
+        {
+            get { return _settings.UseEmoticons; }
+            set { _settings.UseEmoticons = value; RaisePropertyChanged(); }
+        }
+
+        public bool UseSmartNavigation
+        {
+            get { return _settings.UseSmartNavigation; }
+            set { _settings.UseSmartNavigation = value; RaisePropertyChanged(); }
+        }
     }
 
     public class AboutPartViewModel : ViewModelBase

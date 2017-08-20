@@ -92,13 +92,29 @@
                                       RelativePanel.AlignLeftWithPanel="True"
                                       RelativePanel.AlignTopWithPanel="True" />
 
+                        <ToggleSwitch x:Name="UseSmartNavigationButtonToggleSwtich"
+                                      Header="Kom ihåg sidnr för 20 senaste trådarna"
+                                      IsOn="{Binding UseSmartNavigation, Mode=TwoWay}"
+                                      OffContent="Nej"
+                                      OnContent="Ja"
+                                      RelativePanel.AlignLeftWithPanel="True"                                      
+                                      RelativePanel.Below="HoppaTillSistaSidanButtonToggleSwtich" />
+
                         <ToggleSwitch x:Name="VisaAvatarerButtonToggleSwtich"
                                       Header="Visa avatarer"
                                       IsOn="{Binding ShowAvatars, Mode=TwoWay}"
                                       OffContent="Nej"
                                       OnContent="Ja"
                                       RelativePanel.AlignLeftWithPanel="True"                                      
-                                      RelativePanel.Below="HoppaTillSistaSidanButtonToggleSwtich" />
+                                      RelativePanel.Below="UseSmartNavigationButtonToggleSwtich" />
+
+                        <ToggleSwitch x:Name="UseEmoticonsButtonToggleSwtich"
+                                      Header="Använd systemets smileys"
+                                      IsOn="{Binding UseEmoticons, Mode=TwoWay}"
+                                      OffContent="Nej"
+                                      OnContent="Ja"
+                                      RelativePanel.AlignLeftWithPanel="True"                                      
+                                      RelativePanel.Below="VisaAvatarerButtonToggleSwtich" />
 
                         <ToggleSwitch x:Name="UseLightThemeToggleSwitch"
                                       Header="Färgtema"
@@ -106,7 +122,7 @@
                                       OffContent="Mörkt"
                                       OnContent="Ljust"
                                       RelativePanel.AlignLeftWithPanel="True"
-                                      RelativePanel.Below="VisaAvatarerButtonToggleSwtich" />
+                                      RelativePanel.Below="UseEmoticonsButtonToggleSwtich" />
 
                         <ComboBox x:Name="ComboFontSize"  Header="Textstorlek i trådar" ItemsSource="{Binding FontSizes}" RelativePanel.Below="UseLightThemeToggleSwitch" SelectedItem="{Binding FontSize, Mode=TwoWay}">
                             
