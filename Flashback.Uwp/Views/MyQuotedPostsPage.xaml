@@ -92,7 +92,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="{Binding XamlCode}" Margin="5,2" VerticalAlignment="Center" />
+                        <FontIcon Glyph="{Binding XamlCode}" Margin="5,2" VerticalAlignment="Center" FontSize="14" />
 
                         <StackPanel VerticalAlignment="Center" Margin="5,2">
                             <TextBlock Text="{Binding Path=Name}" Style="{ThemeResource BodyTextBlockStyle}"/>
