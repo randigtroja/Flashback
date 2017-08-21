@@ -88,15 +88,15 @@
         </controls:PageHeader>
 
         <!--  content  -->
-        <ListView ItemsSource="{Binding Path=Posts}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Grid.Row="1">
+        <ListView ItemsSource="{x:Bind ViewModel.Posts}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="{Binding XamlCode}" Margin="5,2" VerticalAlignment="Center" FontSize="14" />
+                        <FontIcon Glyph="{Binding XamlCode}" Margin="5,-15,5,0" FontSize="14" />
 
                         <StackPanel VerticalAlignment="Center" Margin="5,2">
-                            <TextBlock Text="{Binding Path=Name}" Style="{ThemeResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="{Binding Path=Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{Binding Name}" Style="{ThemeResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{Binding Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Style="{StaticResource BodyTextBlockStyle}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
