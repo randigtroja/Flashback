@@ -41,7 +41,7 @@ namespace FlashbackUwp.ViewModels
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
-                Posts = SampleData.SampleData.GetDefaultNewTopics();
+                Posts = SampleData.SampleData.GetDefaultMyQuotesPosts();
             }
         }
 

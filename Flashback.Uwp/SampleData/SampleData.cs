@@ -256,5 +256,48 @@ namespace FlashbackUwp.SampleData
                 new FbRssItem() {Date = "2017-01-07",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet7"},
             };
         }
+
+        public static ObservableCollection<FbItem> GetDefaultMyQuotesPosts()
+        {
+            return new ObservableCollection<FbItem>()
+            {
+                new FbItem
+                {
+                    Name = "varör är beatles bäst?",
+                    ShowPostCount = false,
+                    PostCount = 1234,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "2017-01-01, 23:10 - skrikande_gris"
+                },
+                new FbItem
+                {
+                    Name = "paul eller lennon?",
+                    ShowPostCount = false,
+                    PostCount = 367,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "2017-01-01, 23:10 - skrikande_gris"
+                },
+                new FbItem()
+                {
+                    Name = "stora tråden om beatles",
+                    ShowPostCount = false,
+                    PostCount = 12819,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "2017-01-01, 23:10 - skrikande_gris"
+                },
+                new FbItem()
+                {
+                    Name = "Rickenbacker?",
+                    ShowPostCount = false,
+                    PostCount = 4,
+                    Type = FbItemType.Thread,
+                    ShowForumColor = false,
+                    Description = "2017-01-01, 23:10 - skrikande_gris"
+                }
+            };
+        }
     }
 }
