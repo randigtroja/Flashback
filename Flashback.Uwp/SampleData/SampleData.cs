@@ -242,5 +242,19 @@ namespace FlashbackUwp.SampleData
 
             };
         }
+
+        public static ObservableCollection<FbRssItem> GetDefaultRssItems()
+        {
+            return new ObservableCollection<FbRssItem>()
+            {
+                new FbRssItem() {Date = "2017-01-01",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet1"},
+                new FbRssItem() {Date = "2017-01-02",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet2"},
+                new FbRssItem() {Date = "2017-01-03",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet3"},
+                new FbRssItem() {Date = "2017-01-04",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet4"},
+                new FbRssItem() {Date = "2017-01-05",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet5"},
+                new FbRssItem() {Date = "2017-01-06",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet6"},
+                new FbRssItem() {Date = "2017-01-07",Description = "Bla bla bla. Spännande spännande, och så vidare....",Link = "https://www.flashback.se/1",Name = "Detta är en nyhet7"},
+            };
+        }
     }
 }

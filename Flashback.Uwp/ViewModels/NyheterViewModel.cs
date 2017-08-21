@@ -23,6 +23,11 @@ namespace FlashbackUwp.ViewModels
         public NyheterViewModel()
         {
             _nyheter = new ObservableCollection<FbRssItem>();
+
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                Nyheter = SampleData.SampleData.GetDefaultRssItems();
+            }
         }
 
         private async Task LoadViewModel()
