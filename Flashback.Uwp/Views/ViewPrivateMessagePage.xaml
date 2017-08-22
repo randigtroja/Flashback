@@ -86,9 +86,8 @@
         </controls:PageHeader>
 
         <!--  content  -->
-        <ScrollViewer Padding="12,8,0,0" Grid.Row="1">
-            <WebView x:Name="WebView" NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding Message.Message}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}"></WebView>
-        </ScrollViewer>
+        <WebView Grid.Row="1" Margin="0,5" x:Name="WebView" NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding Message.Message}" DefaultBackgroundColor="{ThemeResource SystemAltHighColor}"/>
+
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <CommandBar.Content>
