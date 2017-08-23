@@ -23,11 +23,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- Header Row -->
             <RowDefinition Height="*" />
-            <!-- Content Row -->
             <RowDefinition Height="Auto" />
-            <!-- CommandBar Row -->
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -49,7 +46,6 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
@@ -59,7 +55,6 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
@@ -71,13 +66,11 @@
                     <VisualState.Setters>
                         <Setter Target="BottonCommands.Visibility" Value="Collapsed"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Visible"/>
-
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <!--  header  -->
         <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0" EllipsisVisibility="Collapsed" PrimaryCommandsVisibility="Collapsed">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh"/>
@@ -85,14 +78,12 @@
 
             <controls:PageHeader.Content>
                 <RelativePanel>
-                    <TextBlock x:Name="rubrik">Aktuella ämnen</TextBlock>
-                    <TextBox Margin="12,0,0,0" Text="{Binding FilterText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" RelativePanel.RightOf="rubrik" PlaceholderText="skriv för att filtrera"></TextBox>
+                    <TextBlock x:Name="rubrik" Text="Aktuella ämnen"/>
+                    <TextBox Margin="12,0,0,0" Text="{Binding FilterText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" RelativePanel.RightOf="rubrik" PlaceholderText="skriv för att filtrera"/>
                 </RelativePanel>
             </controls:PageHeader.Content>
-
         </controls:PageHeader>
 
-        <!--  content  -->
 
         <ListView ItemsSource="{Binding Path=Topics}" x:Name="ListTopics" ItemClick="{x:Bind ViewModel.NavigateToForum}" IsItemClickEnabled="True" Grid.Row="1" Padding="12,8,0,0">
             <ListView.ItemTemplate>
@@ -111,10 +102,11 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <CommandBar.Content>
                 <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                    <FontIcon Glyph="&#xE700;"/>
                 </AppBarButton>
             </CommandBar.Content>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
