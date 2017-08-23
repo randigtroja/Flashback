@@ -5,6 +5,7 @@
     xmlns:local="using:FlashbackUwp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
+    xmlns:model="using:Flashback.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
     xmlns:converters="using:FlashbackUwp.Converters"
@@ -22,11 +23,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- Header Row -->
             <RowDefinition Height="*" />
-            <!-- Content Row -->
             <RowDefinition Height="Auto" />
-            <!-- CommandBar Row -->
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -48,7 +46,6 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
@@ -58,7 +55,6 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
@@ -75,39 +71,40 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <!--  header  -->
+ 
         <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0" EllipsisVisibility="Collapsed">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh"/>
             </controls:PageHeader.PrimaryCommands>
             <controls:PageHeader.Content>
-                <TextBlock x:Name="rubrik">Mina citerade inlägg</TextBlock>
+                <TextBlock Text="Mina citerade inlägg"/>
             </controls:PageHeader.Content>
         </controls:PageHeader>
 
-        <!--  content  -->
+
         <ListView ItemsSource="{x:Bind ViewModel.Posts}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Grid.Row="1">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="model:FbItem">
                     <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="{Binding XamlCode}" Margin="5,-15,5,0" FontSize="14" />
+                        <FontIcon Glyph="{x:Bind XamlCode}" Margin="5,-15,5,0" FontSize="14" />
 
                         <StackPanel VerticalAlignment="Center" Margin="5,2">
-                            <TextBlock Text="{Binding Name}" Style="{ThemeResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="{Binding Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{x:Bind Name}" Style="{ThemeResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{x:Bind Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Style="{StaticResource BodyTextBlockStyle}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+        
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <CommandBar.Content>
                 <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                    <FontIcon Glyph="&#xE700;"/>
                 </AppBarButton>
             </CommandBar.Content>
-            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+            <AppBarButton Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
         </CommandBar>
 
     </Grid>
