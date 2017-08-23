@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.UI.Text.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -210,6 +209,14 @@ namespace FlashbackUwp.ViewModels
                     await LoadViewModel(ForumList.Id.GetCleanIdForPage(pageNumer));
                 }
             }                            
+        }
+
+        public async void NavigateToParentForum()
+        {            
+            if (!string.IsNullOrWhiteSpace(ForumList.ParentId))
+            {
+                await NavigationService.NavigateAsync(typeof(ForumMainList), ForumList.ParentId);
+            }
         }
     }
 }

@@ -136,15 +136,24 @@ namespace Flashback.Services.Forum
                     currentPage = int.Parse(match.Groups[1].Value);
                     totalPages = int.Parse(match.Groups[2].Value);
                 }
-            }            
-            
+            }
+
+            var parentCheck = document.QuerySelector("div.list-forum-title ol li:nth-last-child(2) a");
+            string parentId = "";
+
+            if (parentCheck != null)
+            {
+                parentId = parentCheck.Attributes["href"].Value.Replace("/", "");
+            }
+
             return new ForumList()
             {
                 Items = new ObservableCollection<FbItem>(forum),
                 Title = forumTitle,
                 ShowNavigation = showNavigation,
                 CurrentPage = currentPage,
-                MaxPages = totalPages
+                MaxPages = totalPages,
+                ParentId = parentId
             };
         }
 

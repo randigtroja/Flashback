@@ -10,6 +10,7 @@ namespace Flashback.Model
         public int MaxPages { get; set; }   
         public ObservableCollection<FbItem> Items { get; set; }
         public string Id { get; set; }
+        public string ParentId { get; set; }
         public string PagenumberText => string.Format("{0}/{1}", CurrentPage, MaxPages);
     }
 }

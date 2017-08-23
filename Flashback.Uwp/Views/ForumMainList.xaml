@@ -51,7 +51,6 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
@@ -61,7 +60,6 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
@@ -73,7 +71,6 @@
                     <VisualState.Setters>
                         <Setter Target="BottonCommands.Visibility" Value="Collapsed"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Visible"/>
-
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -89,7 +86,7 @@
             </controls:PageHeader.PrimaryCommands>
             <controls:PageHeader.Content>
                 <RelativePanel HorizontalAlignment="Left">
-                    <TextBlock x:Name="rubrik" Text="{Binding ForumList.Title}" Margin="0,0,10,5"/>
+                    <TextBlock x:Name="rubrik" Text="{Binding ForumList.Title}" Tapped="{x:Bind ViewModel.NavigateToParentForum}" Margin="0,0,10,5"/>
 
                     <Button Click="{x:Bind ViewModel.FirstPage}" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}" Style="{StaticResource NavigationButton}" RelativePanel.Below="rubrik" x:Name="First">
                         <SymbolIcon Symbol="Previous"/>
@@ -138,7 +135,7 @@
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <CommandBar.Content>
                 <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" x:Name="OpenHamburgerMenuButton" Visibility="Collapsed" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                    <FontIcon Glyph="&#xE700;"/>
                 </AppBarButton>
             </CommandBar.Content>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
