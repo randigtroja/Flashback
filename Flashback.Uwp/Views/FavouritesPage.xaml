@@ -144,6 +144,7 @@
                     <FontIcon Glyph="&#xE700;"></FontIcon>
                 </AppBarButton>
             </CommandBar.Content>
+            <AppBarButton Icon="World" Label="Webb" Click="{x:Bind ViewModel.OpenWebb}"/>
             <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
         </CommandBar>
 
