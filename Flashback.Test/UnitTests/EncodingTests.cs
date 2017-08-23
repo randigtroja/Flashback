@@ -12,7 +12,7 @@ namespace Flashback.Test.UnitTests
 
             var output = input.FormatToEncodedPostable();
 
-            Assert.Equal("%26amp%3B+%26lt%3B%26gt%3B+HEJ+%26quot%3B+p%26%23229%3B+dig",output);
+            Assert.Equal("%26+%3C%3E+HEJ+%22+p%26%23229%3B+dig",output);
             
         }
 
