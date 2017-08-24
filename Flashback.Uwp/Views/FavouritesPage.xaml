@@ -38,7 +38,7 @@
                                         RightCommandParameter="{Binding}">
                 <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0"  Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
+                        <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0" Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
                         <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"/>
                     </StackPanel>
                     <StackPanel Margin="12,0,0,0">
@@ -55,11 +55,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- Header Row -->
             <RowDefinition Height="*" />
-            <!-- Content Row -->
             <RowDefinition Height="Auto" />
-            <!-- CommandBar Row -->
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -81,12 +78,10 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                         <Setter Target="RefreshButton.Visibility" Value="Collapsed"/>
                         <Setter Target="pageHeader.EllipsisVisibility" Value="Collapsed"/>
-
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -94,12 +89,10 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
                         <Setter Target="RefreshButton.Visibility" Value="Collapsed"/>
                         <Setter Target="pageHeader.EllipsisVisibility" Value="Collapsed"/>
-
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -107,18 +100,16 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for wide view  -->
                         <Setter Target="pageHeader.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Visible"/>
                         <Setter Target="RefreshButton.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.EllipsisVisibility" Value="Visible"/>
-
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <!--  header  -->
+
         <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                    
                              EllipsisVisibility="Collapsed" 
                              PrimaryCommandsVisibility="Collapsed"
@@ -128,7 +119,7 @@
             </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 
-        <!--  content  -->
+
         <ListView ItemsSource="{Binding Path=Favourites}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1" SelectionMode="None" ItemTemplate="{StaticResource FavouriteItemTemplate}" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -137,14 +128,15 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Visibility="Collapsed" Grid.Row="2">
             <CommandBar.Content>
                 <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                    <FontIcon Glyph="&#xE700;"></FontIcon>
+                    <FontIcon Glyph="&#xE700;"/>
                 </AppBarButton>
             </CommandBar.Content>
-            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+            <AppBarButton Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
         </CommandBar>
 
     </Grid>
