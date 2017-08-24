@@ -42,7 +42,7 @@
 
         <controls:PageHeader Text="Nyheter" Frame="{x:Bind Frame}" Grid.Row="0" />
 
-        <ListView ItemsSource="{x:Bind ViewModel.Nyheter}" ItemClick="{x:Bind ViewModel.RssNavigate}" IsItemClickEnabled="True" Padding="4" Grid.Row="1">
+        <ListView ItemsSource="{x:Bind ViewModel.Nyheter, Mode=OneWay}" ItemClick="{x:Bind ViewModel.RssNavigate}" IsItemClickEnabled="True" Padding="4" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:FbRssItem">
                     <StackPanel Padding="0,10">

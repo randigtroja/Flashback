@@ -82,7 +82,7 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{x:Bind ViewModel.Posts}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Grid.Row="1">
+        <ListView ItemsSource="{x:Bind ViewModel.Posts,Mode=OneWay}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:FbItem">
                     <StackPanel Orientation="Horizontal">
