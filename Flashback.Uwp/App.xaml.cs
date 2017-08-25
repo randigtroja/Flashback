@@ -47,18 +47,7 @@ namespace FlashbackUwp
                 .FirstOrDefault(x => x.Name == "vbscanuserid");
 
             return userId != null;
-        }
-
-        private static string GetSessionhash()
-        {
-            var cookies = CookieContainer
-                .GetCookies(new Uri("https://flashback.org/"))
-                .Cast<Cookie>().ToList();
-
-            var hash = cookies.FirstOrDefault(x => x.Name == "vbscansessionhash");
-
-            return hash?.Value;
-        }
+        }        
 
         public static string GetUserId()
         {
@@ -169,7 +158,7 @@ namespace FlashbackUwp
 
         public static async Task Logout()
         {           
-            await new AuthService(CookieContainer).Logout(GetSessionhash());
+            await new AuthService(CookieContainer).Logout();
 
             CookieContainer = new CookieContainer();
 
