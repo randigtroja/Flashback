@@ -1,4 +1,4 @@
-<Page x:Class="FlashbackUwp.Views.SettingsPage"
+﻿<Page x:Class="FlashbackUwp.Views.SettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:Behaviors="using:Template10.Behaviors"
@@ -145,6 +145,15 @@
                         <Run Text="{Binding Version}" />
                     </TextBlock>
 
+                    <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.Below="VersionTextBlock"><LineBreak/>Appen är open source och koden hittas på:<LineBreak/>
+                        <Hyperlink NavigateUri="https://github.com/randigtroja/Flashback" UnderlineStyle="None">https://github.com/randigtroja/Flashback</Hyperlink>    
+                        <LineBreak/>
+                        <LineBreak/>
+                        Hjälp uppskattas alltid!
+                    </TextBlock>
+                    
+
                 </RelativePanel>
             </PivotItem>
 
@@ -157,7 +166,11 @@
                         
                         <Bold>0.1.0.0</Bold>
                         <LineBreak />
-                        Första beta. Portningen från WindowsPhone påbörjad
+                        * Första beta. Portningen från Windows Phone (Silverlight) påbörjad
+                        <LineBreak />
+                        * En del nya funktioner (filter aktuella ämnen, navigera subforum)
+                        <LineBreak />
+                        * Släppt appen som open source
                         
                     </TextBlock>
                 </ScrollViewer>
