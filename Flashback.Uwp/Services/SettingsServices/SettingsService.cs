@@ -175,5 +175,11 @@ namespace FlashbackUwp.Services.SettingsServices
             set { _helper.Write(nameof(UseSmartNavigation), value); }
         }
 
+        public bool ShowSignatures
+        {
+            get { return _helper.Read<bool>(nameof(ShowSignatures), false); }
+            set { _helper.Write(nameof(ShowSignatures), value); }
+        }
+
     }
 }

@@ -61,6 +61,12 @@ namespace FlashbackUwp.ViewModels
             set { _settings.ShowAvatars = value; RaisePropertyChanged(); }
         }
 
+        public bool ShowSignatures
+        {
+            get { return _settings.ShowSignatures; }
+            set { _settings.ShowSignatures = value; RaisePropertyChanged(); }
+        }
+
         public bool UseLightThemeButton
         {
             get { return _settings.AppTheme.Equals(ApplicationTheme.Light); }

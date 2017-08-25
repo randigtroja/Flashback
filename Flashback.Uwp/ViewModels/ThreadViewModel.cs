@@ -80,7 +80,8 @@ namespace FlashbackUwp.ViewModels
                 ShowAvatars = _settings.ShowAvatars,
                 AccentColor = string.Format("#{0:X2}{1:X2}{2:X2}", c.R, c.G, c.B),
                 FontSize = _settings.FontSize,
-                RenderEmoticons = _settings.UseEmoticons
+                RenderEmoticons = _settings.UseEmoticons,
+                ShowSignatures = _settings.ShowSignatures
             });
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)

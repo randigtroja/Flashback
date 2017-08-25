@@ -307,9 +307,20 @@ namespace Flashback.Services.Threads
 
                 var postMessageCheck = post.QuerySelector("div.post_message");
                 string postMessage;
+
                 if (postMessageCheck != null)
                 {
                     postMessage = postMessageCheck.InnerHtml;
+
+                    if (_options.ShowSignatures)
+                    {
+                        var signatureCheck = post.QuerySelector("div.signature");
+                        if (signatureCheck != null)
+                        {
+                            postMessage = postMessage + "<br><small><div class=\"signature\">" + signatureCheck.InnerHtml+"</small></div>";
+                        }
+                    }
+
                     postMessage = postMessage.Replace("/leave.php?u=", "");
                 }
                 else

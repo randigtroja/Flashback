@@ -81,6 +81,11 @@
                                       OffContent="Nej"
                                       OnContent="Ja" />
 
+                        <ToggleSwitch Header="Visa signaturer i trådar"
+                                      IsOn="{Binding ShowSignatures, Mode=TwoWay}"
+                                      OffContent="Nej"
+                                      OnContent="Ja" />
+
                         <ToggleSwitch Header="Använd systemets smileys"
                                       IsOn="{Binding UseEmoticons, Mode=TwoWay}"
                                       OffContent="Nej"

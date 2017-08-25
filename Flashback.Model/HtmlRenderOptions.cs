@@ -14,6 +14,7 @@ namespace Flashback.Model
         public bool ShowAvatars { get; set; }
         public string FontSize { get; set; }
         public bool RenderEmoticons { get; set; }
+        public bool ShowSignatures { get; set; }
 
         private string GetForeColor()
         {
@@ -93,7 +94,8 @@ namespace Flashback.Model
                                     "i { width:90%;} " +
                                     "img.avatar { width:40px;vertical-align:text-bottom; margin-right:12px; }" +
                                     ".hidden {display: none;}" +
-                                    ".post-bbcode-spoiler {color: " + foreColor + "; background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";" +"border-width:1px; " +"font-size:" + fontSize + "; };" +
+                                    ".post-bbcode-spoiler {color: " + foreColor + "; background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";" +"border-width:1px; " +"font-size:" + fontSize + "; }" +
+                                    ".signature {color: #666;}" +
                                 "</style>";
 
 
