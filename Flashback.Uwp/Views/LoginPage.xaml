@@ -16,11 +16,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- Header Row -->
             <RowDefinition Height="*" />
-            <!-- Content Row -->
             <RowDefinition Height="Auto" />
-            <!-- CommandBar Row -->
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -29,34 +26,27 @@
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
-                    </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
-                    </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <!--  TODO: change properties for wide view  -->
-                    </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Text="Logga in" Grid.Row="0"/>
-        <!--  content  -->
-        <ScrollViewer Padding="12,8,0,0" RelativePanel.AlignBottomWithPanel="True" Grid.Row="1">
-            
+
+        
+        <controls:PageHeader Frame="{x:Bind Frame}" Text="Logga in" Grid.Row="0"/>
+
+
+        <ScrollViewer Padding="12,8,0,0" Grid.Row="1">
             <StackPanel HorizontalAlignment="Left" Margin="10,10">
+                
                 <TextBox Text="{Binding UserName, Mode=TwoWay}" Header="Användarnamn:" Margin="0,10"/>
                 <PasswordBox Password="{Binding Password, Mode=TwoWay}" Header="Lösenord:" Margin="0,10"/>
 
@@ -70,8 +60,9 @@
                         https://www.flashback.org/register/
                     </Hyperlink>
                 </TextBlock>
+                
             </StackPanel>            
         </ScrollViewer>
+        
     </Grid>
-    
 </Page>
