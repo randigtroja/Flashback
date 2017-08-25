@@ -48,7 +48,7 @@ namespace FlashbackUwp.ViewModels
                 try
                 {
                     Views.Busy.SetBusy(true, "Loggar ut...");
-                    await App.Logout();
+                    await App.Logout();                    
                 }
                 catch (Exception e)
                 {

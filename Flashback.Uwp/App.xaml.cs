@@ -177,6 +177,8 @@ namespace FlashbackUwp
             await encryptionService.WriteCookieData(CookieContainer);
 
             Messenger.Default.Send<bool>(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
+
+            Messenger.Default.Send<string>("Ok! Du är utloggad!", FlashbackConstants.MessengerShowInformation);
         }
     }
 }

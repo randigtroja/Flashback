@@ -1,8 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Flashback.Model;
 using Flashback.Services.Auth;
-using FlashbackUwp.Services.SecurityServices;
 using FlashbackUwp.Views;
 using GalaSoft.MvvmLight.Messaging;
 
