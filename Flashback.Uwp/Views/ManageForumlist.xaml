@@ -29,12 +29,11 @@
 
 
         <ScrollViewer Margin="0,12,-12,0" VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <RelativePanel HorizontalAlignment="Left" RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True" Margin="12,0,0,0">
+            <StackPanel HorizontalAlignment="Left" Margin="12,0,0,0">
 
-                <TextBlock x:Name="InfoText" Text="Här finns möjlighet att lägga till fler forum. Fyll i samtliga uppgifter nedan och spara." TextWrapping="Wrap" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True"/>
+                <TextBlock x:Name="InfoText" Text="Här finns möjlighet att lägga till fler forum. Fyll i samtliga uppgifter nedan och spara." TextWrapping="Wrap" />
 
-                <ListView x:Name="ListForums" RelativePanel.Below="InfoText" ItemsSource="{Binding Path=ExtraForumList}" >
+                <ListView x:Name="ListForums" ItemsSource="{Binding Path=ExtraForumList}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="-12,0,0,5" HorizontalAlignment="Left">
@@ -53,15 +52,15 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <TextBlock Margin="0,24,0,0" x:Name="InfoText2" RelativePanel.Below="ListForums" Style="{StaticResource CaptionTextBlockStyle}">Namn på forumet (ex. Systemutveckling)</TextBlock>
-                <TextBox MinWidth="200"  x:Name="ForumDescription" RelativePanel.Below="InfoText2" Text="{Binding AddName, Mode=TwoWay}"/>
+                <TextBlock Margin="0,24,0,0" x:Name="InfoText2" Style="{StaticResource CaptionTextBlockStyle}">Namn på forumet (ex. Systemutveckling)</TextBlock>
+                <TextBox MinWidth="200"  x:Name="ForumDescription" Text="{Binding AddName, Mode=TwoWay}"/>
 
-                <TextBlock x:Name="PathText" RelativePanel.Below="ForumDescription" Style="{StaticResource CaptionTextBlockStyle}">Sökväg (ex. /f42 )</TextBlock>
-                <TextBox MinWidth="200" Name="ForumPath" RelativePanel.Below="PathText" Text="{Binding AddPath, Mode=TwoWay}"/>
+                <TextBlock x:Name="PathText" Style="{StaticResource CaptionTextBlockStyle}">Sökväg (ex. /f42 )</TextBlock>
+                <TextBox MinWidth="200" Name="ForumPath" Text="{Binding AddPath, Mode=TwoWay}"/>
 
-                <Button Content="Lägg till" Margin="0,24,0,0" RelativePanel.Below="ForumPath" Click="{x:Bind ViewModel.AddForum}"/>
+                <Button Content="Lägg till" Margin="0,24,0,0" Click="{x:Bind ViewModel.AddForum}"/>
 
-            </RelativePanel>
+            </StackPanel>
            
         </ScrollViewer>
 
