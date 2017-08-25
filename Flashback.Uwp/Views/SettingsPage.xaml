@@ -57,7 +57,7 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <controls:PageHeader x:Name="pageHeader" Grid.Row="0" Content="Inställningar" Frame="{x:Bind Frame}" />
+        <controls:PageHeader Grid.Row="0" Content="Inställningar" Frame="{x:Bind Frame}" />
 
 
         <Pivot x:Name="MyPivot" Grid.Row="1">
@@ -66,41 +66,34 @@
                 <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto">
 
                     <StackPanel>
-                        <ToggleSwitch x:Name="HoppaTillSistaSidanButtonToggleSwtich"
-                                      Header="Hoppa till sista sidan i trådar"
+                        <ToggleSwitch Header="Hoppa till sista sidan i trådar"
                                       IsOn="{Binding HoppaTillSistaSidan, Mode=TwoWay}"
                                       OffContent="Går till första sidan i trådar"
                                       OnContent="Går till sista sidan i trådar" />
 
-                        <ToggleSwitch x:Name="UseSmartNavigationButtonToggleSwtich"
-                                      Header="Kom ihåg sidnr för 20 senaste trådarna"
+                        <ToggleSwitch Header="Kom ihåg sidnr för 20 senaste trådarna"
                                       IsOn="{Binding UseSmartNavigation, Mode=TwoWay}"
                                       OffContent="Nej"
                                       OnContent="Ja" />
 
-                        <ToggleSwitch x:Name="VisaAvatarerButtonToggleSwtich"
-                                      Header="Visa avatarer"
+                        <ToggleSwitch Header="Visa avatarer"
                                       IsOn="{Binding ShowAvatars, Mode=TwoWay}"
                                       OffContent="Nej"
                                       OnContent="Ja" />
 
-                        <ToggleSwitch x:Name="UseEmoticonsButtonToggleSwtich"
-                                      Header="Använd systemets smileys"
+                        <ToggleSwitch Header="Använd systemets smileys"
                                       IsOn="{Binding UseEmoticons, Mode=TwoWay}"
                                       OffContent="Nej"
                                       OnContent="Ja" />
 
-                        <ToggleSwitch x:Name="UseLightThemeToggleSwitch"
-                                      Header="Färgtema"
+                        <ToggleSwitch Header="Färgtema"
                                       IsOn="{Binding UseLightThemeButton, Mode=TwoWay}"
                                       OffContent="Mörkt"
                                       OnContent="Ljust" />
 
-                        <ComboBox x:Name="ComboFontSize"  Header="Textstorlek i trådar" ItemsSource="{Binding FontSizes}" SelectedItem="{Binding FontSize, Mode=TwoWay}"/>
+                        <ComboBox Header="Textstorlek i trådar" ItemsSource="{Binding FontSizes}" SelectedItem="{Binding FontSize, Mode=TwoWay}"/>
 
-
-                        <Button Margin="0,24,0,0" Click="{x:Bind ViewModel.NavigateToManageForums}">Hantera forumlistan</Button>
-
+                        <Button Margin="0,24,0,0" Click="{x:Bind ViewModel.NavigateToManageForums}" Content="Hantera forumlistan"/>
                     </StackPanel>
                 </ScrollViewer>
             </PivotItem>
@@ -152,8 +145,6 @@
                         <LineBreak/>
                         Hjälp uppskattas alltid!
                     </TextBlock>
-                    
-
                 </RelativePanel>
             </PivotItem>
 
@@ -162,16 +153,14 @@
                 <ScrollViewer Margin="0,0,-12,0" VerticalScrollBarVisibility="Auto">
                     <TextBlock Margin="0,12,24,12"
                                LineHeight="24"
-                               TextWrapping="Wrap">
-                        
+                               TextWrapping="Wrap">                        
                         <Bold>0.1.0.0</Bold>
                         <LineBreak />
                         * Första beta. Portningen från Windows Phone (Silverlight) påbörjad
                         <LineBreak />
                         * En del nya funktioner (filter aktuella ämnen, navigera subforum)
                         <LineBreak />
-                        * Släppt appen som open source
-                        
+                        * Släppt appen som open source                        
                     </TextBlock>
                 </ScrollViewer>
             </PivotItem>
