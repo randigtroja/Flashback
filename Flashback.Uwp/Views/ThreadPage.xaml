@@ -72,13 +72,13 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <!--  header  -->
+        
         <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                          
                              EllipsisVisibility="Collapsed" 
                              PrimaryCommandsVisibility="Collapsed">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.PostReply}" IsEnabled="{Binding IsLoggedIn}" />
-                <AppBarButton Icon=" Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
+                <AppBarButton Icon="Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
                 <AppBarButton Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
                 <AppBarButton Icon="Pin" Label="Pinna" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
                 <AppBarButton Icon="Unpin" Label="Ta bort" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
@@ -90,31 +90,33 @@
                 </AppBarButton>
             </controls:PageHeader.PrimaryCommands>
             <controls:PageHeader.Content>
-                <RelativePanel HorizontalAlignment="Left">
-                    <TextBlock x:Name="rubrik" Text="{Binding ForumThread.Title}" Tapped="{x:Bind ViewModel.NavigateToParentForum}" Margin="0,0,10,5"/>
+                <StackPanel>
+                    <TextBlock Text="{Binding ForumThread.Title}" Tapped="{x:Bind ViewModel.NavigateToParentForum}" Margin="0,0,10,5"/>
 
-                    <Button Click="{x:Bind ViewModel.FirstPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Style="{StaticResource NavigationButton}" RelativePanel.Below="rubrik" x:Name="First">
-                        <SymbolIcon Symbol="Previous"/>
-                    </Button>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Click="{x:Bind ViewModel.FirstPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Previous"/>
+                        </Button>
 
-                    <Button Click="{x:Bind ViewModel.PrevioustPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Back" RelativePanel.Below="rubrik" RelativePanel.RightOf="First">
-                        <SymbolIcon Symbol="Back"/>
-                    </Button>
+                        <Button Click="{x:Bind ViewModel.PrevioustPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Back"/>
+                        </Button>
 
-                    <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Picker" RelativePanel.Below="rubrik" RelativePanel.RightOf="Back">
-                        <SymbolIcon Symbol="List"/>
-                    </Button>
+                        <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="List"/>
+                        </Button>
 
-                    <Button Click="{x:Bind ViewModel.NextPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Next" RelativePanel.Below="rubrik" RelativePanel.RightOf="Picker">
-                        <SymbolIcon Symbol="Forward"/>
-                    </Button>
+                        <Button Click="{x:Bind ViewModel.NextPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Forward"/>
+                        </Button>
 
-                    <Button Click="{x:Bind ViewModel.LastPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Last" RelativePanel.Below="rubrik" RelativePanel.RightOf="Next">
-                        <SymbolIcon Symbol="Next"/>
-                    </Button>
+                        <Button Click="{x:Bind ViewModel.LastPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Next"/>
+                        </Button>
 
-                    <TextBlock Margin="24,-5,0,0"  RelativePanel.Below="rubrik" RelativePanel.RightOf="Last" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Text="{Binding ForumThread.PagenumberText}"/>
-                </RelativePanel>
+                        <TextBlock Margin="24,-5,0,0"  Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Text="{Binding ForumThread.PagenumberText}"/>
+                    </StackPanel>
+                </StackPanel>
             </controls:PageHeader.Content>
         </controls:PageHeader>
 
@@ -128,9 +130,9 @@
                     <FontIcon Margin="0" Glyph="&#xE700;"/>
                 </AppBarButton>
             </CommandBar.Content>
-            <AppBarButton Name="BottonAddFavourite" Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.PostReply}" IsEnabled="{Binding IsLoggedIn}" />
-            <AppBarButton Name="BottonReply" Icon=" Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
-            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+            <AppBarButton Icon="Comment" Label="Svara" Click="{x:Bind ViewModel.PostReply}" IsEnabled="{Binding IsLoggedIn}" />
+            <AppBarButton Icon="Favorite" Label="Favorit" Click="{x:Bind ViewModel.AddToFavourites}" IsEnabled="{Binding IsLoggedIn}" />
+            <AppBarButton Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
             
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="World" Label="Öppna i webbläsare" Click="OpenInWebBrowser"/>
@@ -139,8 +141,8 @@
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Name="BottonPin" Icon="Pin" Label="Pinna tråd" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
-                <AppBarButton Name="BottonUnPin" Icon="Unpin" Label="Ta bort pinnad" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
+                <AppBarButton Icon="Pin" Label="Pinna tråd" Click="{x:Bind ViewModel.Pin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter},ConverterParameter=true}" />
+                <AppBarButton Icon="Unpin" Label="Ta bort pinnad" Click="{x:Bind ViewModel.UnPin}" Visibility="{Binding IsPinned,Converter={StaticResource BoolConverter}}" />
                 <AppBarSeparator/>
                 <AppBarButton Icon="ClosePane" Label="Överst" Click="WebViewTop"/>
                 <AppBarButton Icon="OpenPane" Label="Längst ner" Click="WebViewBottom"/>
