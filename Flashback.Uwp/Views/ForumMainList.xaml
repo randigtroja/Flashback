@@ -25,11 +25,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <!-- Header Row -->
             <RowDefinition Height="*" />
-            <!-- Content Row -->
             <RowDefinition Height="Auto" />
-            <!-- CommandBar Row -->
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -76,7 +73,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <!--  header  -->
+
         <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0"                    
                              EllipsisVisibility="Collapsed" 
                              PrimaryCommandsVisibility="Collapsed">
@@ -113,7 +110,7 @@
             </controls:PageHeader.Content>
         </controls:PageHeader>
 
-        <!--  content  -->
+
         <ListView ItemsSource="{Binding Path=ForumList.Items}" ItemClick="{x:Bind ViewModel.NavigateToForumThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -138,9 +135,8 @@
                     <FontIcon Glyph="&#xE700;"/>
                 </AppBarButton>
             </CommandBar.Content>
-            <AppBarButton Name="BottonPrimaryHome" Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
-            <AppBarButton Name="BottonPrimarySearch" Icon="Find" Label="Sök" Click="{x:Bind ViewModel.NavigateToSearch}" />
+            <AppBarButton Icon="Refresh" Label="Ladda om" Click="{x:Bind ViewModel.Refresh}" />
+            <AppBarButton Icon="Find" Label="Sök" Click="{x:Bind ViewModel.NavigateToSearch}" />
         </CommandBar>
     </Grid>
 </Page>
-    
