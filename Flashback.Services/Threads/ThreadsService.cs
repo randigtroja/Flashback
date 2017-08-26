@@ -305,7 +305,7 @@ namespace Flashback.Services.Threads
                     }
                 }
 
-                var postMessageCheck = post.QuerySelector("div.post_message");
+                var postMessageCheck = post.QuerySelector("div.post_message");                
                 string postMessage;
 
                 if (postMessageCheck != null)
@@ -321,7 +321,14 @@ namespace Flashback.Services.Threads
                         }
                     }
 
-                    postMessage = postMessage.Replace("/leave.php?u=", "");
+                    var titleCheck = post.QuerySelector("div.smallfont");
+                    string postTitle = "";
+                    if (titleCheck != null)
+                    {
+                        postTitle = titleCheck.InnerHtml + "<br>";
+                    }
+                    
+                    postMessage = postTitle + postMessage.Replace("/leave.php?u=", "");
                 }
                 else
                 {
