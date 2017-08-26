@@ -327,8 +327,8 @@ namespace Flashback.Services.Threads
                     {
                         postTitle = titleCheck.InnerHtml + "<br>";
                     }
-                    
-                    postMessage = postTitle + postMessage.Replace("/leave.php?u=", "");
+
+                    postMessage = postTitle + postMessage.FixLeaveLink();
                 }
                 else
                 {

@@ -11,6 +11,20 @@ namespace Flashback.Services
             return string.IsNullOrWhiteSpace(str) ? str : str.Replace("&nbsp;", "").Replace("\t", "").Replace("\n", "");
         }
 
+        public static string FixLeaveLink(this String str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return str;
+            }
+            else
+            {
+                str = str.Replace("/leave.php?u=", "");
+
+                return str;
+            }
+        }
+
         public static string GetCleanId(this String str, bool removeForumAndThreadIndicator)
         {
             if (string.IsNullOrWhiteSpace(str))
