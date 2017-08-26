@@ -85,8 +85,7 @@ namespace FlashbackUwp.ViewModels
             var item = e.ClickedItem as FbItem;
 
             if (item != null)
-            {
-                // NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
+            {                
                 NavigationService.Navigate(typeof(ThreadPage), item.Id); // vi borde nog inte hoppa till sista sidan från mina citerade inlägg- vi borde hamna på inlägget ist.
             }
         }
