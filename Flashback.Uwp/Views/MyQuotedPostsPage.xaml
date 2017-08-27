@@ -5,7 +5,6 @@
     xmlns:local="using:FlashbackUwp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
-    xmlns:model="using:Flashback.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
     xmlns:converters="using:FlashbackUwp.Converters"
@@ -16,9 +15,6 @@
         <viewModels:MyQuotedPostsViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
-    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -71,7 +67,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
- 
+
         <controls:PageHeader x:Name="pageHeader" Text="Mina citerade inlägg" Frame="{x:Bind Frame}" Grid.Row="0" EllipsisVisibility="Collapsed">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh"/>
@@ -79,21 +75,13 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{x:Bind ViewModel.Posts,Mode=OneWay}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:FbItem">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="{x:Bind XamlCode}" Margin="5,-15,5,0" FontSize="14" />
+        <ListView ItemsSource="{x:Bind ViewModel.Posts, Mode=OneWay}"  
+                ItemClick="{x:Bind ViewModel.NavigateToThread}" 
+                Style="{StaticResource FbListViewStyle}"  
+                Grid.Row="1" 
+                ItemTemplate="{StaticResource FbItemDataTemplate}"/>
 
-                        <StackPanel VerticalAlignment="Center" Margin="5,2">
-                            <TextBlock Text="{x:Bind Name}" Style="{ThemeResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="{x:Bind Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Style="{StaticResource BodyTextBlockStyle}"/>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+        
         
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <CommandBar.Content>
