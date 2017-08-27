@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace FlashbackUwp.Styles
 {
     public partial class DataTemplates
     {
         public DataTemplates ()
         {
-            InitializeComponent();
+            InitializeComponent();  // Nödvändigt för att x:Bind ska fungera ihop med StaticResource
         }
     }
 }
