@@ -78,7 +78,7 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{x:Bind ViewModel.Topics}" 
+        <ListView ItemsSource="{x:Bind ViewModel.Topics, Mode=OneWay}" 
                   ItemClick="{x:Bind ViewModel.NavigateToThread}" 
                   Style="{StaticResource FbListViewStyle}"  
                   Grid.Row="1" 
