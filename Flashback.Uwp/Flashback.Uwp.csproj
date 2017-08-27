@@ -105,7 +105,9 @@
     <Compile Include="Services\FileServices\FileService.cs" />
     <Compile Include="Services\SecurityServices\EncryptionService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
-    <Compile Include="Styles\DataTemplates.cs" />
+    <Compile Include="Styles\DataTemplates.xaml.cs">
+      <DependentUpon>DataTemplates.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Triggers\DeviceStateTrigger.cs" />
     <Compile Include="ViewModels\AktuellaAmnenViewModel.cs" />
     <Compile Include="ViewModels\ComposePrivateMessageViewModel.cs" />
