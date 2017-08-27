@@ -13,7 +13,7 @@
             </StackPanel>
             <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                 <TextBlock Text="{x:Bind Name}" />
-                <TextBlock Text="{x:Bind Description}" />
+                <TextBlock Text="{x:Bind Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
             </StackPanel>
         </StackPanel>
     </DataTemplate>
