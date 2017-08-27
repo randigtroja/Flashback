@@ -1,4 +1,4 @@
-﻿namespace Flashback.Model
+namespace Flashback.Model
 {
     public class FbItem
     {
@@ -21,5 +21,7 @@
                 return Type == FbItemType.Forum ? "\uE8B7" : "\uE7C3";
             }
         }
+
+        public string PostCountString => ShowPostCount ? PostCount.ToString() : string.Empty;
     }
 }
