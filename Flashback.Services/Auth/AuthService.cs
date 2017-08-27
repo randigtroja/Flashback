@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using AngleSharp.Parser.Html;
 
 namespace Flashback.Services.Auth
 {
@@ -36,9 +37,35 @@ namespace Flashback.Services.Auth
             return result.ToString();
         }
 
-        public async Task Logout(string sessionhash)
-        {           
-            var response = await _httpClient.GetAsync("https://www.flashback.org/login.php?do=logout&logouthash=" + sessionhash);
+        public async Task Logout()
+        {
+            // hashen finns ej i cookies utan skrivs bara ut i genererad html på serversidan. vi måste alltså hämta hashen för att sen anropa med.
+            var responseHash = await _httpClient.GetStringAsync("https://www.flashback.org/usercp.php");
+            var hash = await ParseHash(responseHash);
+
+            var response = await _httpClient.GetAsync("https://www.flashback.org/login.php?do=logout&logouthash=" + hash);
+        }
+
+        private async Task<string> ParseHash(string result)
+        {
+            var document = await new HtmlParser().ParseAsync(result);
+
+            var hashCheck = document.QuerySelector("a[onclick='return log_out()']");
+
+            if (hashCheck != null)
+            {
+                Uri uri = new Uri("http://www.flashback.org" + "/" + hashCheck.Attributes["href"].Value.Replace("&amp;", "&"));
+
+                var parameterValue = uri.Query.Split('&')
+                                    .Where(s => s.Split('=')[0] == "logouthash")
+                                    .Select(s => s.Split('=')[1])
+                                    .FirstOrDefault();
+
+                return parameterValue;
+            }
+
+            return "";
+
         }
 
         /// <summary>

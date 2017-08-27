@@ -72,13 +72,10 @@
         </VisualStateManager.VisualStateGroups>
 
  
-        <controls:PageHeader x:Name="pageHeader" Frame="{x:Bind Frame}" Grid.Row="0" EllipsisVisibility="Collapsed">
+        <controls:PageHeader x:Name="pageHeader" Text="Mina citerade inlägg" Frame="{x:Bind Frame}" Grid.Row="0" EllipsisVisibility="Collapsed">
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh"/>
             </controls:PageHeader.PrimaryCommands>
-            <controls:PageHeader.Content>
-                <TextBlock Text="Mina citerade inlägg"/>
-            </controls:PageHeader.Content>
         </controls:PageHeader>
 
 

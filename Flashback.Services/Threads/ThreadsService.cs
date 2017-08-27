@@ -305,12 +305,30 @@ namespace Flashback.Services.Threads
                     }
                 }
 
-                var postMessageCheck = post.QuerySelector("div.post_message");
+                var postMessageCheck = post.QuerySelector("div.post_message");                
                 string postMessage;
+
                 if (postMessageCheck != null)
                 {
                     postMessage = postMessageCheck.InnerHtml;
-                    postMessage = postMessage.Replace("/leave.php?u=", "");
+
+                    if (_options.ShowSignatures)
+                    {
+                        var signatureCheck = post.QuerySelector("div.signature");
+                        if (signatureCheck != null)
+                        {
+                            postMessage = postMessage + "<br><small><div class=\"signature\">" + signatureCheck.InnerHtml+"</small></div>";
+                        }
+                    }
+
+                    var titleCheck = post.QuerySelector("div.smallfont");
+                    string postTitle = "";
+                    if (titleCheck != null)
+                    {
+                        postTitle = titleCheck.InnerHtml + "<br>";
+                    }
+
+                    postMessage = postTitle + postMessage.FixLeaveLink();
                 }
                 else
                 {

@@ -52,22 +52,12 @@
 
                <AutoSuggestBox MinWidth="280" Margin="0,0,12,24" Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" QueryIcon="Find" QuerySubmitted="{x:Bind ViewModel.LoadViewModel}" />
 
-               <ListView ItemsSource="{Binding Path=SearchResult}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0"  Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
-                                    <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"/>
-                                </StackPanel>
-                                <StackPanel Margin="12,0,0,0">
-                                    <TextBlock Text="{Binding Path=Name}" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}"/>
-                                    <TextBlock Text="{Binding Path=Description}" Margin="0" FontWeight="Normal" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView ItemsSource="{x:Bind ViewModel.SearchResult, Mode=OneWay}" 
+                          ItemClick="{x:Bind ViewModel.NavigateToThread}" 
+                          Style="{StaticResource FbListViewStyle}"
+                          Grid.Row="1" 
+                          ItemTemplate="{StaticResource FbItemDataTemplate}" />
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

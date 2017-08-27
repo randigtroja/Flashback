@@ -18,7 +18,7 @@ namespace FlashbackUwp.Extensions
             obj.SetValue(HTMLProperty, value);
         }
 
-        public static readonly DependencyProperty HTMLProperty = DependencyProperty.RegisterAttached("HTML", typeof(string), typeof(HtmlWebViewExtender), new PropertyMetadata(0, new PropertyChangedCallback(OnHTMLChanged)));
+        public static readonly DependencyProperty HTMLProperty = DependencyProperty.RegisterAttached("HTML", typeof(string), typeof(HtmlWebViewExtender), new PropertyMetadata("", new PropertyChangedCallback(OnHTMLChanged)));
 
         private static void OnHTMLChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
