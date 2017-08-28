@@ -16,6 +16,11 @@ namespace FlashbackUwp.ViewModels
         {
             await NavigationService.NavigateAsync(typeof(ManageForumlist));
         }
+
+        public async Task NavigateToSuportThread()
+        {
+            await NavigationService.NavigateAsync(typeof(ThreadPage), "t1925922");
+        }        
     }
 
     public class SettingsPartViewModel : ViewModelBase

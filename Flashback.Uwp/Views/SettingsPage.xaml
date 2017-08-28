@@ -143,13 +143,19 @@
                         <Run Text="{Binding Version}" />
                     </TextBlock>
 
-                    <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                    <TextBlock x:Name="GithubTextBlock"
+                               RelativePanel.AlignLeftWithPanel="True"
                                RelativePanel.Below="VersionTextBlock"><LineBreak/>Appen är open source och koden hittas på:<LineBreak/>
                         <Hyperlink NavigateUri="https://github.com/randigtroja/Flashback" UnderlineStyle="None">https://github.com/randigtroja/Flashback</Hyperlink>    
                         <LineBreak/>
                         <LineBreak/>
                         Hjälp uppskattas alltid!
+                        <LineBreak/>
                     </TextBlock>
+                    <HyperlinkButton RelativePanel.AlignLeftWithPanel="True" FontStyle="Normal"
+                                     RelativePanel.Below="GithubTextBlock"  Click="{x:Bind ViewModel.NavigateToSuportThread}">
+                        <TextBlock Text="Supportsida på FB" />
+                    </HyperlinkButton>
                 </RelativePanel>
             </PivotItem>
 
