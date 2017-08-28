@@ -19,9 +19,6 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
-        <converters:ColorConverter x:Key="ColorConverter" />
-        <converters:UnreadMessageBrushconverter x:Key="UnreadMessageBrushconverter"/>
 
         <DataTemplate x:Key="FavouriteItemTemplate"
                       x:DataType="model:FbFavourite">
@@ -36,14 +33,15 @@
                                         IsLeftCommandEnabled="False"
                                         RightCommand="{Binding Path=DataContext.DeleteItem, ElementName=Page, Mode=OneWay}"
                                         RightCommandParameter="{Binding}">
-                <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0" Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
-                        <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"/>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="0,3">
+                    <StackPanel VerticalAlignment="Center" MinWidth="28" >
+                        <TextBlock Text="{x:Bind XamlCode}" HorizontalAlignment="Stretch" FontFamily="Segoe MDL2 Assets" Margin="1" TextAlignment="Center" />
+                        <TextBlock Text="{x:Bind PostCount}" HorizontalAlignment="Stretch" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextAlignment="Center"  Margin="1" />
                     </StackPanel>
-                    <StackPanel Margin="12,0,0,0">
-                        <TextBlock Width="1000" Text="{Binding Path=Name}" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock Text="{Binding Path=LastPost}" Margin="0,-1,0,0" FontWeight="Normal" Foreground="{Binding IsUnread, Converter={StaticResource UnreadMessageBrushconverter}}" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="{x:Bind Name}" />
+                        <TextBlock Text="{x:Bind LastPost}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
                     </StackPanel>
                 </StackPanel>
 
@@ -120,7 +118,12 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{Binding Path=Favourites}" ItemClick="{x:Bind ViewModel.NavigateToThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1" SelectionMode="None" ItemTemplate="{StaticResource FavouriteItemTemplate}" >
+        <ListView ItemsSource="{x:Bind ViewModel.Favourites, Mode=OneWay}" 
+                  ItemClick="{x:Bind ViewModel.NavigateToThread}"
+                  Style="{StaticResource FbListViewStyle}"
+                  Grid.Row="1" 
+                  ItemTemplate="{StaticResource FavouriteItemTemplate}" >
+            
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
