@@ -3,8 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FlashbackUwp.Styles"
     xmlns:model="using:Flashback.Model"
+    xmlns:converters="using:FlashbackUwp.Converters"
     x:Class="FlashbackUwp.Styles.DataTemplates">
 
+    <converters:UnreadMessageBrushconverter x:Key="UnreadBrushConverter" />
+
+    <Style x:Key="FbListViewStyle" TargetType="ListView">
+        <Setter Property="SelectionMode" Value="None"/>
+        <Setter Property="IsItemClickEnabled" Value="True"/>
+    </Style>
+
+    
     <DataTemplate x:Key="FbItemDataTemplate" x:DataType="model:FbItem">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="0,3">
             <StackPanel VerticalAlignment="Center" MinWidth="28" >
@@ -18,9 +27,17 @@
         </StackPanel>
     </DataTemplate>
 
-    <Style x:Key="FbListViewStyle" TargetType="ListView">
-        <Setter Property="SelectionMode" Value="None"/>
-        <Setter Property="IsItemClickEnabled" Value="True"/>
-    </Style>
+    <DataTemplate x:Key="FbMessageDataTemplate" x:DataType="model:PrivateMessage">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="0,3">
+            <StackPanel VerticalAlignment="Center" MinWidth="28" >
+                <TextBlock Text="{x:Bind XamlCode}" HorizontalAlignment="Stretch" FontFamily="Segoe MDL2 Assets" Margin="1" TextAlignment="Center" />
+                <TextBlock FontSize="10"/>
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                <TextBlock Text="{x:Bind Name}" />
+                <TextBlock Text="{x:Bind FromName}" Foreground="{x:Bind IsUnread, Converter={StaticResource UnreadBrushConverter}}" />
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
 
 </ResourceDictionary>
