@@ -15,10 +15,6 @@
         <viewModels:PrivateMessagesViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
-        <converters:UnreadMessageBrushconverter x:Key="UnreadBrushConverter" />
-    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -82,17 +78,13 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{Binding Path=Messages}" ItemClick="{x:Bind ViewModel.NavigateToMessage}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="12,0,0,8">
-                        <TextBlock Text="{Binding Path=Name}" />
-                        <TextBlock Text="{Binding Path=FromName}" Style="{StaticResource BodyTextBlockStyle}" Foreground="{Binding IsUnread, Converter={StaticResource UnreadBrushConverter}}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ListView ItemsSource="{x:Bind ViewModel.Messages}" 
+                  ItemClick="{x:Bind ViewModel.NavigateToMessage}" 
+                  Style="{StaticResource FbListViewStyle}" 
+                  Grid.Row="1" 
+                  ItemTemplate="{StaticResource FbMessageDataTemplate}" />
 
+        
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <CommandBar.Content>
                 <AppBarButton Click="{x:Bind ViewModel.OpenMenu}" Visibility="Collapsed" x:Name="OpenHamburgerMenuButton" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
