@@ -78,7 +78,7 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{x:Bind ViewModel.Messages}" 
+        <ListView ItemsSource="{x:Bind ViewModel.Messages, Mode=OneWay}" 
                   ItemClick="{x:Bind ViewModel.NavigateToMessage}" 
                   Style="{StaticResource FbListViewStyle}" 
                   Grid.Row="1" 
