@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Flashback.Model
 {
@@ -13,5 +13,7 @@ namespace Flashback.Model
         public bool IsUnread { get; set; }
         public string FolderId { get; set; }
         public string Title { get; set; }
+
+        public string XamlCode => "\uE715";
     }
 }
