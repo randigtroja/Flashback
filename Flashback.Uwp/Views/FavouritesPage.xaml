@@ -20,6 +20,8 @@
 
     <Page.Resources>
 
+        <converters:UnreadMessageBrushconverter x:Key="UnreadMessageBrushconverter"/>
+
         <DataTemplate x:Key="FavouriteItemTemplate"
                       x:DataType="model:FbFavourite">
             <controls1:SlidableListItem 
@@ -41,7 +43,7 @@
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                         <TextBlock Text="{x:Bind Name}" />
-                        <TextBlock Text="{x:Bind LastPost}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
+                        <TextBlock Text="{x:Bind LastPost}" Foreground="{x:Bind IsUnread, Converter={StaticResource UnreadMessageBrushconverter}}"  />
                     </StackPanel>
                 </StackPanel>
 
@@ -78,8 +80,6 @@
                     <VisualState.Setters>
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
-                        <Setter Target="RefreshButton.Visibility" Value="Collapsed"/>
-                        <Setter Target="pageHeader.EllipsisVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -89,8 +89,6 @@
                     <VisualState.Setters>
                         <Setter Target="BottonCommands.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Collapsed"/>
-                        <Setter Target="RefreshButton.Visibility" Value="Collapsed"/>
-                        <Setter Target="pageHeader.EllipsisVisibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -100,8 +98,6 @@
                     <VisualState.Setters>
                         <Setter Target="pageHeader.Visibility" Value="Visible"/>
                         <Setter Target="pageHeader.PrimaryCommandsVisibility" Value="Visible"/>
-                        <Setter Target="RefreshButton.Visibility" Value="Visible"/>
-                        <Setter Target="pageHeader.EllipsisVisibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -113,7 +109,7 @@
                              PrimaryCommandsVisibility="Collapsed"
                              Text="Favoriter">
             <controls:PageHeader.PrimaryCommands>
-                <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh" x:Name="RefreshButton" Visibility="Collapsed"/>
+                <AppBarButton Click="{x:Bind ViewModel.Refresh}" Label="Ladda om" Icon="Refresh" />
             </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 
