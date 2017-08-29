@@ -7,6 +7,7 @@
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:uwptControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Template10.Behaviors"
     xmlns:converters="using:FlashbackUwp.Converters"
@@ -111,8 +112,13 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{Binding Path=ForumList.Items}" ItemClick="{x:Bind ViewModel.NavigateToForumThread}" IsItemClickEnabled="True" Padding="12,8,0,0" Grid.Row="1">
-            <ListView.ItemTemplate>
+        <uwptControls:PullToRefreshListView ItemsSource="{Binding Path=ForumList.Items}" 
+                                            ItemClick="{x:Bind ViewModel.NavigateToForumThread}" 
+                                            IsItemClickEnabled="True" 
+                                            Padding="12,8,0,0" 
+                                            Grid.Row="1"
+                                            RefreshRequested="{x:Bind ViewModel.Refresh}">
+            <uwptControls:PullToRefreshListView.ItemTemplate> <!--TODO. bryt ut till template här också -->
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
                         <StackPanel Orientation="Vertical">
@@ -126,8 +132,18 @@
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </uwptControls:PullToRefreshListView.ItemTemplate>
+            <uwptControls:PullToRefreshListView.PullToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Dra ner för att uppdatera" />
+            </uwptControls:PullToRefreshListView.PullToRefreshContent>
+            <uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Släpp för att uppdatera" />
+            </uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+        </uwptControls:PullToRefreshListView>
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
             <CommandBar.Content>

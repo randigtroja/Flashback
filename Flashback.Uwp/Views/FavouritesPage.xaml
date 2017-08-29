@@ -8,7 +8,7 @@
     xmlns:converters="using:FlashbackUwp.Converters"
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
     xmlns:controls="using:Template10.Controls"
-    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:uwptControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:model="using:Flashback.Model"
     xmlns:triggers="using:FlashbackUwp.Triggers"
     x:Name="Page"
@@ -24,7 +24,7 @@
 
         <DataTemplate x:Key="FavouriteItemTemplate"
                       x:DataType="model:FbFavourite">
-            <controls1:SlidableListItem 
+            <uwptControls:SlidableListItem 
                                         RightIcon="Delete"                         
                                         IsPointerReleasedOnSwipingHandled="True"
                                         RightLabel="Ta bort"                                        
@@ -47,7 +47,7 @@
                     </StackPanel>
                 </StackPanel>
 
-            </controls1:SlidableListItem>
+            </uwptControls:SlidableListItem>
         </DataTemplate>
 
     </Page.Resources>
@@ -114,19 +114,30 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{x:Bind ViewModel.Favourites, Mode=OneWay}" 
-                  ItemClick="{x:Bind ViewModel.NavigateToThread}"
-                  Style="{StaticResource FbListViewStyle}"
-                  Grid.Row="1" 
-                  ItemTemplate="{StaticResource FavouriteItemTemplate}" >
-            
-            <ListView.ItemContainerStyle>
+        <uwptControls:PullToRefreshListView ItemsSource="{x:Bind ViewModel.Favourites, Mode=OneWay}"                   
+                                            ItemClick="{x:Bind ViewModel.NavigateToThread}"                  
+                                            Style="{StaticResource FbListViewStyle}"                  
+                                            Grid.Row="1"                   
+                                            ItemTemplate="{StaticResource FavouriteItemTemplate}"
+                                            RefreshRequested="{x:Bind ViewModel.Refresh}">
+
+            <uwptControls:PullToRefreshListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="Margin" Value="0,1" />
                 </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+            </uwptControls:PullToRefreshListView.ItemContainerStyle>
+            <uwptControls:PullToRefreshListView.PullToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Dra ner för att uppdatera" />
+            </uwptControls:PullToRefreshListView.PullToRefreshContent>
+            <uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Släpp för att uppdatera" />
+            </uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+        </uwptControls:PullToRefreshListView>
         
 
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Visibility="Collapsed" Grid.Row="2">

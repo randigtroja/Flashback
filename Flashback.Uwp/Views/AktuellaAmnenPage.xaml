@@ -7,6 +7,7 @@
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:uwptControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:FlashbackUwp.Converters"
     xmlns:triggers="using:FlashbackUwp.Triggers"
     IsTabStop="True"
@@ -85,11 +86,23 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{x:Bind ViewModel.Topics, Mode=OneWay}" 
-                  Style="{StaticResource FbListViewStyle}"  
-                  ItemClick="{x:Bind ViewModel.NavigateToForum}"  
-                  Grid.Row="1" 
-                  ItemTemplate="{StaticResource FbItemDataTemplate}"/>
+        <uwptControls:PullToRefreshListView ItemsSource="{x:Bind ViewModel.Topics, Mode=OneWay}"                   
+                                            Style="{StaticResource FbListViewStyle}"                    
+                                            ItemClick="{x:Bind ViewModel.NavigateToForum}"                    
+                                            Grid.Row="1"                   
+                                            ItemTemplate="{StaticResource FbItemDataTemplate}"
+                                            RefreshRequested="{x:Bind ViewModel.Refresh}">
+            <uwptControls:PullToRefreshListView.PullToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Dra ner för att uppdatera" />
+            </uwptControls:PullToRefreshListView.PullToRefreshContent>
+            <uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Släpp för att uppdatera" />
+            </uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+        </uwptControls:PullToRefreshListView>
 
 
 

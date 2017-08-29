@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:uwptControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:FlashbackUwp.Converters"
     xmlns:triggers="using:FlashbackUwp.Triggers"
     mc:Ignorable="d">
@@ -78,11 +79,23 @@
         </controls:PageHeader>
 
 
-        <ListView ItemsSource="{x:Bind ViewModel.Messages, Mode=OneWay}" 
-                  ItemClick="{x:Bind ViewModel.NavigateToMessage}" 
-                  Style="{StaticResource FbListViewStyle}" 
-                  Grid.Row="1" 
-                  ItemTemplate="{StaticResource FbMessageDataTemplate}" />
+        <uwptControls:PullToRefreshListView ItemsSource="{x:Bind ViewModel.Messages, Mode=OneWay}"                   
+                                            ItemClick="{x:Bind ViewModel.NavigateToMessage}"                   
+                                            Style="{StaticResource FbListViewStyle}"                   
+                                            Grid.Row="1"                   
+                                            ItemTemplate="{StaticResource FbMessageDataTemplate}"
+                                            RefreshRequested="{x:Bind ViewModel.Refresh}">
+            <uwptControls:PullToRefreshListView.PullToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Dra ner för att uppdatera" />
+            </uwptControls:PullToRefreshListView.PullToRefreshContent>
+            <uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+                <TextBlock FontSize="16"
+                           Opacity="0.5"
+                           Text="Släpp för att uppdatera" />
+            </uwptControls:PullToRefreshListView.ReleaseToRefreshContent>
+        </uwptControls:PullToRefreshListView>
 
         
         <CommandBar ClosedDisplayMode="Compact" x:Name="BottonCommands" Grid.Row="2">
