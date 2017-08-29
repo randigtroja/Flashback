@@ -40,4 +40,12 @@
         </StackPanel>
     </DataTemplate>
 
+    <DataTemplate x:Key="FbRssDataTemplate" x:DataType="model:FbRssItem">
+        <StackPanel Padding="0,10">
+            <TextBlock Text="{x:Bind Date}" Foreground="{ThemeResource CustomColorBrush}"/>
+            <TextBlock Text="{x:Bind Name}" Style="{StaticResource SubtitleTextBlockStyle}" FontWeight="Bold"/>
+            <TextBlock Text="{x:Bind Description}" Style="{StaticResource BodyTextBlockStyle}" Padding="0,2"/>
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>
