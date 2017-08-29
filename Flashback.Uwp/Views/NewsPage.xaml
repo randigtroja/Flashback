@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:FlashbackUwp.ViewModels"
-    xmlns:model="using:Flashback.Model"
     xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d">
     
@@ -42,17 +41,12 @@
 
         <controls:PageHeader Text="Nyheter" Frame="{x:Bind Frame}" Grid.Row="0" />
 
-        <ListView ItemsSource="{x:Bind ViewModel.Nyheter, Mode=OneWay}" ItemClick="{x:Bind ViewModel.RssNavigate}" IsItemClickEnabled="True" Padding="4" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:FbRssItem">
-                    <StackPanel Padding="0,10">
-                        <TextBlock Text="{x:Bind Date}" Foreground="{ThemeResource CustomColorBrush}"/>
-                        <TextBlock Text="{x:Bind Name}" Style="{StaticResource SubtitleTextBlockStyle}" FontWeight="Bold"/>
-                        <TextBlock Text="{x:Bind Description}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Padding="0,2"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ListView ItemsSource="{x:Bind ViewModel.Nyheter, Mode=OneWay}" 
+                  ItemClick="{x:Bind ViewModel.RssNavigate}" 
+                  Padding="4" 
+                  Grid.Row="1" 
+                  Style="{StaticResource FbListViewStyle}"
+                  ItemTemplate="{StaticResource FbRssDataTemplate}" />
 
     </Grid>
 </Page>
