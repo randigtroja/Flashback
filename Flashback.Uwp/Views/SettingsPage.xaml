@@ -162,16 +162,96 @@
 
             <PivotItem DataContext="{Binding SettingsPartViewModel}" Header="Changelog" Padding="0">
                 <ScrollViewer Margin="0,0,-12,0" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Margin="0,12,24,12"
-                               LineHeight="24"
-                               TextWrapping="Wrap">                        
-                        <Bold>0.1.0.0</Bold>
-                        <LineBreak />
-                        * Första beta. Portningen från Windows Phone (Silverlight) påbörjad
-                        <LineBreak />
-                        * En del nya funktioner (filter aktuella ämnen, navigera subforum)
-                        <LineBreak />
-                        * Släppt appen som open source                        
+                    <TextBlock Margin="0,12,24,12" LineHeight="24" TextWrapping="Wrap">                        
+                        <Bold>10.0.0.0</Bold><LineBreak/>
+                        * Första beta. Portningen från Windows Phone (Silverlight) påbörjad<LineBreak/>
+                        * En del nya funktioner (filter aktuella ämnen, navigera subforum)<LineBreak/>
+                        * Släppt appen som open source<LineBreak/><LineBreak/>
+                        
+                        <Bold>8.1.6.0</Bold><LineBreak/>
+                        * FB har inte spikat sin nya layout så aktuella ämnen slutade funka igen.<LineBreak/><LineBreak/>
+                        
+                        <Bold>8.1.5.0</Bold><LineBreak/>
+                        * Fixat så allt funkar då FB gjorde om layouten<LineBreak/>
+                        * Gjort det möjligt att öppna trådar i webbläsaren<LineBreak/>
+                        * Visar om användare är offline/online i trådar<LineBreak/>
+                        * Mindre grafiska justeringar<LineBreak/>
+                        * Går nu att lista prenumerationer som är på forum-nivå<LineBreak/>
+                        * Går att klicka på trådars titel för att navigera till dess forum som tråden hör till<LineBreak/>
+                        * Kan nu visa dina startade trådar<LineBreak/><LineBreak/>
+                        
+                        <Bold>8.1.4.0</Bold><LineBreak/>
+                        * Går nu igen att radera trådar från favoriterna<LineBreak/>
+                        * Försökt lösa problem med att trådar slutar laddas och blir blanka.<LineBreak/>
+                        * Flyttat "pinna" knappen till menyn och flyttat upp "svara" till menyn istället<LineBreak/>
+                        * Ny funktion - varning på lämna svar-sidan om man har skrivit text för att förhindra att man av misstag förlorar skrivet inlägg<LineBreak/>
+                        * Gjort ikonen något större.<LineBreak/>
+                        * Småfixar för att fixa krascher på Win10-enheter<LineBreak/><LineBreak/>
+                        
+                        <Bold>8.0.3.1</Bold><LineBreak/>
+                        * Ny ikon för appen. 1000 tack till "Mäuschen"<LineBreak/><LineBreak/>
+                        
+                        <Bold>8.0.3.0</Bold><LineBreak/>
+                        * Grafiska fixar.<LineBreak/>
+                        * Flashback har en ny mobilsida och vissa ändringar är gjorda i förväg för att säkra upp saker som eventuellt kan strula<LineBreak/>
+                        * PM slutade fungera efter FB-ändringar<LineBreak/><LineBreak/>
+                        
+                        <Bold>7/8.0.2.8</Bold><LineBreak/>
+                        * Ny funktion: Kan nu söka i forumet man står i<LineBreak/>
+                        * Snabbat upp laddningen av "Svara" rejält...<LineBreak/>
+                        * Ny funktion: Kan navigera till interna länkar till forum<LineBreak/>
+                        * Ny funktion: Hämtar nu forumen från icke-mobil-sidan = fler och alla trådar visas<LineBreak/>
+                        * Ny funktion: Visar trådar om är "sticky"<LineBreak/>
+                        * Ny funktion: Ladda om aktuella ämnen<LineBreak/>
+                        * Buggfix: Ändrat till att visa rätt antal poster i aktuella ämnen efter FB-ändring<LineBreak/>
+                        * Bildvisaren kraschade appen om sökvägen var i felaktigt url-format<LineBreak/>
+                        * Poster med underrubriker i trådar visade inte innehållet<LineBreak/>
+                        * Rättning av marginaler här och där ala Metro<LineBreak/>
+                        * Plockat bort fula blå länkar kring citat i trådar<LineBreak/>
+                        * Stoppat navigering bakåt om man är på sida 1<LineBreak/>
+                        * Kodstädning<LineBreak/><LineBreak/>
+                        
+                        <Bold>7/8.0.2.7</Bold><LineBreak/>
+                        * Avatarer slutade funka pga. ändringar hos FB.<LineBreak/>
+                        * Fix på nya ämnen och trådar pga. FB-ändring.<LineBreak/>
+                        * Ny inställning för landskapsläge i trådar<LineBreak/>
+                        * Fix på krasch om man försöker svara på tråd eller pinna tråd innan den är laddad.<LineBreak/><LineBreak/>
+                        
+                        <Bold>7/8.0.2.6</Bold><LineBreak/>
+                        * "Aktuella ämnen" slutade funka pga. ändrad html hos flashback.<LineBreak/><LineBreak/>
+                        
+                        <Bold>7/8.0.2.5</Bold><LineBreak/>
+                        * Hoppar till rätt sida från "citerade inlägg".<LineBreak/>
+                        * Kan nu radera gamla PM<LineBreak/>
+                        * Man kan nu skriva PM och svara på andras PM<LineBreak/>
+                        * Kraschfix vid inloggning (vid kass uppkoppling)<LineBreak/>
+                        * Info/hjälp sida<LineBreak/>
+                        * Navigationseffekter funkar nu på WP8<LineBreak/>
+                        * Grafiska ändringar på startsidan<LineBreak/>
+                        * Städat en del i koden<LineBreak/>
+                        * Stöd för emoticons och andra konstiga tecken<LineBreak/>
+                        * Mer vector-grafik, mindre bilder som skalas<LineBreak/>
+                        * "längst ner" i trådar funkade inte alltid<LineBreak/>
+                        * Plus andra småfixar här och där<LineBreak/><LineBreak/>
+                        
+                        <Bold>7/8.0.2.1</Bold><LineBreak/>
+                        * Ny funktion: RSS-nyheter från flashback.se<LineBreak/>
+                        * Fix för htc-mozart.<LineBreak/><LineBreak/>
+                        
+                        <Bold>7/8.0.2.0</Bold><LineBreak/>
+                        * Mindre buggfixar<LineBreak/>
+                        * Mer felhantering under dålig uppkoppling<LineBreak/>
+                        * Bättre kompabilitet för WP8<LineBreak/>
+                        * Kodoptimeringar<LineBreak/>
+                        * Grafiska fixar<LineBreak/>
+                        * Kan nu hoppa överst samt längst ner i en tråd<LineBreak/>
+                        * Inställning för att komma ihåg senast lästa sida<LineBreak/><LineBreak/>
+                        
+                        <Bold>1.0.0.1</Bold><LineBreak/>
+                        * Första version (Publik).<LineBreak/><LineBreak/>
+                        
+                        <Bold>1.0.0.0</Bold><LineBreak/>
+                        * Första version (Beta).<LineBreak/><LineBreak/>
                     </TextBlock>
                 </ScrollViewer>
             </PivotItem>
