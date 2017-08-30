@@ -20,7 +20,6 @@
 
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
-        <converters:ColorConverter x:Key="ColorConverter" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -112,27 +111,12 @@
         </controls:PageHeader>
 
 
-        <uwptControls:PullToRefreshListView ItemsSource="{Binding Path=ForumList.Items}" 
-                                            ItemClick="{x:Bind ViewModel.NavigateToForumThread}" 
-                                            IsItemClickEnabled="True" 
-                                            Padding="12,8,0,0" 
+        <uwptControls:PullToRefreshListView ItemsSource="{x:Bind ViewModel.ForumList.Items, Mode=OneWay}"
+                                            ItemClick="{x:Bind ViewModel.NavigateToForumThread}"                                                
                                             Grid.Row="1"
-                                            RefreshRequested="{x:Bind ViewModel.Refresh}">
-            <uwptControls:PullToRefreshListView.ItemTemplate> <!--TODO. bryt ut till template här också -->
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="-12,0,0,5">
-                        <StackPanel Orientation="Vertical">
-                            <Rectangle Width="20" Margin="4,1,0,0" Height="20" Fill="{Binding Name, Converter={StaticResource ColorConverter}}" Visibility="{Binding ShowForumColor,  Converter={StaticResource BoolConverter}}"/>
-                            <TextBlock HorizontalAlignment="Left" FontFamily="Segoe MDL2 Assets" Margin="5,2,0,0"  Text="{Binding XamlCode}" Visibility="{Binding ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
-                            <TextBlock HorizontalAlignment="Center" Margin="3,0,0,0" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" Visibility="{Binding ShowPostCount}" Text="{Binding PostCount}"/>
-                        </StackPanel>
-                        <StackPanel Margin="12,0,0,0">
-                            <TextBlock Width="1000" Text="{Binding Path=Name}" Margin="0" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="{Binding Path=Description}" Margin="0,-1,0,0" FontWeight="Normal" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </uwptControls:PullToRefreshListView.ItemTemplate>
+                                            RefreshRequested="{x:Bind ViewModel.Refresh}"
+                                            Style="{StaticResource FbListViewStyle}"
+                                            ItemTemplate="{StaticResource FbForumListDataTemplate}">
             <uwptControls:PullToRefreshListView.PullToRefreshContent>
                 <TextBlock FontSize="16"
                            Opacity="0.5"

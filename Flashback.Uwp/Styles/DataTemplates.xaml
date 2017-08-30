@@ -7,6 +7,8 @@
     x:Class="FlashbackUwp.Styles.DataTemplates">
 
     <converters:UnreadMessageBrushconverter x:Key="UnreadBrushConverter" />
+    <converters:ColorConverter x:Key="ColorConverter" />
+    <converters:BoolToVisibilityConverter x:Key="BoolConverter" />
 
     <Style x:Key="FbListViewStyle" TargetType="ListView">
         <Setter Property="SelectionMode" Value="None"/>
@@ -23,6 +25,20 @@
             <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                 <TextBlock Text="{x:Bind Name}" />
                 <TextBlock Text="{x:Bind Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FbForumListDataTemplate" x:DataType="model:FbItem">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="0,3">
+            <StackPanel VerticalAlignment="Center" MinWidth="28">
+                <Rectangle Width="20" Height="20" Fill="{x:Bind Name, Converter={StaticResource ColorConverter}}" Visibility="{x:Bind ShowForumColor, Converter={StaticResource BoolConverter}}"/>
+                <TextBlock Text="{x:Bind XamlCode}" HorizontalAlignment="Stretch" FontFamily="Segoe MDL2 Assets" Margin="1" TextAlignment="Center" Visibility="{x:Bind ShowForumColor, Converter={StaticResource BoolConverter}, ConverterParameter=true}"/>
+                <TextBlock Text="{x:Bind PostCountString}" HorizontalAlignment="Stretch" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextAlignment="Center" Margin="1" />
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                <TextBlock Text="{x:Bind Name}" />
+                <TextBlock Text="{x:Bind Description}" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
             </StackPanel>
         </StackPanel>
     </DataTemplate>
