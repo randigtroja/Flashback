@@ -270,9 +270,14 @@ namespace Flashback.Services.Threads
 
                 if (userNameCheck != null)
                     userName = userNameCheck.TextContent.FixaRadbrytningar();
-                
-                var userOnlineCheck = post.QuerySelector("div.post-user-title i[title='online']");
+
+
+                var userStatusCheck = post.QuerySelector("div.post-user-title");
+
+                var userOnlineCheck = userStatusCheck.QuerySelector("i[title='online']");
                 string onlinestatus;
+
+                var moderatorCheck = userStatusCheck.TextContent.Trim().FixaRadbrytningar() == "Moderator";
 
                 if (userOnlineCheck != null)
                 {
@@ -283,7 +288,9 @@ namespace Flashback.Services.Threads
                     onlinestatus = "<span style=\"color:rgb(213, 89, 89);font-size:50%\">&#9632; </span>";
                 }
 
-                userName = onlinestatus + userName;
+                
+
+                userName = onlinestatus + userName + (moderatorCheck ? " <span style=\"color:rgb(204, 59, 59)\"> (Mod) </span>" : "");
 
                 var avatarCheck = post.QuerySelector("a.post-user-avatar img");
                 string avatar = "";
