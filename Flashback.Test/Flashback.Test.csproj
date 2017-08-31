@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\xunit.runner.visualstudio.2.3.0-beta3-build3705\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.3.0-beta3-build3705\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="..\packages\xunit.core.2.3.0-beta3-build3705\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.3.0-beta3-build3705\build\xunit.core.props')" />
@@ -97,9 +97,6 @@
       <Project>{2af642af-a6b8-4650-bd75-d94e661642dd}</Project>
       <Name>Flashback.Services</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\xunit.analyzers.0.3.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
