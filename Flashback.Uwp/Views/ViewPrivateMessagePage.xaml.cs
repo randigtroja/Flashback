@@ -31,23 +31,27 @@ namespace FlashbackUwp.Views
         private async void WebView_OnNewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
             args.Handled = true;
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
 
             if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/t") || args.Uri.AbsoluteUri.Contains("https://www.flashback.org/sp")) // intern FB-trådlänk eller fb-singlepost
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
-
-                var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
-
+                
                 nav?.Navigate(typeof(Views.ThreadPage), id);
             }
             else if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/f")) // intern FB-forumlänk
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
-
-                var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
-
+                
                 nav?.Navigate(typeof(Views.ForumMainList), id);
-            }            
+            }
+            else if(args.Uri.AbsoluteUri.Contains("http://www.flashback.org/showthread.php?t=")) // gammla FB-standarden, öppna internt
+            {
+                var id = args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
+                id = "t" + id;                
+
+                nav?.Navigate(typeof(Views.ThreadPage), id);
+            }
             else
             {
                 var dialog = new Windows.UI.Popups.MessageDialog("Vill du verkligen öppna en länk till extern sida? Tänk på att länkar som öppnas från privata meddelanden kan utnytjas för att spåra dig!" 
@@ -66,13 +70,7 @@ namespace FlashbackUwp.Views
                 {
                     var openUrl = Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));
                 }
-
-
-                
-
             }
-
-            
         }
     }
 }

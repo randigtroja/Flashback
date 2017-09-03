@@ -62,29 +62,33 @@ namespace FlashbackUwp.Views
         }
 
         private void WebView_OnNewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
-        {            
+        {
+            args.Handled = true;
+            var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
+
             if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/t") || args.Uri.AbsoluteUri.Contains("https://www.flashback.org/sp")) // intern FB-trådlänk
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
-
-                var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
-                
+                                
                 nav?.Navigate(typeof(Views.ThreadPage), id);                
             }
             else if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/f")) // intern FB-forumlänk
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
-
-                var nav = WindowWrapper.Current().NavigationServices.FirstOrDefault();
-
+                
                 nav?.Navigate(typeof(Views.ForumMainList), id);
+            }
+            else if (args.Uri.AbsoluteUri.Contains("http://www.flashback.org/showthread.php?t=")) // gammla FB-standarden, öppna internt
+            {
+                var id = args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
+                id = "t" + id;
+
+                nav?.Navigate(typeof(Views.ThreadPage), id);
             }
             else
             {
                 var openUrl = Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));                
-            }
-
-            args.Handled = true;
+            }            
         }
 
         private async void WebViewTop(object sender, RoutedEventArgs e)
