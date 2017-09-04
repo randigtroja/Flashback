@@ -4,8 +4,16 @@ var elements = document.querySelectorAll('[data-toggle="hidden"]');
 
 Array.prototype.forEach.call(elements, function (el, i)
 {
-	el.onclick = function() {
+	el.onclick = function() 
+	{
 		el.nextElementSibling.classList.toggle("hidden");
 	}
 });
 
+
+// prepareQuote
+
+function prepareQuote(i) 
+{
+    window.external.notify(i);
+};
