@@ -165,14 +165,7 @@ namespace Flashback.Model
         {
             StringBuilder sb = new StringBuilder();
 
-            var spoilerScript = "<script>" +
-                                        "var elements = document.querySelectorAll('[data-toggle=\"hidden\"]');" +
-                                            "Array.prototype.forEach.call(elements, function(el, i) {el.onclick = function() {" +
-                                                "el.nextElementSibling.classList.toggle(\"hidden\");" +
-                                        "}});" +
-                                    "</script>";
-
-            sb.AppendLine(spoilerScript);
+            sb.AppendLine("<script src='ms-appx-web:///Assets/FbCommon.js'>");
             sb.AppendLine("</body>");
             sb.AppendLine("</html>");
 
