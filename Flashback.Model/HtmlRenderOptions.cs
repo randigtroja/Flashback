@@ -87,7 +87,7 @@ namespace Flashback.Model
                                 "<style TYPE=\"text/css\">" +
                                     "div.post-bbcode-quote {color:" + foreColor + ";background:" + quotesBackground + ";border-style:solid;padding:12px;border-color:" + quotesBorder + ";border-width:1px;font-size:" + fontSize + "; };" +
                                     "td.post-quote img {border: 0px;}" +
-                                    "a {color:" + accentColor + ";} " +
+                                    "a {color:" + accentColor + "; text-decoration:none;} " +
                                     "div.post-bbcode-quote-wrapper { width:95%;} " +
                                     "table{table-layout:fixed;}  " +
                                     "blockquote { width: 95%;margin-left:20px; background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";border-width:1px;} " +
