@@ -638,7 +638,7 @@ namespace Flashback.Services.Threads
                     if (countCheck != null)
                     {
                         
-                        item.PostCount = int.Parse(countCheck.TextContent.Replace("&nbsp;", "").Replace("svar", ""));                        
+                        item.PostCount = int.Parse(countCheck.TextContent.FixaRadbrytningar().Replace("svar", ""));                        
                     }
 
                     resultThreads.Add(item);
