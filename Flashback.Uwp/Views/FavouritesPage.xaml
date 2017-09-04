@@ -39,7 +39,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" Margin="0,3">
                     <StackPanel VerticalAlignment="Center" MinWidth="28" >
                         <TextBlock Text="{x:Bind XamlCode}" HorizontalAlignment="Stretch" FontFamily="Segoe MDL2 Assets" Margin="1" TextAlignment="Center" />
-                        <TextBlock Text="{x:Bind PostCount}" HorizontalAlignment="Stretch" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextAlignment="Center"  Margin="1" />
+                        <TextBlock Text="{x:Bind PostCountString}" HorizontalAlignment="Stretch" FontSize="10" Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" TextAlignment="Center"  Margin="1" />
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                         <TextBlock Text="{x:Bind Name}" />
