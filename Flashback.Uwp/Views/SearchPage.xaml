@@ -50,7 +50,12 @@
         <ScrollViewer Padding="12,8,0,0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
 
-               <AutoSuggestBox MinWidth="280" Margin="0,0,12,24" Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" QueryIcon="Find" QuerySubmitted="{x:Bind ViewModel.LoadViewModel}" />
+               <AutoSuggestBox MinWidth="280" 
+                               Margin="0,0,12,24" 
+                               Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                               QueryIcon="Find" 
+                               QuerySubmitted="{x:Bind ViewModel.LoadViewModel}"
+                               PlaceholderText="Ange sökterm (minst 2 tecken)" />
 
                 <ListView ItemsSource="{x:Bind ViewModel.SearchResult, Mode=OneWay}" 
                           ItemClick="{x:Bind ViewModel.NavigateToThread}" 

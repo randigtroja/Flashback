@@ -41,7 +41,7 @@ namespace FlashbackUwp.ViewModels
 
         public bool CanSearch
         {
-            get { return !string.IsNullOrWhiteSpace(SearchTerm) && SearchTerm.Length >= 3; }
+            get { return !string.IsNullOrWhiteSpace(SearchTerm) && SearchTerm.Length >= 2; }
             set
             {
                 Set(ref _canSearch, value);
@@ -75,7 +75,7 @@ namespace FlashbackUwp.ViewModels
 
         public async Task LoadViewModel()
         {
-            if (string.IsNullOrWhiteSpace(SearchTerm))
+            if (!CanSearch)
                 return;
 
             try
