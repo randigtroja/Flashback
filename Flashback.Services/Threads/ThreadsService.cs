@@ -849,7 +849,7 @@ namespace Flashback.Services.Threads
                     if (countCheck != null)
                     {
 
-                        foreach (Match match in regex.Matches(countCheck.Attributes[1].Value.FixaRadbrytningar()))
+                        foreach (Match match in regex.Matches(countCheck.Attributes[1].Value.Replace(" ", "").FixaRadbrytningar()))
                         {
                             item.PostCount = int.Parse(match.Groups[1].Value);
                         }
