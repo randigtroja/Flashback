@@ -281,13 +281,12 @@ namespace Flashback.Services.Threads
 
                 if (userOnlineCheck != null)
                 {
-                    onlinestatus = "<span style=\"color:rgb(92, 140, 111);font-size:50%\">&#9632; </span>";
+                    onlinestatus = "<span style='color:rgb(92, 140, 111);font-size:50%; -ms-high-contrast-adjust: none;'>&#9632; </span>";
                 }
                 else
                 {
-                    onlinestatus = "<span style=\"color:rgb(213, 89, 89);font-size:50%\">&#9632; </span>";
+                    onlinestatus = "<span style='color:rgb(213, 89, 89);font-size:50%; -ms-high-contrast-adjust: none;'>&#9632; </span>";
                 }
-
                 
 
                 userName = onlinestatus + userName + (moderatorCheck ? " <span style=\"color:rgb(204, 59, 59)\"> (Mod) </span>" : "");
