@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,10 +26,7 @@ namespace FlashbackUwp.ViewModels
 
         public string SearchTerm
         {
-            get
-            {
-                return _searchTerm;
-            }
+            get => _searchTerm;
             set
             {
                 Set(ref _searchTerm, value);
@@ -37,27 +34,22 @@ namespace FlashbackUwp.ViewModels
             }
         }
 
-        public string ForumId { get { return _forumId; } set { Set(ref _forumId, value); } }
+        public string ForumId
+        {
+            get => _forumId;
+            set => Set(ref _forumId, value);
+        }
 
         public bool CanSearch
         {
-            get { return !string.IsNullOrWhiteSpace(SearchTerm) && SearchTerm.Length >= 2; }
-            set
-            {
-                Set(ref _canSearch, value);
-            }
+            get => !string.IsNullOrWhiteSpace(SearchTerm) && SearchTerm.Length >= 2;
+            set => Set(ref _canSearch, value);
         }
 
         public ObservableCollection<FbItem> SearchResult
         {
-            get
-            {
-                return _searchResult;
-            }
-            set
-            {
-                Set(ref _searchResult, value);
-            }
+            get => _searchResult;
+            set => Set(ref _searchResult, value);
         }
 
         public SearchViewModel()
