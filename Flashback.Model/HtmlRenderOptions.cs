@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace Flashback.Model
@@ -16,10 +16,10 @@ namespace Flashback.Model
         public bool RenderEmoticons { get; set; }
         public bool ShowSignatures { get; set; }
 
-        private string GetForeColor() => (IsDarkThemed) ? "#ffffff" : "#000000";
-        private string GetBackgroundColor() => (IsDarkThemed) ? "#000000" : "#ffffff";
-        private string GetQuotesBackground() => (IsDarkThemed) ? "#3D3D3D" : "#DEDEDE";
-        private string GetQuotesBorder() => (IsDarkThemed) ? "#ffffff" : "#000000";
+        private string GetForeColor() => IsDarkThemed ? "#ffffff" : "#000000";
+        private string GetBackgroundColor() => IsDarkThemed ? "#000000" : "#ffffff";
+        private string GetQuotesBackground() => IsDarkThemed ? "#3d3d3d" : "#dedede";
+        private string GetQuotesBorder() => IsDarkThemed ? "#ffffff" : "#000000";
 
         public string ReplaceSmileys(string postMessage)
         {
