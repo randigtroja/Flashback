@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Flashback.Model;
 using GalaSoft.MvvmLight.Messaging;
@@ -13,17 +13,10 @@ namespace FlashbackUwp.ViewModels
         DelegateCommand _logoutCommand;
         public DelegateCommand LogoutCommand => _logoutCommand ?? (_logoutCommand = new DelegateCommand(async () => await Logout()));
         
-
         public bool IsLoggedIn
         {
-            get
-            {
-                return _isLoggedIn;
-            }
-            set
-            {
-                Set(ref _isLoggedIn, value);
-            }
+            get => _isLoggedIn;
+            set => Set(ref _isLoggedIn, value);
         }
 
         public ShellViewModel()
@@ -58,7 +51,7 @@ namespace FlashbackUwp.ViewModels
                 {
                     Views.Busy.SetBusy(false, null);
                 }
-            }                        
+            } 
         }
     }
 }
