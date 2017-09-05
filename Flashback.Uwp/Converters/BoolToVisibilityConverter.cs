@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -26,14 +26,8 @@ namespace FlashbackUwp.Converters
                     flag = !flag;
                 }                
             }
-            if (flag)
-            {
-                return Visibility.Visible;
-            }
-            else
-            {
-                return Visibility.Collapsed;
-            }
+
+            return flag ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
