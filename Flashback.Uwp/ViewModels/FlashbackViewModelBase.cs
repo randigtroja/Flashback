@@ -1,4 +1,4 @@
-﻿using Flashback.Model;
+using Flashback.Model;
 using FlashbackUwp.Views;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Mvvm;
@@ -11,7 +11,7 @@ namespace FlashbackUwp.ViewModels
 
         public string Error
         {
-            get { return _error; }
+            get => _error;
             set
             {
                 Set(ref _error, value);
