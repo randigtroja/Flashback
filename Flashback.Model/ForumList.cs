@@ -12,5 +12,6 @@ namespace Flashback.Model
         public string Id { get; set; }
         public string ParentId { get; set; }
         public string PagenumberText => string.Format("{0}/{1}", CurrentPage, MaxPages);
+        public int? UnreadMessagesCount { get; set; }
     }
 }

@@ -146,6 +146,14 @@ namespace Flashback.Services.Forum
                 parentId = parentCheck.Attributes["href"].Value.Replace("/", "");
             }
 
+            var unreadMessagesCheck = document.QuerySelector("a[href='/private.php'] span.label-danger");
+            int? unreadMessages = null;
+
+            if (unreadMessagesCheck != null)
+            {
+                unreadMessages = int.Parse(unreadMessagesCheck.TextContent.Replace(" ", ""));
+            }
+
             return new ForumList()
             {
                 Items = new ObservableCollection<FbItem>(forum),
@@ -153,7 +161,8 @@ namespace Flashback.Services.Forum
                 ShowNavigation = showNavigation,
                 CurrentPage = currentPage,
                 MaxPages = totalPages,
-                ParentId = parentId
+                ParentId = parentId,
+                UnreadMessagesCount = unreadMessages
             };
         }
 
@@ -184,10 +193,19 @@ namespace Flashback.Services.Forum
                 forum.Add(fbForum);
             }
 
+            var unreadMessagesCheck = document.QuerySelector("a[href='/private.php'] span.label-danger");
+            int? unreadMessages = null;
+
+            if (unreadMessagesCheck != null)
+            {
+                unreadMessages = int.Parse(unreadMessagesCheck.TextContent.Replace(" ",""));
+            }
+
             return new ForumList()
             {
                 Items = new ObservableCollection<FbItem>(forum),
-                Title = "Kategorier"
+                Title = "Kategorier",
+                UnreadMessagesCount = unreadMessages
             };
         }
     }

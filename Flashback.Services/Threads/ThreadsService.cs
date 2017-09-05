@@ -234,8 +234,16 @@ namespace Flashback.Services.Threads
             string html = _options.GetHtmlHeaders() +  BuildHtmlForForumThreads(poster, userLoggedIn) + _options.GetHtmlFooter();
 
 #if DEBUG
-            Debug.WriteLine(html);                
+            Debug.WriteLine(html);
 #endif
+
+            var unreadMessagesCheck = thread.QuerySelector("a[href='/private.php'] span.label-danger");
+            int? unreadMessages = null;
+
+            if (unreadMessagesCheck != null)
+            {
+                unreadMessages = int.Parse(unreadMessagesCheck.TextContent.Replace(" ", ""));
+            }
 
             return new ForumThread()
             {
@@ -246,7 +254,8 @@ namespace Flashback.Services.Threads
                 ParentId = parentId,
                 Html = html,
                 Id = realId,
-                ReplyId = replyId
+                ReplyId = replyId,
+                UnreadMessagesCount = unreadMessages
             };
         }
 

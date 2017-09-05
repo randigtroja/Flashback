@@ -11,5 +11,6 @@
         public string ParentId { get; set; }
         public string Html { get; set; }
         public string ReplyId { get; set; }
+        public int? UnreadMessagesCount { get; set; }
     }
 }
