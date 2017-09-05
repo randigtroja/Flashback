@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,23 +12,24 @@ namespace FlashbackUwp.ViewModels
     public class ManageForumlistViewModel : FlashbackViewModelBase
     {
         private string _addPath = "";
-        public string AddPath { get { return _addPath; } set { Set(ref _addPath, value); } }
+        public string AddPath
+        {
+            get => _addPath;
+            set => Set(ref _addPath, value);
+        }
 
         private string _addName = "";
-        public string AddName { get { return _addName; } set { Set(ref _addName, value); } }
-
+        public string AddName
+        {
+            get => _addName;
+            set => Set(ref _addName, value);
+        }
 
         private ObservableCollection<FbItem> _extraForums;
         public ObservableCollection<FbItem> ExtraForumList
         {
-            get
-            {
-                return _extraForums;
-            }
-            set
-            {
-                Set(ref _extraForums, value);
-            }
+            get => _extraForums;
+            set => Set(ref _extraForums, value);
         }
 
         private FileService _fileService;
