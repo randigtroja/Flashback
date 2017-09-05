@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,34 +25,19 @@ namespace FlashbackUwp.ViewModels
 
         public ObservableCollection<FbItem> Topics
         {
-            get
-            {
-                return _topics;
-            }
-            set
-            {
-                Set(ref _topics, value);
-            }
+            get => _topics;
+            set => Set(ref _topics, value);
         }
 
         public ObservableCollection<FbItem> TopicsAll
         {
-            get
-            {
-                return _topicsAll;
-            }
-            set
-            {
-                Set(ref _topicsAll, value);
-            }
+            get => _topicsAll;
+            set => Set(ref _topicsAll, value);
         }
 
         public string FilterText
         {
-            get
-            {
-                return _filterText;
-            }
+            get => _filterText;
             set
             {                
                 Set(ref _filterText, value);
