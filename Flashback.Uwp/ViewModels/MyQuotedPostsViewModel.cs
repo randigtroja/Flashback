@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,14 +22,8 @@ namespace FlashbackUwp.ViewModels
 
         public ObservableCollection<FbItem> Posts
         {
-            get
-            {
-                return _posts;
-            }
-            set
-            {
-                Set(ref _posts, value);
-            }
+            get => _posts;
+            set => Set(ref _posts, value);
         }
 
         public MyQuotedPostsViewModel()
