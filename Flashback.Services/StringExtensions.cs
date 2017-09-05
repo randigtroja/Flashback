@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Text;
 
@@ -13,16 +13,7 @@ namespace Flashback.Services
 
         public static string FixLeaveLink(this String str)
         {
-            if (string.IsNullOrWhiteSpace(str))
-            {
-                return str;
-            }
-            else
-            {
-                str = str.Replace("/leave.php?u=", "");
-
-                return str;
-            }
+            return string.IsNullOrWhiteSpace(str) ? str : str.Replace("/leave.php?u=", "");
         }
 
         public static string GetCleanId(this String str, bool removeForumAndThreadIndicator)
@@ -44,16 +35,7 @@ namespace Flashback.Services
 
         public static string GetCleanIdForPage(this String str, int pageNumber)
         {
-            if (string.IsNullOrWhiteSpace(str))
-            {
-                return str;
-            }
-            else
-            {
-                str = str.GetCleanId(false) + "p" + pageNumber;
-
-                return str;                
-            }
+            return string.IsNullOrWhiteSpace(str) ? str : str.GetCleanId(false) + "p" + pageNumber;
         }
 
         public static string GetCleanIdFirstPage(this String str)
