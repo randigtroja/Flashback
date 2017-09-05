@@ -16,37 +16,10 @@ namespace Flashback.Model
         public bool RenderEmoticons { get; set; }
         public bool ShowSignatures { get; set; }
 
-        private string GetForeColor()
-        {
-            if (IsDarkThemed)
-                return "#ffffff";
-
-            return "#000000";
-        }
-
-        private string GetBackgroundColor()
-        {
-            if (IsDarkThemed)
-                return "#000000";
-            else
-                return "#ffffff";
-        }
-
-        private string GetQuotesBackground()
-        {
-            if (IsDarkThemed)
-                return "#3D3D3D";
-            else
-                return "#DEDEDE";
-        }
-
-        private string GetQuotesBorder()
-        {
-            if (IsDarkThemed)
-                return "#ffffff";
-            else
-                return "#000000";
-        }
+        private string GetForeColor() => (IsDarkThemed) ? "#ffffff" : "#000000";
+        private string GetBackgroundColor() => (IsDarkThemed) ? "#000000" : "#ffffff";
+        private string GetQuotesBackground() => (IsDarkThemed) ? "#3D3D3D" : "#DEDEDE";
+        private string GetQuotesBorder() => (IsDarkThemed) ? "#ffffff" : "#000000";
 
         public string ReplaceSmileys(string postMessage)
         {
