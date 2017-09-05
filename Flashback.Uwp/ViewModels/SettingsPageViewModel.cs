@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Template10.Mvvm;
@@ -45,48 +45,43 @@ namespace FlashbackUwp.ViewModels
 
         public string FontSize
         {
-            get { return _settings.FontSize; }
-            set
-            {
-                _settings.FontSize = value;
-                
-                RaisePropertyChanged();
-            }
+            get => _settings.FontSize;
+            set {_settings.FontSize = value; RaisePropertyChanged(); }
         }
 
         public bool HoppaTillSistaSidan
         {
-            get { return _settings.HoppaTillSistaSidan; }
+            get => _settings.HoppaTillSistaSidan;
             set { _settings.HoppaTillSistaSidan = value; RaisePropertyChanged(); }
         }
 
         public bool ShowAvatars
         {
-            get { return _settings.ShowAvatars; }
+            get => _settings.ShowAvatars;
             set { _settings.ShowAvatars = value; RaisePropertyChanged(); }
         }
 
         public bool ShowSignatures
         {
-            get { return _settings.ShowSignatures; }
+            get => _settings.ShowSignatures;
             set { _settings.ShowSignatures = value; RaisePropertyChanged(); }
         }
 
         public bool UseLightThemeButton
         {
-            get { return _settings.AppTheme.Equals(ApplicationTheme.Light); }
+            get => _settings.AppTheme.Equals(ApplicationTheme.Light);
             set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; RaisePropertyChanged(); }
         }
 
         public bool UseEmoticons
         {
-            get { return _settings.UseEmoticons; }
+            get => _settings.UseEmoticons;
             set { _settings.UseEmoticons = value; RaisePropertyChanged(); }
         }
 
         public bool UseSmartNavigation
         {
-            get { return _settings.UseSmartNavigation; }
+            get => _settings.UseSmartNavigation;
             set { _settings.UseSmartNavigation = value; RaisePropertyChanged(); }
         }
     }
@@ -107,7 +102,5 @@ namespace FlashbackUwp.ViewModels
                 return $"{v.Major}.{v.Minor}.{v.Build}.{v.Revision}";
             }
         }
-
-        public Uri RateMe => new Uri("http://aka.ms/template10");
     }
 }
