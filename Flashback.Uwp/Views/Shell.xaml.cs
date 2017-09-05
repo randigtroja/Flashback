@@ -72,7 +72,7 @@ namespace FlashbackUwp.Views
 
         private void UpdateUnreadMessagesCount(int? result)
         {
-            if (!result.HasValue) // Det finns inget oläst, dölj skiten
+            if (!result.HasValue || result.Value == 0) // Det finns inget oläst, dölj skiten
             {
                 PmCount.Visibility = Visibility.Collapsed;
                 PmGrid.Visibility = Visibility.Collapsed;
