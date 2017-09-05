@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -41,14 +41,8 @@ namespace FlashbackUwp.ViewModels
 
         public ObservableCollection<FbFavourite> Favourites
         {
-            get
-            {
-                return _favourites;
-            }
-            set
-            {
-                Set(ref _favourites, value);
-            }
+            get => _favourites;
+            set => Set(ref _favourites, value);
         }
 
         public async Task LoadViewModel()
@@ -119,7 +113,6 @@ namespace FlashbackUwp.ViewModels
             if (item != null)
             {
                 NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
-
             }
         }
     }
