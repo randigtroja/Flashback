@@ -13,7 +13,6 @@ namespace Flashback.Model
         public bool IsUnread { get; set; }
         public string FolderId { get; set; }
         public string Title { get; set; }
-
-        public string XamlCode => IsUnread ? "\uE715" : "\uE8C3";
+        public string XamlCode => IsUnread ? "\uE715" : "\uE8C3";        
     }
 }

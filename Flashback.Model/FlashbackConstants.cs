@@ -8,6 +8,7 @@
         public static string MessengerShowWarning = "ShowWarning";
         public static string MessengerShowInformation = "ShowInformation";       
         public static string MessengerBrowserScrollToPost = "ScrollToPost";
-        public static string MessengerFavoritesUpdated = "FavoritesUpdated";        
+        public static string MessengerFavoritesUpdated = "FavoritesUpdated";
+        public static string MessengerUnreadMessagesCount = "UnreadMessagesCount";
     }
 }

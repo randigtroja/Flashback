@@ -108,10 +108,10 @@
                                               Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay, Converter={StaticResource BoolConverter}}">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xE715;" FontSize="20" Width="48" Height="48" />
-                        <Grid Width="15" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-22,-10,0,10">
+                        <Grid x:Name="PmGrid" Width="15" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-22,-10,0,10" Visibility="Collapsed">
                             <Ellipse Fill="{ThemeResource CustomColorBrush}"/>
                             <Viewbox>
-                                <TextBlock x:Name="PmCount" Text="1" Foreground="White"/>
+                                <TextBlock x:Name="PmCount" Text="" Foreground="White"/>
                             </Viewbox>
                         </Grid>
                         <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Privata meddelanden" />

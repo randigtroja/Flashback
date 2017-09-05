@@ -35,6 +35,7 @@ namespace FlashbackUwp.Views
             Messenger.Default.Register<string>(this, FlashbackConstants.MessengerShowWarning, ShowWarning);
             Messenger.Default.Register<string>(this, FlashbackConstants.MessengerShowError, ShowError);
             Messenger.Default.Register<string>(this, FlashbackConstants.MessengerShowInformation, ShowInformation);
+            Messenger.Default.Register<int?>(this, FlashbackConstants.MessengerUnreadMessagesCount, UpdateUnreadMessagesCount);
         }
         
 
@@ -67,6 +68,21 @@ namespace FlashbackUwp.Views
             FlashbackNotifier.IsOpen = true;
             await Task.Delay(2000);
             FlashbackNotifier.IsOpen = false;
+        }
+
+        private void UpdateUnreadMessagesCount(int? result)
+        {
+            if (!result.HasValue) // Det finns inget oläst, dölj skiten
+            {
+                PmCount.Visibility = Visibility.Collapsed;
+                PmGrid.Visibility = Visibility.Collapsed;
+            }
+            else // Visa badge och antalet
+            {
+                PmCount.Visibility = Visibility.Visible;
+                PmGrid.Visibility = Visibility.Visible;
+                PmCount.Text = result.Value.ToString();
+            }
         }
 
         public async void ShowWarning(string message)

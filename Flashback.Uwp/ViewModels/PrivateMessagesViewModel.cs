@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Messages;
 using FlashbackUwp.Views;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -53,6 +54,13 @@ namespace FlashbackUwp.ViewModels
                 Error = null;
 
                 var resultMessages = await _messagesService.GetPrivateMessages();
+
+                if (resultMessages.Any())
+                {
+                    var unreadCount = resultMessages.Count(x => x.IsUnread);
+                    Messenger.Default.Send(unreadCount > 0 ? unreadCount : (int?)null, FlashbackConstants.MessengerUnreadMessagesCount);
+                }
+
                 Messages = new ObservableCollection<PrivateMessage>(resultMessages);
             }
             catch (Exception e)

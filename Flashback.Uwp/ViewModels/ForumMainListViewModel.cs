@@ -12,6 +12,7 @@ using Flashback.Services.Forum;
 using FlashbackUwp.Services.FileServices;
 using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
+using GalaSoft.MvvmLight.Messaging;
 using Template10.Utils;
 
 namespace FlashbackUwp.ViewModels
@@ -71,6 +72,8 @@ namespace FlashbackUwp.ViewModels
                     }
 
                     ForumList = resultForumList;
+
+                    Messenger.Default.Send(resultForumList.UnreadMessagesCount, FlashbackConstants.MessengerUnreadMessagesCount);
                 }
                 else
                 {
@@ -80,6 +83,9 @@ namespace FlashbackUwp.ViewModels
                     var resultForumList = await _forumService.GetForums(id);
 
                     ForumList = resultForumList;
+
+                    Messenger.Default.Send(resultForumList.UnreadMessagesCount, FlashbackConstants.MessengerUnreadMessagesCount);
+
                 }
 
                 if (ForumList.Items.Count > 0)

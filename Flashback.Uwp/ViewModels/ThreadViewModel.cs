@@ -112,6 +112,9 @@ namespace FlashbackUwp.ViewModels
                 }
 
                 ForumThread = await _threadService.GetForumThread(id);
+
+                Messenger.Default.Send(ForumThread.UnreadMessagesCount, FlashbackConstants.MessengerUnreadMessagesCount);
+
                 _firstLoadDone = true;
 
                 // spara ner senaste besökta sida om vi använder smartnavigering
