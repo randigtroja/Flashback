@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,9 +26,7 @@ namespace FlashbackUwp.Services.FileServices
                 newForumlist.Id, newForumlist                
             }};
 
-            var exists = await FileHelper.FileExistsAsync(CACHEFILE);
-
-            if(!exists)
+            if(!await FileHelper.FileExistsAsync(CACHEFILE))
             {
                 fbCache = new FlashbackCacheList<Dictionary<string, ForumList>>();
             }
@@ -49,9 +47,7 @@ namespace FlashbackUwp.Services.FileServices
 
         public async Task<ForumList> TryGetFromCache(string key)
         {            
-            var cacheExists = await FileHelper.FileExistsAsync(CACHEFILE);
-
-            if (!cacheExists)
+            if (!await FileHelper.FileExistsAsync(CACHEFILE))
             {                
                 return null;
             }                
@@ -85,9 +81,7 @@ namespace FlashbackUwp.Services.FileServices
 
         public async Task<List<FbItem>> GetExtraForums()
         {
-            var fileExists = await FileHelper.FileExistsAsync(EXTRAFORUMSFILE);
-
-            if (!fileExists)
+            if (!await FileHelper.FileExistsAsync(EXTRAFORUMSFILE))
             {
                 return new List<FbItem>();
             }
@@ -124,9 +118,7 @@ namespace FlashbackUwp.Services.FileServices
 
         public async Task<int?> GetLastVisitedPageForThread(string threadId)
         {
-            var fileExists = await FileHelper.FileExistsAsync(SMARTNAVIGATIONFILE);
-
-            if (!fileExists)
+            if (!await FileHelper.FileExistsAsync(SMARTNAVIGATIONFILE))
             {
                 return null;
             }
