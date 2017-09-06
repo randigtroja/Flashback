@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -12,8 +12,6 @@ namespace FlashbackUwp.ViewModels
 {
     public class ComposePrivateMessageViewModel : FlashbackViewModelBase
     {
-       
-
         private bool _mayPost;
         private string _subject;
         private string _id;
@@ -24,44 +22,44 @@ namespace FlashbackUwp.ViewModels
 
         public bool MayPost
         {
-            get { return _mayPost; }
-            set { Set(ref _mayPost, value); }
+            get => _mayPost;
+            set => Set(ref _mayPost, value);
         }
 
         public string Id
         {
-            get { return _id; }
-            set { Set(ref _id,value); }
+            get => _id;
+            set => Set(ref _id, value);
         }
 
         public bool IsQuote
         {
-            get { return _isQuote; }
-            set { Set(ref _isQuote, value); }
+            get => _isQuote;
+            set => Set(ref _isQuote, value);
         }
 
         public string To
         {
-            get { return _to; }
-            set { Set(ref _to, value); }
+            get => _to;
+            set => Set(ref _to, value);
         }
 
         public string Subject
         {
-            get { return _subject; }
-            set { Set(ref _subject, value); }
+            get => _subject;
+            set => Set(ref _subject, value);
         }
 
         public string Message
         {
-            get { return _message; }
-            set { Set(ref _message, value); }
+            get => _message;
+            set => Set(ref _message, value);
         }
 
         public string PostToken
         {
-            get { return _postToken; }
-            set { Set(ref _postToken, value); }
+            get => _postToken;
+            set => Set(ref _postToken, value);
         }
        
         private MessagesService _messageService;

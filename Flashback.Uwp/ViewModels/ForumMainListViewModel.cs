@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,14 +26,8 @@ namespace FlashbackUwp.ViewModels
         
         public ForumList ForumList
         {
-            get
-            {
-                return _forumlist;
-            }
-            set
-            {
-                Set(ref _forumlist, value);                
-            }
+            get => _forumlist;
+            set => Set(ref _forumlist, value);
         }
 
         public ForumMainListViewModel()

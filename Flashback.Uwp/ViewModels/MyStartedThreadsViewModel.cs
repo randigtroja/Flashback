@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,8 +22,8 @@ namespace FlashbackUwp.ViewModels
 
         public ObservableCollection<FbItem> Threads
         {
-            get { return _threads; }
-            set { Set(ref _threads, value); }
+            get => _threads;
+            set => Set(ref _threads, value);
         }
 
         public MyStartedThreadsViewModel()

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Flashback.Model;
 using Flashback.Services.Auth;
 using FlashbackUwp.Views;
@@ -11,10 +11,18 @@ namespace FlashbackUwp.ViewModels
         private AuthService _authSerivce;
 
         private string _userName = "";
-        public string UserName { get { return _userName; } set { Set(ref _userName, value); } }
+        public string UserName
+        {
+            get => _userName;
+            set => Set(ref _userName, value);
+        }
 
         private string _password = "";        
-        public string Password { get { return _password; } set { Set(ref _password, value); } }
+        public string Password
+        {
+            get => _password;
+            set => Set(ref _password, value);
+        }
         
         public LoginViewModel()
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
@@ -25,44 +25,44 @@ namespace FlashbackUwp.ViewModels
 
         public bool MayPost
         {
-            get { return _mayPost; }
-            set { Set(ref _mayPost, value); }
+            get => _mayPost;
+            set => Set(ref _mayPost, value);
         }
 
         public string Title
         {
-            get { return _title; }
-            set { Set(ref _title, value); }
+            get => _title;
+            set => Set(ref _title, value);
         }
 
         public string Message
         {
-            get { return _message; }
-            set { Set(ref _message, value); }
+            get => _message;
+            set => Set(ref _message, value);
         }
 
         public string UserId
         {
-            get { return _userId; }
-            set { Set(ref _userId, value); }
+            get => _userId;
+            set => Set(ref _userId, value);
         }
 
         public string ThreadId
         {
-            get { return _threadId; }
-            set { Set(ref _threadId, value); }
+            get => _threadId;
+            set => Set(ref _threadId, value);
         }
 
         public string SubscriptionType
         {
-            get { return _subscriptionType; }
-            set { Set(ref _subscriptionType, value); }
+            get => _subscriptionType;
+            set => Set(ref _subscriptionType, value);
         }
 
         public string PostId
         {
-            get { return _postId; }
-            set { Set(ref _postId, value); }
+            get => _postId;
+            set => Set(ref _postId, value);
         }
 
 

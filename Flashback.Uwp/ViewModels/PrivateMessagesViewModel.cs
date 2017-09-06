@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,14 +20,8 @@ namespace FlashbackUwp.ViewModels
         private ObservableCollection<PrivateMessage> _messages;
         public ObservableCollection<PrivateMessage> Messages
         {
-            get
-            {
-                return _messages;
-            }
-            set
-            {
-                Set(ref _messages, value);
-            }
+            get => _messages;
+            set => Set(ref _messages, value);
         }
 
         public PrivateMessagesViewModel()

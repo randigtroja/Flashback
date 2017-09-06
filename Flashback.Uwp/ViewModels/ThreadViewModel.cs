@@ -30,40 +30,22 @@ namespace FlashbackUwp.ViewModels
 
         public ForumThread ForumThread
         {
-            get
-            {
-                return _forumThread;
-            }
-            set
-            {
-                Set(ref _forumThread, value);
-            }
+            get => _forumThread;
+            set => Set(ref _forumThread, value);
         }
 
         private bool _isPinned;
         public bool IsPinned
         {
-            get
-            {
-                return _isPinned;
-            }
-            set
-            {
-                Set(ref _isPinned, value);
-            }
+            get => _isPinned;
+            set => Set(ref _isPinned, value);
         }
 
         private bool _isLoggedIn;
         public bool IsLoggedIn
         {
-            get
-            {
-                return _isLoggedIn;
-            }
-            set
-            {
-                Set(ref _isLoggedIn, value);
-            }
+            get => _isLoggedIn;
+            set => Set(ref _isLoggedIn, value);
         }
 
         public ThreadViewModel()

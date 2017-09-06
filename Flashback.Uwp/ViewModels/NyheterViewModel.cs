@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -16,8 +16,8 @@ namespace FlashbackUwp.ViewModels
 
         public ObservableCollection<FbRssItem> Nyheter
         {
-            get { return _nyheter; }
-            set { Set(ref _nyheter, value); }
+            get => _nyheter;
+            set => Set(ref _nyheter, value);
         }
 
         public NyheterViewModel()

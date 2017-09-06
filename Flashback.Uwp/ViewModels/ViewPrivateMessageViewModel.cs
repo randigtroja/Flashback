@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI;
@@ -17,21 +17,13 @@ namespace FlashbackUwp.ViewModels
         private readonly MessagesService _messagesService;
         private readonly SettingsService _settings;
         private PrivateMessage _message;
-      
 
         public PrivateMessage Message
         {
-            get
-            {
-                return _message;
-            }
-            set
-            {
-                Set(ref _message, value);
-            }
+            get => _message;
+            set => Set(ref _message, value);
         }
-
-
+        
         public ViewPrivateMessageViewModel()
         {
             var c = (Color)Application.Current.Resources["SystemAccentColor"];
