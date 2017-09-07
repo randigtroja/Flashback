@@ -1,24 +1,19 @@
-﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using FlashbackUwp.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Template10.Common;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-using Windows.ApplicationModel;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Controls;
 using Flashback.Model;
 using Flashback.Services.Auth;
 using FlashbackUwp.Services.SecurityServices;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Services.LoggingService;
-using Template10.Services.SerializationService;
 
 namespace FlashbackUwp
 {
@@ -32,11 +27,8 @@ namespace FlashbackUwp
 
         public static CookieContainer CookieContainer
         {
-            get { return _cookieContainer ?? (_cookieContainer = new CookieContainer()); }
-            set
-            {
-                _cookieContainer = value;
-            }
+            get => _cookieContainer ?? (_cookieContainer = new CookieContainer());
+            set => _cookieContainer = value;
         }
 
         public static bool IsUserLoggedIn()
