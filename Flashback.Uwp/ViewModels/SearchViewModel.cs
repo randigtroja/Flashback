@@ -90,8 +90,7 @@ namespace FlashbackUwp.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-            var forumId = parameter as string;
-            if (forumId != null)
+            if (parameter is string forumId)
             {
                 ForumId = forumId;
             }
@@ -106,9 +105,7 @@ namespace FlashbackUwp.ViewModels
 
         public void NavigateToThread(object sender, ItemClickEventArgs e)
         {
-            var item = e.ClickedItem as FbItem;
-
-            if (item != null)
+            if (e.ClickedItem is FbItem item)
             {
                 NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
             }

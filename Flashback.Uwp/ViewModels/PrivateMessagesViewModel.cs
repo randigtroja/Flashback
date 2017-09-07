@@ -14,7 +14,7 @@ namespace FlashbackUwp.ViewModels
 {
     public class PrivateMessagesViewModel : FlashbackViewModelBase
     {
-        private MessagesService _messagesService;
+        private readonly MessagesService _messagesService;
         public bool IsDataLoaded => Messages != null && Messages.Any();
 
         private ObservableCollection<PrivateMessage> _messages;
@@ -79,9 +79,7 @@ namespace FlashbackUwp.ViewModels
 
         public void NavigateToMessage(object sender, ItemClickEventArgs e)
         {
-            var item = e.ClickedItem as PrivateMessage;
-
-            if (item != null)
+            if (e.ClickedItem is PrivateMessage item)
             {
                 NavigationService.Navigate(typeof(ViewPrivateMessagePage), item.Id);
             }

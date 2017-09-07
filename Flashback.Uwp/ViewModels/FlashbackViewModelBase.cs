@@ -18,7 +18,7 @@ namespace FlashbackUwp.ViewModels
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    Messenger.Default.Send<string>("Fel uppstod! " + value, FlashbackConstants.MessengerShowError);
+                    Messenger.Default.Send("Fel uppstod! " + value, FlashbackConstants.MessengerShowError);
                 }                
             }
         }

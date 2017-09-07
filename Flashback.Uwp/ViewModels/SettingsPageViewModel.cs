@@ -25,7 +25,7 @@ namespace FlashbackUwp.ViewModels
 
     public class SettingsPartViewModel : ViewModelBase
     {
-        Services.SettingsServices.SettingsService _settings;
+        readonly Services.SettingsServices.SettingsService _settings;
         public ObservableCollection<string> FontSizes { get; set; }
 
         public SettingsPartViewModel()

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI;
@@ -46,7 +45,7 @@ namespace FlashbackUwp.ViewModels
 
             if (ok)
             {                
-                Messenger.Default.Send<string>("Meddelandet är raderat", FlashbackConstants.MessengerShowInformation);
+                Messenger.Default.Send("Meddelandet är raderat", FlashbackConstants.MessengerShowInformation);
                 await NavigationService.NavigateAsync(typeof(PrivateMessagesPage));
             }
         }

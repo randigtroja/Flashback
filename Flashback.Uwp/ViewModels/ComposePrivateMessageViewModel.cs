@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
@@ -117,7 +116,7 @@ namespace FlashbackUwp.ViewModels
 
             if (string.IsNullOrWhiteSpace(Subject) || string.IsNullOrWhiteSpace(To) || string.IsNullOrWhiteSpace(Message))
             {                
-                Messenger.Default.Send<string>("Ej fullständiga uppgifter ifyllda för att kunna skicka", FlashbackConstants.MessengerShowError);
+                Messenger.Default.Send("Ej fullständiga uppgifter ifyllda för att kunna skicka", FlashbackConstants.MessengerShowError);
                 return;
             }
 
@@ -132,11 +131,11 @@ namespace FlashbackUwp.ViewModels
 
                 if (result)
                 {
-                    Messenger.Default.Send<string>("Meddelandet är skickat!", FlashbackConstants.MessengerShowInformation);
+                    Messenger.Default.Send("Meddelandet är skickat!", FlashbackConstants.MessengerShowInformation);
                 }
                 else
                 {
-                    Messenger.Default.Send<string>("Något gick fel vid skickande av meddelande", FlashbackConstants.MessengerShowError);
+                    Messenger.Default.Send("Något gick fel vid skickande av meddelande", FlashbackConstants.MessengerShowError);
                 }
             }
             catch (Exception e)

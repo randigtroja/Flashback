@@ -21,7 +21,7 @@ namespace FlashbackUwp.ViewModels
     public class ThreadViewModel : FlashbackViewModelBase
     {
         private ForumThread _forumThread;
-        private ThreadsService _threadService;
+        private readonly ThreadsService _threadService;
         private readonly FileService _fileService;
         private readonly SettingsService _settings;
         private string _requestedId;
@@ -152,12 +152,12 @@ namespace FlashbackUwp.ViewModels
             if (result)
             {
 
-                Messenger.Default.Send<bool>(true, FlashbackConstants.MessengerFavoritesUpdated);
-                Messenger.Default.Send<string>("Ok, tråden är tillagd till favoriterna!", FlashbackConstants.MessengerShowInformation);                
+                Messenger.Default.Send(true, FlashbackConstants.MessengerFavoritesUpdated);
+                Messenger.Default.Send("Ok, tråden är tillagd till favoriterna!", FlashbackConstants.MessengerShowInformation);                
             }
             else 
             {                
-                Messenger.Default.Send<string>("Fel vid tillägg av favorit!", FlashbackConstants.MessengerShowError);
+                Messenger.Default.Send("Fel vid tillägg av favorit!", FlashbackConstants.MessengerShowError);
             } 
         }
 

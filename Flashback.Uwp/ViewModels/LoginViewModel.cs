@@ -38,12 +38,12 @@ namespace FlashbackUwp.ViewModels
             if (isSuccess)
             {                
                 await App.SaveCookies();
-                Messenger.Default.Send<string>("Ok! Du är inloggad!", FlashbackConstants.MessengerShowInformation);
+                Messenger.Default.Send("Ok! Du är inloggad!", FlashbackConstants.MessengerShowInformation);
                 await NavigationService.NavigateAsync(typeof(ForumMainList));
             }
             else
             {                
-                Messenger.Default.Send<string>("Felaktigt lösenord/användarnamn!", "ShowError");
+                Messenger.Default.Send("Felaktigt lösenord/användarnamn!", "ShowError");
             }           
         }
     }

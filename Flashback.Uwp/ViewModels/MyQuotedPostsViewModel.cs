@@ -7,7 +7,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Threads;
-using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
 
 namespace FlashbackUwp.ViewModels
@@ -16,7 +15,6 @@ namespace FlashbackUwp.ViewModels
     {
         private ObservableCollection<FbItem> _posts;
         private readonly ThreadsService _threadService;
-        private readonly SettingsService _settings;
 
         public bool IsDataLoaded => Posts != null && Posts.Any();
 
@@ -29,7 +27,6 @@ namespace FlashbackUwp.ViewModels
         public MyQuotedPostsViewModel()
         {
             _threadService = new ThreadsService(App.CookieContainer, null);
-            _settings = SettingsService.Instance;
 
             Posts = new ObservableCollection<FbItem>();
 
@@ -76,11 +73,9 @@ namespace FlashbackUwp.ViewModels
 
         public void NavigateToThread(object sender, ItemClickEventArgs e)
         {
-            var item = e.ClickedItem as FbItem;
-
-            if (item != null)
+            if (e.ClickedItem is FbItem item)
             {                
-                NavigationService.Navigate(typeof(ThreadPage), item.Id); // vi borde nog inte hoppa till sista sidan från mina citerade inlägg- vi borde hamna på inlägget ist.
+                NavigationService.Navigate(typeof(ThreadPage), item.Id);
             }
         }
     }

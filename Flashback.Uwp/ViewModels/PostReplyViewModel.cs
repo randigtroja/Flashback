@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.Threads;
-using FlashbackUwp.Services.SettingsServices;
 using FlashbackUwp.Views;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -13,7 +12,6 @@ namespace FlashbackUwp.ViewModels
     public class PostReplyViewModel : FlashbackViewModelBase
     {
         private readonly ThreadsService _threadService;
-        private readonly SettingsService _settings;
 
         private string _title;
         private string _message;
@@ -69,14 +67,12 @@ namespace FlashbackUwp.ViewModels
         public PostReplyViewModel()
         {
             _threadService = new ThreadsService(App.CookieContainer, null);
-            _settings = SettingsService.Instance;
             MayPost = true;
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-            var replyRequest = parameter as PostReplyRequest;
-            if (replyRequest != null)
+            if (parameter is PostReplyRequest replyRequest)
             {
                 await LoadViewModel(replyRequest.Id, replyRequest.IsQuote);
             }
@@ -130,11 +126,11 @@ namespace FlashbackUwp.ViewModels
 
                 if (result)
                 {                    
-                    Messenger.Default.Send<string>("Inlägget är skickat! Gå tillbaka för att ladda om", FlashbackConstants.MessengerShowInformation);
+                    Messenger.Default.Send("Inlägget är skickat! Gå tillbaka för att ladda om", FlashbackConstants.MessengerShowInformation);
                 }
                 else
                 {                    
-                    Messenger.Default.Send<string>("Fel vid skickande av meddelande!", FlashbackConstants.MessengerShowError);
+                    Messenger.Default.Send("Fel vid skickande av meddelande!", FlashbackConstants.MessengerShowError);
                     MayPost = true;
                 }
             }

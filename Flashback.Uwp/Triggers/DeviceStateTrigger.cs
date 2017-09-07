@@ -8,7 +8,7 @@ namespace FlashbackUwp.Triggers
 
         public string DeviceFamily
         {
-            get { return _deviceFamily; }
+            get => _deviceFamily;
             set
             {
                 _deviceFamily = value;

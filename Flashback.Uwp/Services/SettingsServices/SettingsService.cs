@@ -19,7 +19,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool UseShellBackButton
         {
-            get { return _helper.Read<bool>(nameof(UseShellBackButton), true); }
+            get => _helper.Read<bool>(nameof(UseShellBackButton), true);
             set
             {
                 _helper.Write(nameof(UseShellBackButton), value);
@@ -105,7 +105,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public TimeSpan CacheMaxDuration
         {
-            get { return _helper.Read<TimeSpan>(nameof(CacheMaxDuration), TimeSpan.FromDays(2)); }
+            get => _helper.Read<TimeSpan>(nameof(CacheMaxDuration), TimeSpan.FromDays(2));
             set
             {
                 _helper.Write(nameof(CacheMaxDuration), value);
@@ -115,7 +115,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool ShowHamburgerButton
         {
-            get { return _helper.Read<bool>(nameof(ShowHamburgerButton), true); }
+            get => _helper.Read<bool>(nameof(ShowHamburgerButton), true);
             set
             {
                 _helper.Write(nameof(ShowHamburgerButton), value);
@@ -125,7 +125,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool IsFullScreen
         {
-            get { return _helper.Read<bool>(nameof(IsFullScreen), false); }
+            get => _helper.Read<bool>(nameof(IsFullScreen), false);
             set
             {
                 _helper.Write(nameof(IsFullScreen), value);
@@ -135,50 +135,50 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool ShowAvatars
         {
-            get { return _helper.Read<bool>(nameof(ShowAvatars), true); }
-            set { _helper.Write(nameof(ShowAvatars), value); }
+            get => _helper.Read<bool>(nameof(ShowAvatars), true);
+            set => _helper.Write(nameof(ShowAvatars), value);
         }
 
         public bool HoppaTillSistaSidan
         {
-            get { return _helper.Read<bool>(nameof(HoppaTillSistaSidan), false); }
-            set { _helper.Write(nameof(HoppaTillSistaSidan), value); }
+            get => _helper.Read<bool>(nameof(HoppaTillSistaSidan), false);
+            set => _helper.Write(nameof(HoppaTillSistaSidan), value);
         }
 
         public bool VisaBilderITraden
         {
-            get { return _helper.Read<bool>(nameof(VisaBilderITraden), true); }
-            set { _helper.Write(nameof(VisaBilderITraden), value); }
+            get => _helper.Read<bool>(nameof(VisaBilderITraden), true);
+            set => _helper.Write(nameof(VisaBilderITraden), value);
         }
 
         public bool KomIhagSidNr
         {
-            get { return _helper.Read<bool>(nameof(KomIhagSidNr), true); }
-            set { _helper.Write(nameof(KomIhagSidNr), value); }
+            get => _helper.Read(nameof(KomIhagSidNr), true);
+            set => _helper.Write(nameof(KomIhagSidNr), value);
         }
 
         public string FontSize
         {
-            get { return _helper.Read<string>(nameof(FontSize), "90%"); }
-            set { _helper.Write(nameof(FontSize), value); }
+            get => _helper.Read<string>(nameof(FontSize), "90%");
+            set => _helper.Write(nameof(FontSize), value);
         }
 
         public bool UseEmoticons
         {
-            get { return _helper.Read<bool>(nameof(UseEmoticons), true); }
-            set { _helper.Write(nameof(UseEmoticons), value); }
+            get => _helper.Read<bool>(nameof(UseEmoticons), true);
+            set => _helper.Write(nameof(UseEmoticons), value);
         }
 
         public bool UseSmartNavigation
         {
-            get { return _helper.Read<bool>(nameof(UseSmartNavigation), false); }
-            set { _helper.Write(nameof(UseSmartNavigation), value); }
+            get => _helper.Read<bool>(nameof(UseSmartNavigation), false);
+            set => _helper.Write(nameof(UseSmartNavigation), value);
         }
 
         public bool ShowSignatures
         {
-            get { return _helper.Read<bool>(nameof(ShowSignatures), false); }
-            set { _helper.Write(nameof(ShowSignatures), value); }
+            get => _helper.Read<bool>(nameof(ShowSignatures), false);
+            set => _helper.Write(nameof(ShowSignatures), value);
         }
 
     }

@@ -8,9 +8,9 @@ namespace FlashbackUwp.ViewModels
 {
     public class ShellViewModel: FlashbackViewModelBase
     {
-        private bool _isLoggedIn;        
+        private bool _isLoggedIn;
 
-        DelegateCommand _logoutCommand;
+        private DelegateCommand _logoutCommand;
         public DelegateCommand LogoutCommand => _logoutCommand ?? (_logoutCommand = new DelegateCommand(async () => await Logout()));
         
         public bool IsLoggedIn
@@ -49,7 +49,7 @@ namespace FlashbackUwp.ViewModels
                 }
                 finally
                 {
-                    Views.Busy.SetBusy(false, null);
+                    Views.Busy.SetBusy(false);
                 }
             } 
         }

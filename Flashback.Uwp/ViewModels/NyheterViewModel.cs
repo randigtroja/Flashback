@@ -57,9 +57,7 @@ namespace FlashbackUwp.ViewModels
 
         public async void RssNavigate(object sender, ItemClickEventArgs e)
         {
-            var item = e.ClickedItem as FbRssItem;
-
-            if (item != null)
+            if (e.ClickedItem is FbRssItem item)
             {
                 await Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(item.Link)));                
             }
