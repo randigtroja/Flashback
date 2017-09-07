@@ -1,32 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+using System;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Template10.Common;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.System;
 
 namespace FlashbackUwp.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ViewPrivateMessagePage : Page
     {
-        public ViewPrivateMessagePage()
-        {
-            this.InitializeComponent();
-        }
+        public ViewPrivateMessagePage() => this.InitializeComponent();
 
         private async void WebView_OnNewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
@@ -37,20 +19,20 @@ namespace FlashbackUwp.Views
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
                 
-                nav?.Navigate(typeof(Views.ThreadPage), id);
+                nav?.Navigate(typeof(ThreadPage), id);
             }
             else if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/f")) // intern FB-forumlänk
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
                 
-                nav?.Navigate(typeof(Views.ForumMainList), id);
+                nav?.Navigate(typeof(ForumMainList), id);
             }
             else if(args.Uri.AbsoluteUri.Contains("http://www.flashback.org/showthread.php?t=")) // gammla FB-standarden, öppna internt
             {
                 var id = args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
                 id = "t" + id;                
 
-                nav?.Navigate(typeof(Views.ThreadPage), id);
+                nav?.Navigate(typeof(ThreadPage), id);
             }
             else
             {
@@ -68,7 +50,7 @@ namespace FlashbackUwp.Views
 
                 if (resultDialog.Label == "Öppna")
                 {
-                    var openUrl = Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));
+                    await Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));
                 }
             }
         }
