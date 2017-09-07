@@ -1,20 +1,12 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using System;
 using System.Threading.Tasks;
-using Windows.Foundation.Metadata;
 using Windows.UI;
-using Template10.Common;
 using Template10.Controls;
 using Template10.Services.NavigationService;
-using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Flashback.Model;
 using GalaSoft.MvvmLight.Messaging;
-using Template10.Mvvm;
 
 namespace FlashbackUwp.Views
 {
