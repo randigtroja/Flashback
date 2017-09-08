@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -30,9 +30,7 @@ namespace FlashbackUwp.Services.SecurityServices
             
             var buffUnprotected = await provider.UnprotectAsync(buffProtected);
 
-            var strClearText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, buffUnprotected);
-            
-            return strClearText;
+            return CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, buffUnprotected);
         }
 
         private async Task<IBuffer> Protect(string dataToBeStored)
@@ -41,9 +39,8 @@ namespace FlashbackUwp.Services.SecurityServices
 
             var encoding = BinaryStringEncoding.Utf8;
             var buffMsg = CryptographicBuffer.ConvertStringToBinary(dataToBeStored, encoding);
-            var buffProtected = await provider.ProtectAsync(buffMsg);
-            
-            return buffProtected;
+
+            return await provider.ProtectAsync(buffMsg);
         }
 
         public async Task<bool> WriteCookieData(CookieContainer container)
