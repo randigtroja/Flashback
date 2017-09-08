@@ -127,9 +127,8 @@ namespace Flashback.Services
             var destinationBytes = Encoding.Convert(sourceEncoding, destinationEncoding, sourceBytes);            
 
             var encodesBytes = WebUtility.UrlEncodeToBytes(destinationBytes, 0, destinationBytes.Length);
-            var encodedString = destinationEncoding.GetString(encodesBytes, 0, encodesBytes.Length);
 
-            return encodedString;            
+            return destinationEncoding.GetString(encodesBytes, 0, encodesBytes.Length);
         }
     }
 }
