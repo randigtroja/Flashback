@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,10 +21,9 @@ namespace Flashback.Services.Messages
 
         public async Task<List<PrivateMessage>> GetPrivateMessages()
         {
-            var result = await _httpClient.GetStringAsync("https://www.flashback.org/private.php");
-            var messages = await ParsePrivateMessages(result);
-            
-            return messages;
+            string result = await _httpClient.GetStringAsync("https://www.flashback.org/private.php");
+
+            return await ParsePrivateMessages(result);
         }
 
         private async Task<List<PrivateMessage>> ParsePrivateMessages(string result)
@@ -90,11 +89,9 @@ namespace Flashback.Services.Messages
                 pmUrl = "https://www.flashback.org/private.php?do=newpm&pmid=" + id;
             }
 
-            var result = await _httpClient.GetStringAsync(pmUrl);
+            string result = await _httpClient.GetStringAsync(pmUrl);
 
-            var messageModel = await ParseNewPrivateMessage(result);
-
-            return messageModel;
+            return await ParseNewPrivateMessage(result);
         }
 
         private async Task<ComposePrivateMessageModel> ParseNewPrivateMessage(string result)
@@ -183,7 +180,6 @@ namespace Flashback.Services.Messages
         public async Task<PrivateMessage> GetMessage(string id)
         {
             var result = await _httpClient.GetStringAsync("https://www.flashback.org/private.php?do=showpm&pmid=" + id);
-
 
             var message = await ParseMessage(result);
             message.Id = id;
