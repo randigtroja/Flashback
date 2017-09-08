@@ -15,11 +15,10 @@ namespace FlashbackUwp.Views
             FbItem forumToDelete = (sender as Button).DataContext as FbItem;
             if (forumToDelete == null) return;
 
-            var model = DataContext as ManageForumlistViewModel;
-            if (model != null)
+            if (DataContext is ManageForumlistViewModel model)
             {
                 await model.DeleteForum(forumToDelete);
-            }            
+            }
         }
     }
 }

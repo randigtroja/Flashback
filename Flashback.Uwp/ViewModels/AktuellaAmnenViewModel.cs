@@ -117,10 +117,8 @@ namespace FlashbackUwp.ViewModels
         }
 
         public void NavigateToForum(object sender, ItemClickEventArgs e)
-        {            
-            var item = e.ClickedItem as FbItem;
-
-            if (item != null)
+        {
+            if (e.ClickedItem is FbItem item)
             {
                 NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
             }

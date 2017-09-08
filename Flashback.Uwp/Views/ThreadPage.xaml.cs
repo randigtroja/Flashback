@@ -57,20 +57,20 @@ namespace FlashbackUwp.Views
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
                                 
-                nav?.Navigate(typeof(Views.ThreadPage), id);                
+                nav?.Navigate(typeof(ThreadPage), id);                
             }
             else if (args.Uri.AbsoluteUri.Contains("https://www.flashback.org/f")) // intern FB-forumlänk
             {
                 string id = args.Uri.AbsoluteUri.Replace("https://www.flashback.org/", "");
                 
-                nav?.Navigate(typeof(Views.ForumMainList), id);
+                nav?.Navigate(typeof(ForumMainList), id);
             }
             else if (args.Uri.AbsoluteUri.Contains("http://www.flashback.org/showthread.php?t=")) // gammla FB-standarden, öppna internt
             {
                 var id = args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
                 id = "t" + id;
 
-                nav?.Navigate(typeof(Views.ThreadPage), id);
+                nav?.Navigate(typeof(ThreadPage), id);
             }
             else
             {
@@ -90,8 +90,7 @@ namespace FlashbackUwp.Views
 
         private async void OpenInWebBrowser(object sender, RoutedEventArgs e)
         {
-            var model = DataContext as ThreadViewModel;
-            if (model != null)
+            if (DataContext is ThreadViewModel model)
             {
                 var id = model.ForumThread.Id;
                 var openUrl = await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.flashback.org/" + id));

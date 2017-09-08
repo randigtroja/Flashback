@@ -72,11 +72,10 @@ namespace FlashbackUwp.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-            var id = parameter as string;
-            if (id != null)
+            if (parameter is string id)
             {
-                Id =id;
-                IsQuote= true;
+                Id = id;
+                IsQuote = true;
             }
 
             await LoadViewModel();
