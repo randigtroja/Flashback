@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI;
@@ -268,9 +268,7 @@ namespace FlashbackUwp.ViewModels
 
             if (await dialog.ShowAsync() == ContentDialogResult.Primary)
             {
-                int pageNumer;
-
-                if (int.TryParse(inputTextBox.Text, out pageNumer) && pageNumer > 0 && pageNumer <= ForumThread.MaxPages)
+                if (int.TryParse(inputTextBox.Text, out int pageNumer) && pageNumer > 0 && pageNumer <= ForumThread.MaxPages)
                 {
                     await LoadViewModel(ForumThread.Id.GetCleanIdForPage(pageNumer));
                 }
@@ -279,8 +277,6 @@ namespace FlashbackUwp.ViewModels
 
         public async void WebView_OnScriptNotify(object sender, NotifyEventArgs e)
         {
-
-
             if (e.Value.Contains("left"))
             {
                 await this.NextPage();
