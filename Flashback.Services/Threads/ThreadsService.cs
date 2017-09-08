@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -29,10 +29,9 @@ namespace Flashback.Services.Threads
         /// <returns>Lista med trådar</returns>
         public async Task<List<FbItem>> GetHotTopics()
         {
-            var result = await _httpClient.GetStringAsync("https://www.flashback.org/aktuella-amnen/");
-            var forum = await ParseHotTopics(result);
+            string result = await _httpClient.GetStringAsync("https://www.flashback.org/aktuella-amnen/");
 
-            return forum;
+            return await ParseHotTopics(result);
         }
 
         private async Task<List<FbItem>> ParseHotTopics(string result)
@@ -102,20 +101,9 @@ namespace Flashback.Services.Threads
         /// <returns>En modell över en forumtråd. Bygger html utefter inskickad HtmlRenderOptions till ThreadService</returns>
         public async Task<ForumThread> GetForumThread(string id)
         {
-            var result = await _httpClient.GetStringAsync("https://www.flashback.org/" + id);
+            string result = await _httpClient.GetStringAsync("https://www.flashback.org/" + id);
 
-            if (id.StartsWith("sp"))
-            {
-                var forumPost = await ParseSinglePost(result);
-
-                return forumPost;
-            }
-            else
-            {
-                var forumThread = await ParseThread(result);
-
-                return forumThread;
-            }            
+            return id.StartsWith("sp") ? await ParseSinglePost(result) : await ParseThread(result);
         }
 
         private async Task<ForumThread> ParseSinglePost(string result)
@@ -158,8 +146,6 @@ namespace Flashback.Services.Threads
                 Id = parentId,
                 ReplyId = replyId
             };
-
-
         }
 
         private async Task<ForumThread> ParseThread(string result)
@@ -382,10 +368,9 @@ namespace Flashback.Services.Threads
         /// <returns>Lista med trådar</returns>
         public async Task<List<FbItem>> GetNewTopics()
         {
-            var result = await _httpClient.GetStringAsync("https://www.flashback.org/nya-amnen");
-            var topics = await ParseNewTopics(result);
-            
-            return topics;
+            string result = await _httpClient.GetStringAsync("https://www.flashback.org/nya-amnen");
+
+            return await ParseNewTopics(result);
         }
 
         private async Task<List<FbItem>> ParseNewTopics(string result)
@@ -459,10 +444,9 @@ namespace Flashback.Services.Threads
         /// <returns>Lista med trådar</returns>
         public async Task<List<FbItem>> GetNewPosts()
         {
-            var result = await _httpClient.GetStringAsync("https://www.flashback.org/nya-inlagg");
-            var topics = await ParseNewTopics(result); // funkar att använda samma metod för nyainlägg. Bryt ut om det börjar diffa
+            string result = await _httpClient.GetStringAsync("https://www.flashback.org/nya-inlagg");
 
-            return topics;
+            return await ParseNewTopics(result); // funkar att använda samma metod för nyainlägg. Bryt ut om det börjar diffa
         }
 
         /// <summary>
@@ -472,9 +456,8 @@ namespace Flashback.Services.Threads
         public async Task<List<FbFavourite>> GetFavourites()
         {
             var result = await _httpClient.GetStringAsync("https://www.flashback.org/subscription.php");
-            var favourites = await ParseFavourites(result);
 
-            return favourites;           
+            return await ParseFavourites(result);           
         }
 
         private async Task<List<FbFavourite>> ParseFavourites(string result)
@@ -597,10 +580,9 @@ namespace Flashback.Services.Threads
         /// <returns>Lista med trådar</returns>
         public async Task<List<FbItem>> GetMyStartedThreads(string userId)
         {
-            var result = await _httpClient.GetStringAsync("https://www.flashback.org/find_threads_by_user.php?userid=" + userId);
-            var favourites = await ParseMyStartedThreads(result);
+            string result = await _httpClient.GetStringAsync("https://www.flashback.org/find_threads_by_user.php?userid=" + userId);
 
-            return favourites;            
+            return await ParseMyStartedThreads(result);            
         }
 
         private async Task<List<FbItem>> ParseMyStartedThreads(string result)
@@ -711,9 +693,8 @@ namespace Flashback.Services.Threads
             //todo: tror vi måste encoda användarnamnet för att klara användare med exotiska namn
 
             var result = await _httpClient.GetStringAsync("https://www.flashback.org/sok/quote=" + userName + "?sp=1&so=d");
-            var quotes = await ParseMyQuotedPosts(result);
 
-            return quotes;
+            return await ParseMyQuotedPosts(result);
         }
 
         private async Task<List<FbItem>> ParseMyQuotedPosts(string result)
@@ -812,7 +793,7 @@ namespace Flashback.Services.Threads
                 searchUrl = "https://www.flashback.org/sok/" + searchTerm + "?f=" + forumId.Replace("/","").Replace("f","");
             }
 
-            var result = await _httpClient.GetStringAsync(searchUrl);
+            string result = await _httpClient.GetStringAsync(searchUrl);
 
             return await ParseSearchResult(result);            
         }
@@ -869,7 +850,6 @@ namespace Flashback.Services.Threads
             }
 
             return searchResult;
-
         }
 
         public async Task<PostReplyModel> GetReply(string id, bool isQuote)
@@ -885,11 +865,9 @@ namespace Flashback.Services.Threads
                 url = "https://www.flashback.org/newreply.php?do=newreply&noquote=1&p=" + id;
             }
 
-            var result = await _httpClient.GetStringAsync(url);
+            string result = await _httpClient.GetStringAsync(url);
 
-            var reply = await ParsePostReply(result);
-
-            return reply;
+            return await ParsePostReply(result);
         }
 
         private async Task<PostReplyModel> ParsePostReply(string result)
