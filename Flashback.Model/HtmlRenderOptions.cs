@@ -63,20 +63,20 @@ namespace Flashback.Model
             var backgroundColor = GetBackgroundColor();
             
             var htmlHeaders = 
-                            "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\" />" +
-                                "<style TYPE=\"text/css\">" +
-                                    "div.post-bbcode-quote {color:" + foreColor + ";background:" + quotesBackground + ";border-style:solid;padding:12px;border-color:" + quotesBorder + ";border-width:1px;font-size:" + fontSize + "; };" +
-                                    "td.post-quote img {border: 0px;}" +
-                                    "a {color:" + accentColor + "; text-decoration:none;} " +
-                                    "div.post-bbcode-quote-wrapper { width:95%;} " +
-                                    "table{table-layout:fixed;}  " +
-                                    "blockquote { width: 95%;margin-left:20px; background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";border-width:1px;} " +
-                                    "i { width:90%;} " +
-                                    "img.avatar { width:40px;vertical-align:text-bottom; margin-right:12px; }" +
-                                    ".hidden {display: none;}" +
-                                    ".post-bbcode-spoiler {color: " + foreColor + "; background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";" +"border-width:1px; " +"font-size:" + fontSize + "; }" +
-                                    ".signature {color: #666;}" +
-                                "</style>";
+                            "<meta name='viewport' content='width=device-width, user-scalable=no' />" +
+                            "<style>" +
+                                "div.post-bbcode-quote {color:" + foreColor + ";background:" + quotesBackground + ";border-style:solid;padding:12px;border-color:" + quotesBorder + ";border-width:1px;font-size:" + fontSize + "; };" +
+                                "td.post-quote img {border: 0px;}" +
+                                "a {color:" + accentColor + "; text-decoration:none;} " +
+                                "div.post-bbcode-quote-wrapper { width:95%;} " +
+                                "table{table-layout:fixed;}  " +
+                                "blockquote { width: 95%;margin-left:20px; background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";border-width:1px;} " +
+                                "i { width:90%;} " +
+                                "img.avatar { width:40px;vertical-align:text-bottom; margin-right:12px; }" +
+                                ".hidden {display: none;}" +
+                                ".post-bbcode-spoiler {color: " + foreColor + "; background:" + quotesBackground + ";border-style:solid;border-color:" + quotesBorder + ";" +"border-width:1px; " +"font-size:" + fontSize + "; }" +
+                                ".signature {color: #666;}" +
+                            "</style>";
 
 
             var sb = new StringBuilder();
@@ -85,7 +85,7 @@ namespace Flashback.Model
             sb.AppendLine("<head>");
             sb.AppendLine(htmlHeaders);
             sb.AppendLine(
-                "<script type=\"text/javascript\">" +
+                "<script>" +
                     "window.onload = function() { " +
                         "document.addEventListener(\'touchstart\', handleTouchStart, false);" +
                         "document.addEventListener(\'touchmove\', handleTouchMove, false);" +
@@ -123,7 +123,7 @@ namespace Flashback.Model
                 "}};</script>");
 
 
-            sb.AppendLine("<script type=\"text/javascript\">" + 
+            sb.AppendLine("<script>" + 
                             "function prepareQuote(i) {" +
                                 "window.external.notify(i);" +
                             "};" +
@@ -132,7 +132,7 @@ namespace Flashback.Model
             sb.AppendLine("</head>");
             sb.AppendLine("<body style=\"margin:12px;font-family:'Segoe UI';background-color:" + backgroundColor + ";font-size: " + fontSize + ";\">");
             sb.AppendLine("<div id=\"pageWrapper\" style=\"width:100%; color:" + foreColor + ";word-wrap: break-word\">");
-            sb.AppendLine("<div style=\"display:none\">" + Guid.NewGuid() + "</div>"); // verkar inte alltid slängas loadedeventet annars. Nån cache?
+            sb.AppendLine("<div style='display:none'>" + Guid.NewGuid() + "</div>"); // verkar inte alltid slängas loadedeventet annars. Nån cache?
 
             return sb.ToString();
         }
@@ -146,11 +146,11 @@ namespace Flashback.Model
             StringBuilder sb = new StringBuilder();
 
             var spoilerScript = "<script>" +
-                                        "var elements = document.querySelectorAll('[data-toggle=\"hidden\"]');" +
-                                            "Array.prototype.forEach.call(elements, function(el, i) {el.onclick = function() {" +
-                                                "el.nextElementSibling.classList.toggle(\"hidden\");" +
-                                        "}});" +
-                                    "</script>";
+                                    "var elements = document.querySelectorAll('[data-toggle=\"hidden\"]');" +
+                                        "Array.prototype.forEach.call(elements, function(el, i) {el.onclick = function() {" +
+                                            "el.nextElementSibling.classList.toggle(\"hidden\");" +
+                                    "}});" +
+                                "</script>";
 
             sb.AppendLine(spoilerScript);
             sb.AppendLine("</body>");
