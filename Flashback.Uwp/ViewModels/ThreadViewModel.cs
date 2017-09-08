@@ -120,7 +120,7 @@ namespace FlashbackUwp.ViewModels
         {
             // Om vi begär en tråd utifrån ett specifikt inlägg. Släng iväg message och låt vyn med webview scrolla ner till detta om möjligt. 
             // Vi kollar så det finns text i vymodellen samt om vi redan har scrollat, kan hamna i konstiga lägen annars då webview är muppig som satan
-            if (_hasScrolled == false && this._requestedId != null && _requestedId.Contains("#") && _requestedId.StartsWith("p") && this.ForumThread.Html != null)
+            if (_hasScrolled == false && _requestedId != null && _requestedId.Contains("#") && _requestedId.StartsWith("p") && ForumThread.Html != null)
             {
                 _hasScrolled = true;
                 var index = _requestedId.IndexOf("#");
@@ -140,10 +140,7 @@ namespace FlashbackUwp.ViewModels
             }
         }
 
-        public async void Refresh()
-        {
-            await LoadViewModel(ForumThread.Id);
-        }
+        public async void Refresh() => await LoadViewModel(ForumThread.Id);
 
         public async void AddToFavourites()
         {
@@ -212,35 +209,29 @@ namespace FlashbackUwp.ViewModels
             }                        
         }
 
-        public async Task FirstPage()
-        {
-            await LoadViewModel(ForumThread.Id.GetCleanIdFirstPage());
-        }
+        public async Task FirstPage() => await LoadViewModel(ForumThread.Id.GetCleanIdFirstPage());
 
         public async Task PrevioustPage()
         {
-            if(ForumThread.CurrentPage < 2)
-                return;
-
-            await LoadViewModel(ForumThread.Id.GetCleanIdPreviousPage(ForumThread.CurrentPage));
+            if(ForumThread.CurrentPage > 1)
+            {
+                await LoadViewModel(ForumThread.Id.GetCleanIdPreviousPage(ForumThread.CurrentPage));
+            }
         }
 
-        public async Task LastPage()
-        {
-            await LoadViewModel(ForumThread.Id.GetCleanIdLastPage(ForumThread.MaxPages));
-        }
+        public async Task LastPage() => await LoadViewModel(ForumThread.Id.GetCleanIdLastPage(ForumThread.MaxPages));
 
         public async Task NextPage()
         {
-            if (ForumThread.CurrentPage >= ForumThread.MaxPages)
-                return;
-
-            await LoadViewModel(ForumThread.Id.GetCleanIdNextPage(ForumThread.CurrentPage));
+            if (ForumThread.CurrentPage < ForumThread.MaxPages)
+            { 
+                await LoadViewModel(ForumThread.Id.GetCleanIdNextPage(ForumThread.CurrentPage));
+            }
         }
 
         public async Task PostReply()
         {
-            await NavigationService.NavigateAsync(typeof(PostReplyPage),new PostReplyRequest(){Id = this.ForumThread.ReplyId, IsQuote = false});
+            await NavigationService.NavigateAsync(typeof(PostReplyPage),new PostReplyRequest(){Id = ForumThread.ReplyId, IsQuote = false});
         }
 
         public async Task ShowPicker()
@@ -279,13 +270,11 @@ namespace FlashbackUwp.ViewModels
         {
             if (e.Value.Contains("left"))
             {
-                await this.NextPage();
-                return;
+                await NextPage();
             }
             else if (e.Value.Contains("right"))
             {
-                await this.PrevioustPage();
-                return;
+                await PrevioustPage();
             }
             else if (e.Value.Contains("post"))
             {
