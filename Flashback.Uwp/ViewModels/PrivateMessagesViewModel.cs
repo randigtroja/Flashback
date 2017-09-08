@@ -81,6 +81,17 @@ namespace FlashbackUwp.ViewModels
         {
             if (e.ClickedItem is PrivateMessage item)
             {
+                // då fb inte uppdaterar att ett meddedelande är läst då man går in på det automatiskt
+                // (sidan måste laddas om för att det ska slå igenom) så gör vi en manuell uppdatering
+                // utifrån antalet meddelanden vi har - 1 om meddelandet vi navigerar till är "Unread"                
+                if (item.IsUnread)
+                {
+                    var unreadCount = Messages.Count(x => x.IsUnread);
+                    unreadCount = unreadCount - 1;
+
+                    Messenger.Default.Send(unreadCount > 0 ? unreadCount : (int?)null, FlashbackConstants.MessengerUnreadMessagesCount);
+                }                    
+
                 NavigationService.Navigate(typeof(ViewPrivateMessagePage), item.Id);
             }
         }
