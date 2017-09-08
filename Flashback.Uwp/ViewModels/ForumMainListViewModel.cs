@@ -200,9 +200,7 @@ namespace FlashbackUwp.ViewModels
 
             if (await dialog.ShowAsync() == ContentDialogResult.Primary)
             {
-                int pageNumer;
-
-                if (int.TryParse(inputTextBox.Text, out pageNumer) && pageNumer > 0 && pageNumer <= ForumList.MaxPages)
+                if (int.TryParse(inputTextBox.Text, out var pageNumer) && pageNumer > 0 && pageNumer <= ForumList.MaxPages)
                 {
                     await LoadViewModel(ForumList.Id.GetCleanIdForPage(pageNumer));
                 }
