@@ -8,7 +8,7 @@ using Flashback.Services;
 using FlashbackUwp.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using Template10.Common;
-
+using Windows.System;
 
 namespace FlashbackUwp.Views
 {
@@ -24,8 +24,7 @@ namespace FlashbackUwp.Views
 
         private void ThreadPage_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
-            var model = DataContext as ThreadViewModel;
-            if (model != null)
+            if (DataContext is ThreadViewModel model)
             {
                 var id = model.ForumThread.Id.GetCleanId(false);
                 args.Request.Data.SetWebLink(new Uri("https://www.flashback.org/" + id));
@@ -74,7 +73,7 @@ namespace FlashbackUwp.Views
             }
             else
             {
-                var openUrl = Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));                
+                var openUrl = Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));                
             }            
         }
 
@@ -92,8 +91,7 @@ namespace FlashbackUwp.Views
         {
             if (DataContext is ThreadViewModel model)
             {
-                var id = model.ForumThread.Id;
-                var openUrl = await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.flashback.org/" + id));
+                await Launcher.LaunchUriAsync(new Uri("https://www.flashback.org/" + model.ForumThread.Id));
             }
         }
 
