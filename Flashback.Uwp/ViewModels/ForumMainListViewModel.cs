@@ -136,9 +136,7 @@ namespace FlashbackUwp.ViewModels
 
         public void NavigateToForumThread(object sender, ItemClickEventArgs e)
         {
-            var item = e.ClickedItem as FbItem;
-
-            if (item != null)
+            if (e.ClickedItem is FbItem item)
             {
                 if (item.Type == FbItemType.Forum)
                 {
@@ -147,7 +145,7 @@ namespace FlashbackUwp.ViewModels
                 else if (item.Type == FbItemType.Thread)
                 {
                     NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
-                }               
+                }
             }
         }
 
@@ -208,7 +206,7 @@ namespace FlashbackUwp.ViewModels
                 {
                     await LoadViewModel(ForumList.Id.GetCleanIdForPage(pageNumer));
                 }
-            }                            
+            }
         }
 
         public async void NavigateToParentForum()
