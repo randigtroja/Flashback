@@ -19,7 +19,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool UseShellBackButton
         {
-            get => _helper.Read<bool>(nameof(UseShellBackButton), true);
+            get => _helper.Read(nameof(UseShellBackButton), true);
             set
             {
                 _helper.Write(nameof(UseShellBackButton), value);
@@ -36,8 +36,8 @@ namespace FlashbackUwp.Services.SettingsServices
             get
             {
                 var theme = ApplicationTheme.Dark;
-                var value = _helper.Read<string>(nameof(AppTheme), theme.ToString());
-                return Enum.TryParse<ApplicationTheme>(value, out theme) ? theme : ApplicationTheme.Dark;
+                var value = _helper.Read(nameof(AppTheme), theme.ToString());
+                return Enum.TryParse(value, out theme) ? theme : ApplicationTheme.Dark;
             }
             set
             {
@@ -57,7 +57,7 @@ namespace FlashbackUwp.Services.SettingsServices
                 var titleBar = ApplicationView.GetForCurrentView().TitleBar;
                 if (titleBar != null)
                 {
-                    if (this.AppTheme == ApplicationTheme.Dark)
+                    if (AppTheme == ApplicationTheme.Dark)
                     {
                         titleBar.ButtonBackgroundColor = Colors.Black;
                         titleBar.ButtonForegroundColor = Colors.White;
@@ -65,6 +65,8 @@ namespace FlashbackUwp.Services.SettingsServices
                         titleBar.ForegroundColor = Colors.White;
                         titleBar.InactiveBackgroundColor = Colors.Black;
                         titleBar.InactiveForegroundColor = Colors.White;
+                        titleBar.ButtonInactiveBackgroundColor = Colors.Black;
+                        titleBar.ButtonInactiveForegroundColor = Colors.White;
                     }
                     else
                     {
@@ -74,16 +76,15 @@ namespace FlashbackUwp.Services.SettingsServices
                         titleBar.ForegroundColor = Colors.Black;
                         titleBar.InactiveBackgroundColor = Colors.White;
                         titleBar.InactiveForegroundColor = Colors.Black;
+                        titleBar.ButtonInactiveBackgroundColor = Colors.White;
+                        titleBar.ButtonInactiveForegroundColor = Colors.Black;
                     }
-
-
                 }
             }
 
             // nedan är för mobiltelefoner
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-
                 var statusBar = StatusBar.GetForCurrentView();
                 if (statusBar != null)
                 {
@@ -105,7 +106,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public TimeSpan CacheMaxDuration
         {
-            get => _helper.Read<TimeSpan>(nameof(CacheMaxDuration), TimeSpan.FromDays(2));
+            get => _helper.Read(nameof(CacheMaxDuration), TimeSpan.FromDays(2));
             set
             {
                 _helper.Write(nameof(CacheMaxDuration), value);
@@ -115,7 +116,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool ShowHamburgerButton
         {
-            get => _helper.Read<bool>(nameof(ShowHamburgerButton), true);
+            get => _helper.Read(nameof(ShowHamburgerButton), true);
             set
             {
                 _helper.Write(nameof(ShowHamburgerButton), value);
@@ -125,7 +126,7 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool IsFullScreen
         {
-            get => _helper.Read<bool>(nameof(IsFullScreen), false);
+            get => _helper.Read(nameof(IsFullScreen), false);
             set
             {
                 _helper.Write(nameof(IsFullScreen), value);
@@ -135,19 +136,19 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public bool ShowAvatars
         {
-            get => _helper.Read<bool>(nameof(ShowAvatars), true);
+            get => _helper.Read(nameof(ShowAvatars), true);
             set => _helper.Write(nameof(ShowAvatars), value);
         }
 
         public bool HoppaTillSistaSidan
         {
-            get => _helper.Read<bool>(nameof(HoppaTillSistaSidan), false);
+            get => _helper.Read(nameof(HoppaTillSistaSidan), false);
             set => _helper.Write(nameof(HoppaTillSistaSidan), value);
         }
 
         public bool VisaBilderITraden
         {
-            get => _helper.Read<bool>(nameof(VisaBilderITraden), true);
+            get => _helper.Read(nameof(VisaBilderITraden), true);
             set => _helper.Write(nameof(VisaBilderITraden), value);
         }
 
@@ -159,27 +160,26 @@ namespace FlashbackUwp.Services.SettingsServices
 
         public string FontSize
         {
-            get => _helper.Read<string>(nameof(FontSize), "90%");
+            get => _helper.Read(nameof(FontSize), "90%");
             set => _helper.Write(nameof(FontSize), value);
         }
 
         public bool UseEmoticons
         {
-            get => _helper.Read<bool>(nameof(UseEmoticons), true);
+            get => _helper.Read(nameof(UseEmoticons), true);
             set => _helper.Write(nameof(UseEmoticons), value);
         }
 
         public bool UseSmartNavigation
         {
-            get => _helper.Read<bool>(nameof(UseSmartNavigation), false);
+            get => _helper.Read(nameof(UseSmartNavigation), false);
             set => _helper.Write(nameof(UseSmartNavigation), value);
         }
 
         public bool ShowSignatures
         {
-            get => _helper.Read<bool>(nameof(ShowSignatures), false);
+            get => _helper.Read(nameof(ShowSignatures), false);
             set => _helper.Write(nameof(ShowSignatures), value);
         }
-
     }
 }
