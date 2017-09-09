@@ -91,6 +91,11 @@
                                       OffContent="Nej"
                                       OnContent="Ja" />
 
+                        <ToggleSwitch Header="Försök öppna bilder direkt i trådarna (beta)"
+                                      IsOn="{Binding UseImageViewer, Mode=TwoWay}"
+                                      OffContent="Nej"
+                                      OnContent="Ja" />
+
                         <ToggleSwitch Header="Färgtema"
                                       IsOn="{Binding UseLightThemeButton, Mode=TwoWay}"
                                       OffContent="Mörkt"

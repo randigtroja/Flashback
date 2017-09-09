@@ -181,5 +181,11 @@ namespace FlashbackUwp.Services.SettingsServices
             get => _helper.Read(nameof(ShowSignatures), false);
             set => _helper.Write(nameof(ShowSignatures), value);
         }
+
+        public bool UseImageViewer
+        {
+            get => _helper.Read(nameof(UseImageViewer), false);
+            set => _helper.Write(nameof(UseImageViewer), value);
+        }
     }
 }

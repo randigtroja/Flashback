@@ -84,6 +84,12 @@ namespace FlashbackUwp.ViewModels
             get => _settings.UseSmartNavigation;
             set { _settings.UseSmartNavigation = value; RaisePropertyChanged(); }
         }
+
+        public bool UseImageViewer
+        {
+            get => _settings.UseImageViewer;
+            set { _settings.UseImageViewer = value; RaisePropertyChanged(); }
+        }
     }
 
     public class AboutPartViewModel : ViewModelBase

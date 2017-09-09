@@ -10,6 +10,7 @@
     xmlns:converters="using:FlashbackUwp.Converters"
     xmlns:extensions="using:FlashbackUwp.Extensions"
     xmlns:triggers="using:FlashbackUwp.Triggers"
+    xmlns:userControls="using:FlashbackUwp.UserControls"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -120,7 +121,16 @@
             </controls:PageHeader.Content>
         </controls:PageHeader>
 
-        
+        <Popup Grid.Row="1" x:Name="ImagePopup" LightDismissOverlayMode="On" IsLightDismissEnabled="True">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <PaneThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <userControls:ImageViewer x:Name="ImageViewer">
+                
+            </userControls:ImageViewer>
+        </Popup>
         <WebView Grid.Row="1" x:Name="WebView" NavigationCompleted="{x:Bind ViewModel.BrowserReady}" ScriptNotify="{x:Bind ViewModel.WebView_OnScriptNotify}"  NewWindowRequested="WebView_OnNewWindowRequested" extensions:HtmlWebViewExtender.HTML="{Binding ForumThread.Html}"  DefaultBackgroundColor="{ThemeResource SystemAltHighColor}" />
         
 
