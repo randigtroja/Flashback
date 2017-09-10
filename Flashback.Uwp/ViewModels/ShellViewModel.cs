@@ -34,14 +34,12 @@ namespace FlashbackUwp.ViewModels
             dialog.DefaultCommandIndex = 0;
             dialog.CancelCommandIndex = 1;
 
-            var result = await dialog.ShowAsync();
-
-            if (result.Label == "Ja")
+            if ((await dialog.ShowAsync()).Label == "Ja")
             {
                 try
                 {
                     Views.Busy.SetBusy(true, "Loggar ut...");
-                    await App.Logout();                    
+                    await App.Logout();
                 }
                 catch (Exception e)
                 {
