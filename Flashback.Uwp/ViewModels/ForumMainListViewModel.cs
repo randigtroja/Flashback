@@ -19,7 +19,7 @@ namespace FlashbackUwp.ViewModels
 {
     public class ForumMainListViewModel : FlashbackViewModelBase
     {
-        private ForumList _forumlist;        
+        private ForumList _forumlist;
 
         private readonly ForumService _forumService;
         private readonly SettingsService _settings;
@@ -31,7 +31,7 @@ namespace FlashbackUwp.ViewModels
         }
 
         public ForumMainListViewModel()
-        {                        
+        {
             ForumList = new ForumList(){Items = new ObservableCollection<FbItem>()};
             _forumService = new ForumService(App.CookieContainer);
 
@@ -79,12 +79,10 @@ namespace FlashbackUwp.ViewModels
                     ForumList = resultForumList;
 
                     Messenger.Default.Send(resultForumList.UnreadMessagesCount, FlashbackConstants.MessengerUnreadMessagesCount);
-
                 }
 
                 if (ForumList.Items.Count > 0)
                 {
-                    
                     await fileService.AddToCacheList(ForumList);
                 }
             }
@@ -104,7 +102,7 @@ namespace FlashbackUwp.ViewModels
             ForumList.Id = id;
             
             if (mode == NavigationMode.New || mode == NavigationMode.Refresh)
-            {                             
+            {
                 await LoadViewModel(parameter?.ToString());
             }
             else
@@ -115,24 +113,18 @@ namespace FlashbackUwp.ViewModels
 
                 if (cachedForumlist != null)
                 {
-                    ForumList = cachedForumlist;                    
+                    ForumList = cachedForumlist;
                 }
                 else
                 {
-                    await LoadViewModel(id);                    
+                    await LoadViewModel(id);
                 }
-            }            
+            }
         }
 
-        public async void Refresh()
-        {
-            await LoadViewModel(ForumList.Id);
-        }
+        public async void Refresh() => await LoadViewModel(ForumList.Id);
 
-        public async void NavigateToSearch()
-        {
-            await NavigationService.NavigateAsync(typeof(SearchPage), ForumList.Id);
-        }
+        public async void NavigateToSearch() => await NavigationService.NavigateAsync(typeof(SearchPage), ForumList.Id);
 
         public void NavigateToForumThread(object sender, ItemClickEventArgs e)
         {
@@ -149,30 +141,24 @@ namespace FlashbackUwp.ViewModels
             }
         }
 
-        public async Task FirstPage()
-        {
-            await LoadViewModel(ForumList.Id.GetCleanIdFirstPage());
-        }
+        public async Task FirstPage() => await LoadViewModel(ForumList.Id.GetCleanIdFirstPage());
 
         public async Task PrevioustPage()
         {
-            if (ForumList.CurrentPage < 2)
-                return;
-
-            await LoadViewModel(ForumList.Id.GetCleanIdPreviousPage(ForumList.CurrentPage));
+            if (ForumList.CurrentPage > 1)
+            {
+                await LoadViewModel(ForumList.Id.GetCleanIdPreviousPage(ForumList.CurrentPage));
+            }
         }
 
-        public async Task LastPage()
-        {
-            await LoadViewModel(ForumList.Id.GetCleanIdLastPage(ForumList.MaxPages));
-        }
+        public async Task LastPage() => await LoadViewModel(ForumList.Id.GetCleanIdLastPage(ForumList.MaxPages));
 
         public async Task NextPage()
         {
-            if (ForumList.CurrentPage >= ForumList.MaxPages)
-                return;
-
-            await LoadViewModel(ForumList.Id.GetCleanIdNextPage(ForumList.CurrentPage));
+            if (ForumList.CurrentPage < ForumList.MaxPages)
+            {
+                await LoadViewModel(ForumList.Id.GetCleanIdNextPage(ForumList.CurrentPage));
+            }
         }
 
         public async Task ShowPicker()
@@ -186,16 +172,16 @@ namespace FlashbackUwp.ViewModels
             {
                 AcceptsReturn = false,
                 Height = 32,
-                InputScope = scope                
+                InputScope = scope
             };
 
             ContentDialog dialog = new ContentDialog
             {
                 Content = inputTextBox,
-                Title = "Hoppa till sida",
+                Title = $"Hoppa till sida (Nuvarande: {ForumList.PagenumberText})",
                 IsSecondaryButtonEnabled = true,
                 PrimaryButtonText = "Ok",
-                SecondaryButtonText = "Avbryt",
+                SecondaryButtonText = "Avbryt"
             };
 
             if (await dialog.ShowAsync() == ContentDialogResult.Primary)
