@@ -94,22 +94,22 @@
                 <StackPanel>
                     <TextBlock Text="{Binding ForumThread.Title}" Tapped="{x:Bind ViewModel.NavigateToParentForum}" Margin="0,0,10,5"/>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Button Click="{x:Bind ViewModel.FirstPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Style="{StaticResource NavigationButton}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}">
+                        <Button Click="{x:Bind ViewModel.FirstPage}" Style="{StaticResource NavigationButton}">
                             <SymbolIcon Symbol="Previous"/>
                         </Button>
 
-                        <Button Click="{x:Bind ViewModel.PrevioustPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                        <Button Click="{x:Bind ViewModel.PrevioustPage}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
                             <SymbolIcon Symbol="Back"/>
                         </Button>
 
-                        <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" Content="{Binding ForumThread.PagenumberText}" />
+                        <Button Click="{x:Bind ViewModel.ShowPicker}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" Content="{Binding ForumThread.PagenumberText}" />
 
-                        <Button Click="{x:Bind ViewModel.NextPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                        <Button Click="{x:Bind ViewModel.NextPage}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
                             <SymbolIcon Symbol="Forward"/>
                         </Button>
 
-                        <Button Click="{x:Bind ViewModel.LastPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                        <Button Click="{x:Bind ViewModel.LastPage}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
                             <SymbolIcon Symbol="Next"/>
                         </Button>
                     </StackPanel>
