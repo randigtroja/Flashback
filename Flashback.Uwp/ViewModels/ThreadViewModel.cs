@@ -251,10 +251,10 @@ namespace FlashbackUwp.ViewModels
             ContentDialog dialog = new ContentDialog
             {
                 Content = inputTextBox,
-                Title = "Hoppa till sida",
+                Title = $"Hoppa till sida (Nuvarande: {ForumThread.PagenumberText})",
                 IsSecondaryButtonEnabled = true,
                 PrimaryButtonText = "Ok",
-                SecondaryButtonText = "Avbryt",
+                SecondaryButtonText = "Avbryt"
             };
 
             if (await dialog.ShowAsync() == ContentDialogResult.Primary)
