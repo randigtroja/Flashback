@@ -7,7 +7,7 @@ namespace FlashbackUwp.Views
     {
         public FavouritesPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
