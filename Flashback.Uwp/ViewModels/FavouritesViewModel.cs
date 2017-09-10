@@ -66,15 +66,9 @@ namespace FlashbackUwp.ViewModels
             }
         }
 
-        public async void Refresh()
-        {
-            await LoadViewModel();
-        }
+        public async void Refresh() => await LoadViewModel();
 
-        private bool CanExecuteDeleteItemCommand(FbFavourite item)
-        {
-            return true;
-        }
+        private bool CanExecuteDeleteItemCommand(FbFavourite item) => true;
 
         private async void ExecuteDeleteItemCommand(FbFavourite item)
         {
@@ -82,9 +76,7 @@ namespace FlashbackUwp.ViewModels
             {
                 Error = null;
 
-                var result = await _threadsService.RemoveFavourite(item);
-
-                if (result)
+                if (await _threadsService.RemoveFavourite(item))
                 {
                     this.Favourites.Remove(item);
                     Messenger.Default.Send<string>(item.Name + " är borttagen från favoriterna!", FlashbackConstants.MessengerShowInformation);
