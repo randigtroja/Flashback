@@ -67,30 +67,24 @@ namespace FlashbackUwp.ViewModels
             }
         }
 
-        public async void Refresh()
-        {
-            await LoadViewModel();
-        }
+        public async void Refresh() => await LoadViewModel();
 
-        public async Task NewMessage()
-        {
-            await NavigationService.NavigateAsync(typeof(ComposePrivateMessagePage), null);
-        }
+        public async Task NewMessage() => await NavigationService.NavigateAsync(typeof(ComposePrivateMessagePage), null);
 
         public void NavigateToMessage(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is PrivateMessage item)
             {
-                // då fb inte uppdaterar att ett meddedelande är läst då man går in på det automatiskt
-                // (sidan måste laddas om för att det ska slå igenom) så gör vi en manuell uppdatering
-                // utifrån antalet meddelanden vi har - 1 om meddelandet vi navigerar till är "Unread"                
+                // dÃ¥ fb inte uppdaterar att ett meddedelande Ã¤r lÃ¤st dÃ¥ man gÃ¥r in pÃ¥ det automatiskt
+                // (sidan mÃ¥ste laddas om fÃ¶r att det ska slÃ¥ igenom) sÃ¥ gÃ¶r vi en manuell uppdatering
+                // utifrÃ¥n antalet meddelanden vi har - 1 om meddelandet vi navigerar till Ã¤r "Unread"
                 if (item.IsUnread)
                 {
                     var unreadCount = Messages.Count(x => x.IsUnread);
                     unreadCount = unreadCount - 1;
 
                     Messenger.Default.Send(unreadCount > 0 ? unreadCount : (int?)null, FlashbackConstants.MessengerUnreadMessagesCount);
-                }                    
+                } 
 
                 NavigationService.Navigate(typeof(ViewPrivateMessagePage), item.Id);
             }
