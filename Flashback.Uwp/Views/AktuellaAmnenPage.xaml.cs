@@ -7,7 +7,7 @@ namespace FlashbackUwp.Views
     {
         public AktuellaAmnenPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
