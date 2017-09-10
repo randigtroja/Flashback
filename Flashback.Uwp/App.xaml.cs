@@ -23,7 +23,7 @@ namespace FlashbackUwp
     [Bindable]
     sealed partial class App : BootStrapper
     {
-        private static CookieContainer _cookieContainer = null;        
+        private static CookieContainer _cookieContainer = null;
 
         public static CookieContainer CookieContainer
         {
@@ -56,7 +56,7 @@ namespace FlashbackUwp
         public App()
         {
             InitializeComponent();
-            SplashFactory = (e) => new Views.Splash(e);            
+            SplashFactory = (e) => new Views.Splash(e);
 
             #region app settings
 
@@ -107,12 +107,12 @@ namespace FlashbackUwp
                 {
                     // fuck up, här ska vi nog inte kunna hamna
                     NavigationService.Navigate(typeof(Views.ForumMainList));
-                }               
+                }
             }
             else
             {
                 NavigationService.Navigate(typeof(Views.ForumMainList));
-            }            
+            }
         }
         
         public override async void OnResuming(object s, object e, AppExecutionState previousExecutionState)
@@ -126,16 +126,15 @@ namespace FlashbackUwp
         {
             var encryptionService = new EncryptionService();
 
-            var cookies = await encryptionService.GetCookieData();
-            if (cookies != null && cookies.Any())
+            if (await encryptionService.GetCookieData() != null && (await encryptionService.GetCookieData()).Any())
             {
-                foreach (var cookie in cookies)
+                foreach (var cookie in await encryptionService.GetCookieData())
                 {
                     CookieContainer.Add(new Uri("https://www.flashback.org"), cookie);
                 }
             }
 
-            Messenger.Default.Send<bool>(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
+            Messenger.Default.Send(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
 
             await Task.CompletedTask;
         }
@@ -143,7 +142,7 @@ namespace FlashbackUwp
         public static async Task SaveCookies()
         {
             var encryptionService = new EncryptionService();
-            var saveOk = await encryptionService.WriteCookieData(App.CookieContainer);
+            await encryptionService.WriteCookieData(CookieContainer);
 
             await Task.CompletedTask;
         }
