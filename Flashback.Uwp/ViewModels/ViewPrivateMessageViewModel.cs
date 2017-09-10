@@ -36,37 +36,30 @@ namespace FlashbackUwp.ViewModels
                 FontSize = _settings.FontSize,
                 RenderEmoticons = _settings.UseEmoticons,
                 ShowSignatures = _settings.ShowSignatures
-            });    
+            });
         }
 
         public async void Delete()
         {
-            var ok = await _messagesService.DeleteMessage(Message.Id, Message.FolderId,Message.Token);
-
-            if (ok)
-            {                
+            if (await _messagesService.DeleteMessage(Message.Id, Message.FolderId, Message.Token))
+            {
                 Messenger.Default.Send("Meddelandet är raderat", FlashbackConstants.MessengerShowInformation);
                 await NavigationService.NavigateAsync(typeof(PrivateMessagesPage));
             }
         }
 
-        public async void Reply()
-        {
-            await NavigationService.NavigateAsync(typeof(ComposePrivateMessagePage), Message.Id);
-        }
+        public async void Reply() => await NavigationService.NavigateAsync(typeof(ComposePrivateMessagePage), Message.Id);
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
-            var id = parameter as string;
-
-            await LoadViewModel(id);
+            await LoadViewModel(parameter as string);
 
             await Task.CompletedTask;
         }
 
         private async Task LoadViewModel(string id)
         {
-            Message = await _messagesService.GetMessage(id);            
+            Message = await _messagesService.GetMessage(id);
         }
     }
 }
