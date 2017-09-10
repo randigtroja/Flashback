@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Flashback.Model;
 using Flashback.Services.News;
+using Windows.System;
 
 namespace FlashbackUwp.ViewModels
 {
@@ -47,7 +48,7 @@ namespace FlashbackUwp.ViewModels
             finally
             {
                 Views.Busy.SetBusy(false);
-            }            
+            }
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
@@ -59,7 +60,7 @@ namespace FlashbackUwp.ViewModels
         {
             if (e.ClickedItem is FbRssItem item)
             {
-                await Windows.System.Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(item.Link)));                
+                await Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(item.Link)));
             }
         }
     }
