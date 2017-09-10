@@ -103,9 +103,7 @@
                             <SymbolIcon Symbol="Back"/>
                         </Button>
 
-                        <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
-                            <SymbolIcon Symbol="List"/>
-                        </Button>
+                        <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" Content="{Binding ForumThread.PagenumberText}" />
 
                         <Button Click="{x:Bind ViewModel.NextPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
                             <SymbolIcon Symbol="Forward"/>
@@ -114,8 +112,6 @@
                         <Button Click="{x:Bind ViewModel.LastPage}" Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
                             <SymbolIcon Symbol="Next"/>
                         </Button>
-
-                        <TextBlock Margin="24,-5,0,0"  Visibility="{Binding ForumThread.ShowNavigation, Converter={StaticResource BoolConverter}}" Text="{Binding ForumThread.PagenumberText}"/>
                     </StackPanel>
                 </StackPanel>
             </controls:PageHeader.Content>
