@@ -39,14 +39,14 @@ namespace FlashbackUwp.ViewModels
         {
             get => _filterText;
             set
-            {                
+            {
                 Set(ref _filterText, value);
                 FilterList();
             }
         }
 
         public AktuellaAmnenViewModel()
-        {            
+        {
             _threadService = new ThreadsService(App.CookieContainer, null);
             _settings = SettingsService.Instance;
 
@@ -71,7 +71,7 @@ namespace FlashbackUwp.ViewModels
             }
             catch (Exception e)
             {
-                Error = e.ToString();               
+                Error = e.ToString();
             }
             finally
             {
@@ -89,7 +89,7 @@ namespace FlashbackUwp.ViewModels
             await Task.CompletedTask;
         }
 
-        public bool IsDataLoaded => TopicsAll != null && TopicsAll.Any();        
+        public bool IsDataLoaded => TopicsAll != null && TopicsAll.Any();
 
         public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
@@ -97,21 +97,16 @@ namespace FlashbackUwp.ViewModels
             await Task.CompletedTask;
         }
 
-        public async void Refresh()
-        {
-            await LoadViewModel();
-        }
+        public async void Refresh() => await LoadViewModel();
 
         public void FilterList()
         {
             if (string.IsNullOrWhiteSpace(FilterText))
             {
                 Topics = new ObservableCollection<FbItem>(TopicsAll);
-                return;
             }
-           
-            if (TopicsAll != null && TopicsAll.Any())
-            {                
+            else if (TopicsAll != null && TopicsAll.Any())
+            {
                 Topics = new ObservableCollection<FbItem>(TopicsAll.Where(x => x.Name.ToLower().Contains(FilterText.ToLower()) || x.Description.ToLower().Contains(FilterText.ToLower())));
             }
         }
@@ -122,6 +117,6 @@ namespace FlashbackUwp.ViewModels
             {
                 NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
             }
-        }       
+        }
     }
 }
