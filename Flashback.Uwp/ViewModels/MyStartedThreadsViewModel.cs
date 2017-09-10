@@ -68,17 +68,13 @@ namespace FlashbackUwp.ViewModels
             await Task.CompletedTask;
         }
 
-        public async void Refresh()
-        {
-            await LoadViewModel();
-        }
+        public async void Refresh() => await LoadViewModel();
 
         public void NavigateToThread(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is FbItem item)
             {
                 NavigationService.Navigate(typeof(ThreadPage), item.Id + (_settings.HoppaTillSistaSidan ? "s" : ""));
-
             }
         }
     }
