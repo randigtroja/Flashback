@@ -30,13 +30,27 @@
                              PrimaryCommandsVisibility="Collapsed" Text="{Binding Title}">
         </controls:PageHeader>
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox MinHeight="500" Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                        TextWrapping="Wrap"                          
-                        AcceptsReturn="True"
-                        InputScope="Text"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <Button  Width="200" HorizontalAlignment="Left" Content="Svara" Margin="0,12,0,0" IsEnabled="{x:Bind ViewModel.MayPost}" Click="{x:Bind ViewModel.PostMessage}"/>
-        </StackPanel>
+            <TextBox 
+                Grid.Row="0"
+                Margin="12" 
+                Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                InputScope="Text"/>
+
+            <Button  
+                Margin="12"
+                Grid.Row="1"                
+                HorizontalAlignment="Left" 
+                Content="Skicka inlägg"                  
+                IsEnabled="{x:Bind ViewModel.MayPost}" 
+                Click="{x:Bind ViewModel.PostMessage}"/>
+        </Grid>
     </Grid>
 </Page>
