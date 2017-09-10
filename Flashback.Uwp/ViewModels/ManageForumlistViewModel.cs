@@ -35,17 +35,17 @@ namespace FlashbackUwp.ViewModels
         private FileService _fileService;
 
         public ManageForumlistViewModel()
-        {           
+        {
             ExtraForumList = new ObservableCollection<FbItem>();
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 ExtraForumList = SampleData.SampleData.GetDefaultExtraForums();
-            }            
+            }
         }
 
         public async Task DeleteForum(FbItem item)
-        {            
+        {
             ExtraForumList.Remove(item);
             await _fileService.SaveExtraForums(ExtraForumList.ToList());
         }
@@ -61,7 +61,7 @@ namespace FlashbackUwp.ViewModels
             };
 
             if (!ValidateAndFixPaths(forum))
-            {                                
+            {
                 Messenger.Default.Send("Ej kompletta uppgifter (fyll i namn, och sökvägen)", FlashbackConstants.MessengerShowWarning);
                 return;
             }
