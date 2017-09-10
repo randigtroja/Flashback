@@ -103,7 +103,7 @@ namespace FlashbackUwp.ViewModels
             finally
             {
                 Busy.SetBusy(false);
-            }            
+            }
         }
 
         public async Task PostMessage()
@@ -116,20 +116,16 @@ namespace FlashbackUwp.ViewModels
             dialog.DefaultCommandIndex = 0;
             dialog.CancelCommandIndex = 1;
 
-            var resultDialog = await dialog.ShowAsync();
-
-            if (resultDialog.Label == "Ja")
+            if ((await dialog.ShowAsync()).Label == "Ja")
             {
                 MayPost = false;
 
-                var result = await _threadService.PostReply(Message, ThreadId, PostId, UserId, SubscriptionType);
-
-                if (result)
-                {                    
+                if (await _threadService.PostReply(Message, ThreadId, PostId, UserId, SubscriptionType))
+                {
                     Messenger.Default.Send("Inlägget är skickat! Gå tillbaka för att ladda om", FlashbackConstants.MessengerShowInformation);
                 }
                 else
-                {                    
+                {
                     Messenger.Default.Send("Fel vid skickande av meddelande!", FlashbackConstants.MessengerShowError);
                     MayPost = true;
                 }
