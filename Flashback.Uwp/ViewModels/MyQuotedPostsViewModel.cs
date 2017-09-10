@@ -56,10 +56,7 @@ namespace FlashbackUwp.ViewModels
             }
         }
 
-        public async void Refresh()
-        {
-            await LoadViewModel();
-        }
+        public async void Refresh() => await LoadViewModel();
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
@@ -74,7 +71,7 @@ namespace FlashbackUwp.ViewModels
         public void NavigateToThread(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is FbItem item)
-            {                
+            { 
                 NavigationService.Navigate(typeof(ThreadPage), item.Id);
             }
         }
