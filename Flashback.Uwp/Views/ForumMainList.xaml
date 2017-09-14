@@ -82,31 +82,29 @@
                 <AppBarButton Click="{x:Bind ViewModel.NavigateToSearch}" Label="Sök" Icon="Find" x:Name="SearchButton"/>
             </controls:PageHeader.PrimaryCommands>
             <controls:PageHeader.Content>
-                <RelativePanel HorizontalAlignment="Left">
-                    <TextBlock x:Name="rubrik" Text="{Binding ForumList.Title}" Tapped="{x:Bind ViewModel.NavigateToParentForum}" Margin="0,0,10,5"/>
+                <StackPanel>
+                    <TextBlock Text="{Binding ForumList.Title}" Tapped="{x:Bind ViewModel.NavigateToParentForum}" Margin="0,0,10,5"/>
 
-                    <Button Click="{x:Bind ViewModel.FirstPage}" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}" Style="{StaticResource NavigationButton}" RelativePanel.Below="rubrik" x:Name="First">
-                        <SymbolIcon Symbol="Previous"/>
-                    </Button>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}">
+                        <Button Click="{x:Bind ViewModel.FirstPage}" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Previous"/>
+                        </Button>
 
-                    <Button Click="{x:Bind ViewModel.PrevioustPage}" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Back" RelativePanel.Below="rubrik" RelativePanel.RightOf="First">
-                        <SymbolIcon Symbol="Back"/>
-                    </Button>
+                        <Button Click="{x:Bind ViewModel.PrevioustPage}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Back"/>
+                        </Button>
 
-                    <Button Click="{x:Bind ViewModel.ShowPicker}" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Picker" RelativePanel.Below="rubrik" RelativePanel.RightOf="Back">
-                        <SymbolIcon Symbol="List"/>
-                    </Button>
+                        <Button Click="{x:Bind ViewModel.ShowPicker}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" Content="{Binding ForumList.PagenumberText}" />
 
-                    <Button Click="{x:Bind ViewModel.NextPage}" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Next" RelativePanel.Below="rubrik" RelativePanel.RightOf="Picker">
-                        <SymbolIcon Symbol="Forward"/>
-                    </Button>
+                        <Button Click="{x:Bind ViewModel.NextPage}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Forward"/>
+                        </Button>
 
-                    <Button Click="{x:Bind ViewModel.LastPage}" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}" x:Name="Last" RelativePanel.Below="rubrik" RelativePanel.RightOf="Next">
-                        <SymbolIcon Symbol="Next"/>
-                    </Button>
-
-                    <TextBlock Margin="24,-5,0,0"  RelativePanel.Below="rubrik" RelativePanel.RightOf="Last" Visibility="{Binding ForumList.ShowNavigation, Converter={StaticResource BoolConverter}}" Text="{Binding ForumList.PagenumberText}"/>
-                </RelativePanel>
+                        <Button Click="{x:Bind ViewModel.LastPage}" Margin="15,0,0,0" Style="{StaticResource NavigationButton}">
+                            <SymbolIcon Symbol="Next"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
             </controls:PageHeader.Content>
         </controls:PageHeader>
 
