@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,15 +14,14 @@ namespace Flashback.Services.News
 
         public NewsService()
         {
-            _httpClient = new FlashbackHttpClient(new CookieContainer()); // vi behvöer inte använda oss av cookies mot rss-feeden som är på annan domän    
+            _httpClient = new FlashbackHttpClient(new CookieContainer()); // vi behöver inte använda oss av cookies mot rss-feeden som är på annan domän    
         }
 
         public async Task<List<FbRssItem>> GetNyheter()
         {
             var result = await _httpClient.GetStringAsync("http://www.flashback.se/rss");
-            var nyheter = ParseNyheter(result);
 
-            return nyheter;
+            return ParseNyheter(result);
         }
 
         private List<FbRssItem> ParseNyheter(string result)
