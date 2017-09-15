@@ -23,7 +23,7 @@ namespace FlashbackUwp.Services.FileServices
 
             var dataToAdd = new Dictionary<string, ForumList> {
             {
-                newForumlist.Id, newForumlist                
+                newForumlist.Id, newForumlist
             }};
 
             if(!await FileHelper.FileExistsAsync(CACHEFILE))
@@ -40,23 +40,20 @@ namespace FlashbackUwp.Services.FileServices
             await FileHelper.WriteFileAsync(CACHEFILE, fbCache);
         }
 
-        public async Task ResetCache()
-        {           
-            await FileHelper.DeleteFileAsync(CACHEFILE);
-        }
+        public async Task ResetCache() => await FileHelper.DeleteFileAsync(CACHEFILE);
 
         public async Task<ForumList> TryGetFromCache(string key)
-        {            
+        {
             if (!await FileHelper.FileExistsAsync(CACHEFILE))
-            {                
+            {
                 return null;
-            }                
+            }
             else
             {
                 FlashbackCacheList<Dictionary<string, ForumList>> data;
                 
                 try
-                {                   
+                {
                     data = await FileHelper.ReadFileAsync<FlashbackCacheList<Dictionary<string, ForumList>>>(CACHEFILE);
                 }
                 catch (Exception e)
@@ -68,7 +65,7 @@ namespace FlashbackUwp.Services.FileServices
                 var item = data?.FirstOrDefault(x => x.ContainsKey(key));
 
                 return item?[key];
-            }            
+            }
         }
 
         public async Task SaveExtraForums(List<FbItem> forumList)
@@ -101,7 +98,7 @@ namespace FlashbackUwp.Services.FileServices
             }
             else
             {
-                data = new FlashbackCacheList<LastReadPageInfo>();    
+                data = new FlashbackCacheList<LastReadPageInfo>(); 
             }
 
             if (data.All(x => x.ThreadId != threadId))
@@ -111,10 +108,10 @@ namespace FlashbackUwp.Services.FileServices
             else
             {
                 data.First(x => x.ThreadId == threadId).PageNr = pageNumber;
-            }                
+            }
 
             await FileHelper.WriteFileAsync(SMARTNAVIGATIONFILE, data);
-        }        
+        }
 
         public async Task<int?> GetLastVisitedPageForThread(string threadId)
         {
