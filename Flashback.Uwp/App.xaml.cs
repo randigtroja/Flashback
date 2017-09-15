@@ -126,15 +126,16 @@ namespace FlashbackUwp
         {
             var encryptionService = new EncryptionService();
 
-            if (await encryptionService.GetCookieData() != null && (await encryptionService.GetCookieData()).Any())
+            var cookies = await encryptionService.GetCookieData();
+            if (cookies != null && cookies.Any())
             {
-                foreach (var cookie in await encryptionService.GetCookieData())
+                foreach (var cookie in cookies)
                 {
                     CookieContainer.Add(new Uri("https://www.flashback.org"), cookie);
                 }
             }
 
-            Messenger.Default.Send(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
+            Messenger.Default.Send<bool>(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
 
             await Task.CompletedTask;
         }
