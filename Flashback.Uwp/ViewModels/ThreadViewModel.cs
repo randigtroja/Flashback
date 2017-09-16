@@ -67,16 +67,16 @@ namespace FlashbackUwp.ViewModels
             });
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {                
+            {
                 _forumThread = SampleData.SampleData.GetDefaultForumThread();
             }
         }
-        
+
         public async Task LoadViewModel(string id)
         {
             try
             {
-                Busy.SetBusy(true, "Laddar tråden...");                
+                Busy.SetBusy(true, "Laddar tråden...");
                 Error = null;
                 _requestedId = id;
 
@@ -90,7 +90,6 @@ namespace FlashbackUwp.ViewModels
                     {
                         id = id.GetCleanId(false).GetCleanIdForPage(lastVisitedPageNumber.Value);
                     }
-
                 }
 
                 ForumThread = await _threadService.GetForumThread(id);
@@ -101,10 +100,9 @@ namespace FlashbackUwp.ViewModels
 
                 // spara ner senaste besökta sida om vi använder smartnavigering
                 if (_settings.UseSmartNavigation)
-                {                  
+                {
                     await _fileService.SaveLastVisitedPageNumber(id.GetCleanId(false),ForumThread.CurrentPage);
                 }
-
             }
             catch (Exception e)
             {
@@ -112,8 +110,8 @@ namespace FlashbackUwp.ViewModels
             }
             finally
             {
-                Busy.SetBusy(false);                 
-            }            
+                Busy.SetBusy(false);
+            }
         }
 
         public void BrowserReady(WebView sender, WebViewNavigationCompletedEventArgs args)
@@ -144,16 +142,13 @@ namespace FlashbackUwp.ViewModels
 
         public async void AddToFavourites()
         {
-            var result = await _threadService.AddThreadToFavourites(ForumThread.Id.GetCleanId(true));
-
-            if (result)
+            if (await _threadService.AddThreadToFavourites(ForumThread.Id.GetCleanId(true)))
             {
-
                 Messenger.Default.Send(true, FlashbackConstants.MessengerFavoritesUpdated);
-                Messenger.Default.Send("Ok, tråden är tillagd till favoriterna!", FlashbackConstants.MessengerShowInformation);                
+                Messenger.Default.Send("Ok, tråden är tillagd till favoriterna!", FlashbackConstants.MessengerShowInformation);
             }
             else 
-            {                
+            {
                 Messenger.Default.Send("Fel vid tillägg av favorit!", FlashbackConstants.MessengerShowError);
             } 
         }
@@ -161,7 +156,7 @@ namespace FlashbackUwp.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (parameter == null)
-                throw new ArgumentException("Saknas id för vymodell(threads)");            
+                throw new ArgumentException("Saknas id för vymodell(threads)");
 
             ForumThread.Id = parameter.ToString();
             
@@ -187,15 +182,13 @@ namespace FlashbackUwp.ViewModels
                 tile.VisualElements.ShowNameOnWide310x150Logo = true;
                 tile.VisualElements.ShowNameOnSquare310x310Logo = true;
 
-                bool success = await tile.RequestCreateAsync();
-
-                if (success)
+                if (await tile.RequestCreateAsync())
                     IsPinned = true;
             }
             catch (Exception e)
             {
                 Error = e.Message;
-            }            
+            }
         }
 
         public async Task UnPin()
@@ -206,7 +199,7 @@ namespace FlashbackUwp.ViewModels
                 await toBeDeleted.RequestDeleteAsync();
 
                 IsPinned = false;
-            }                        
+            }
         }
 
         public async Task FirstPage() => await LoadViewModel(ForumThread.Id.GetCleanIdFirstPage());
