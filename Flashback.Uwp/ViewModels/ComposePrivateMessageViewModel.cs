@@ -65,7 +65,7 @@ namespace FlashbackUwp.ViewModels
 
         public ComposePrivateMessageViewModel()
         {
-            _messageService = new MessagesService(App.CookieContainer,null);            
+            _messageService = new MessagesService(App.CookieContainer,null);
 
             MayPost = true;
         }
@@ -126,9 +126,7 @@ namespace FlashbackUwp.ViewModels
                 Busy.SetBusy(true,"Skickar meddelande...");
                 Error = null;
 
-                var result = await _messageService.PostMessage(To, Subject, Message, PostToken);
-
-                if (result)
+                if (await _messageService.PostMessage(To, Subject, Message, PostToken))
                 {
                     Messenger.Default.Send("Meddelandet är skickat!", FlashbackConstants.MessengerShowInformation);
                 }
@@ -140,7 +138,6 @@ namespace FlashbackUwp.ViewModels
             catch (Exception e)
             {
                 Error = e.Message;
-
             }
             finally
             {

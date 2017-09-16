@@ -17,13 +17,13 @@ namespace FlashbackUwp.ViewModels
             set => Set(ref _userName, value);
         }
 
-        private string _password = "";        
+        private string _password = "";
         public string Password
         {
             get => _password;
             set => Set(ref _password, value);
         }
-        
+
         public LoginViewModel()
         {
             _authSerivce = new AuthService(App.CookieContainer);
@@ -36,15 +36,15 @@ namespace FlashbackUwp.ViewModels
             Messenger.Default.Send(isSuccess, FlashbackConstants.MessengerLoggedInStatus);
 
             if (isSuccess)
-            {                
+            {
                 await App.SaveCookies();
                 Messenger.Default.Send("Ok! Du är inloggad!", FlashbackConstants.MessengerShowInformation);
                 await NavigationService.NavigateAsync(typeof(ForumMainList));
             }
             else
-            {                
+            {
                 Messenger.Default.Send("Felaktigt lösenord/användarnamn!", "ShowError");
-            }           
+            }
         }
     }
 }

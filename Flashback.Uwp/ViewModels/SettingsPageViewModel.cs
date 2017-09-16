@@ -12,15 +12,9 @@ namespace FlashbackUwp.ViewModels
         public SettingsPartViewModel SettingsPartViewModel { get; } = new SettingsPartViewModel();
         public AboutPartViewModel AboutPartViewModel { get; } = new AboutPartViewModel();
 
-        public async Task NavigateToManageForums()
-        {
-            await NavigationService.NavigateAsync(typeof(ManageForumlist));
-        }
+        public async Task NavigateToManageForums() => await NavigationService.NavigateAsync(typeof(ManageForumlist));
 
-        public async Task NavigateToSuportThread()
-        {
-            await NavigationService.NavigateAsync(typeof(ThreadPage), "t1925922");
-        }        
+        public async Task NavigateToSuportThread() => await NavigationService.NavigateAsync(typeof(ThreadPage), "t1925922");
     }
 
     public class SettingsPartViewModel : ViewModelBase
@@ -29,19 +23,14 @@ namespace FlashbackUwp.ViewModels
         public ObservableCollection<string> FontSizes { get; set; }
 
         public SettingsPartViewModel()
-        {            
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                // designtime
-            }
-            else
+        {
+            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 _settings = Services.SettingsServices.SettingsService.Instance;
             }
 
             FontSizes = new ObservableCollection<string> {"120%", "110%", "100%", "90%", "80%", "70%"};
-
-        }        
+        }
 
         public string FontSize
         {

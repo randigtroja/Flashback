@@ -23,7 +23,7 @@ namespace FlashbackUwp
     [Bindable]
     sealed partial class App : BootStrapper
     {
-        private static CookieContainer _cookieContainer = null;        
+        private static CookieContainer _cookieContainer = null;
 
         public static CookieContainer CookieContainer
         {
@@ -56,7 +56,7 @@ namespace FlashbackUwp
         public App()
         {
             InitializeComponent();
-            SplashFactory = (e) => new Views.Splash(e);            
+            SplashFactory = (e) => new Views.Splash(e);
 
             #region app settings
 
@@ -107,12 +107,12 @@ namespace FlashbackUwp
                 {
                     // fuck up, här ska vi nog inte kunna hamna
                     NavigationService.Navigate(typeof(Views.ForumMainList));
-                }               
+                }
             }
             else
             {
                 NavigationService.Navigate(typeof(Views.ForumMainList));
-            }            
+            }
         }
         
         public override async void OnResuming(object s, object e, AppExecutionState previousExecutionState)
@@ -143,7 +143,7 @@ namespace FlashbackUwp
         public static async Task SaveCookies()
         {
             var encryptionService = new EncryptionService();
-            var saveOk = await encryptionService.WriteCookieData(App.CookieContainer);
+            await encryptionService.WriteCookieData(CookieContainer);
 
             await Task.CompletedTask;
         }

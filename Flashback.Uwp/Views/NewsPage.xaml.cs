@@ -7,8 +7,8 @@ namespace FlashbackUwp.Views
     {
         public NewsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
-        }      
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace FlashbackUwp.Views
@@ -7,7 +7,7 @@ namespace FlashbackUwp.Views
     {
         public LoginPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Disabled;
         }
     }

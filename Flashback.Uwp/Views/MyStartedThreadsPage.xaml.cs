@@ -7,8 +7,8 @@ namespace FlashbackUwp.Views
     {
         public MyStartedThreadsPage()
         {
-            this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;            
+            InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }
 }

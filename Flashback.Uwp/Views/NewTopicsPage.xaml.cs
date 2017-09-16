@@ -1,14 +1,13 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-
 namespace FlashbackUwp.Views
 {
     public sealed partial class NewTopicsPage : Page
     {
         public NewTopicsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }

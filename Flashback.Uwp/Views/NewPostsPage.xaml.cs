@@ -7,7 +7,7 @@ namespace FlashbackUwp.Views
     {
         public NewPostsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }

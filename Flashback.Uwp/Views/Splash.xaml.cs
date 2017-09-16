@@ -19,23 +19,19 @@ namespace FlashbackUwp.Views
             if (splashScreen.ImageLocation.Top == 0)
             {
                 splashImage.Visibility = Visibility.Collapsed;
-                return;
             }
             else
             {
                 rootCanvas.Background = null;
                 splashImage.Visibility = Visibility.Visible;
+                splashImage.Height = splashScreen.ImageLocation.Height;
+                splashImage.Width = splashScreen.ImageLocation.Width;
+                splashImage.SetValue(Canvas.TopProperty, splashScreen.ImageLocation.Top);
+                splashImage.SetValue(Canvas.LeftProperty, splashScreen.ImageLocation.Left);
+                ProgressTransform.TranslateY = splashImage.Height / 2;
             }
-            splashImage.Height = splashScreen.ImageLocation.Height;
-            splashImage.Width = splashScreen.ImageLocation.Width;
-            splashImage.SetValue(Canvas.TopProperty, splashScreen.ImageLocation.Top);
-            splashImage.SetValue(Canvas.LeftProperty, splashScreen.ImageLocation.Left);
-            ProgressTransform.TranslateY = splashImage.Height / 2;
         }
 
-        private void Image_Loaded(object sender, RoutedEventArgs e)
-        {
-            Opacity = 1;
-        }
+        private void Image_Loaded(object sender, RoutedEventArgs e) => Opacity = 1;
     }
 }

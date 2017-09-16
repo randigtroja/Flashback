@@ -4,6 +4,6 @@ namespace FlashbackUwp.Views
 {
     public sealed partial class ComposePrivateMessagePage : Page
     {
-        public ComposePrivateMessagePage() => this.InitializeComponent();
+        public ComposePrivateMessagePage() => InitializeComponent();
     }
 }
