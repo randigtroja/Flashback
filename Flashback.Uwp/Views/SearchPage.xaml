@@ -56,6 +56,11 @@
                                QueryIcon="Find" 
                                QuerySubmitted="{x:Bind ViewModel.LoadViewModel}"
                                PlaceholderText="Ange sökterm (minst 2 tecken)" />
+                
+                <ToggleSwitch Header="Använd sökterm för att söka efter taggar"
+                              IsOn="{Binding SearchByTags, Mode=TwoWay}"
+                              OffContent="Nej"
+                              OnContent="Ja" />
 
                 <ListView ItemsSource="{x:Bind ViewModel.SearchResult, Mode=OneWay}" 
                           ItemClick="{x:Bind ViewModel.NavigateToThread}" 

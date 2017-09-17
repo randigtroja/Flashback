@@ -798,6 +798,14 @@ namespace Flashback.Services.Threads
             return await ParseSearchResult(result);            
         }
 
+        public async Task<List<FbItem>> SearchThreadsByTag(string tag)
+        {
+            string searchUrl = "https://www.flashback.org/find_threads_by_tag.php?tag=" + tag;
+            string result = await _httpClient.GetStringAsync(searchUrl);
+
+            return await ParseSearchResult(result);
+        }
+
         private async Task<List<FbItem>> ParseSearchResult(string result)
         {
             var parser = new HtmlParser();

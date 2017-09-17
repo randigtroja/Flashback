@@ -23,6 +23,7 @@ namespace FlashbackUwp.ViewModels
         private string _searchTerm;
         private string _forumId;
         private bool _canSearch;
+        private bool _searchByTags;
 
         public string SearchTerm
         {
@@ -44,6 +45,12 @@ namespace FlashbackUwp.ViewModels
         {
             get => !string.IsNullOrWhiteSpace(SearchTerm) && SearchTerm.Length >= 2;
             set => Set(ref _canSearch, value);
+        }
+
+        public bool SearchByTags
+        {
+            get => _searchByTags;
+            set => Set(ref _searchByTags, value);
         }
 
         public ObservableCollection<FbItem> SearchResult
@@ -74,8 +81,18 @@ namespace FlashbackUwp.ViewModels
             {
                 Busy.SetBusy(true, "Söker...");
                 Error = null;
+                var result = new List<FbItem>();
 
-                var result = await _threadService.SearchThreads(SearchTerm, ForumId);
+                if (SearchByTags)
+                {
+                    result = await _threadService.SearchThreadsByTag(SearchTerm);
+                }
+                else
+                {
+                    result = await _threadService.SearchThreads(SearchTerm, ForumId);
+                }
+                
+                
                 SearchResult = new ObservableCollection<FbItem>(result);
             }
             catch (Exception e)
