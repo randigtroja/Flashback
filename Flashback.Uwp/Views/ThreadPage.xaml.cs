@@ -20,7 +20,7 @@ namespace FlashbackUwp.Views
 
         public ThreadPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Messenger.Default.Register<string>(this, FlashbackConstants.MessengerBrowserScrollToPost, ScrollToPost);
 
             DataTransferManager.GetForCurrentView().DataRequested += ThreadPage_DataRequested;
@@ -40,7 +40,7 @@ namespace FlashbackUwp.Views
 
         private async void ScrollToPost(string postId)
         {            
-            await this.WebView.InvokeScriptAsync("eval", new string[] { @"
+            await WebView.InvokeScriptAsync("eval", new string[] { @"
                                                                             var element = document.getElementById('" + postId + "');"+
                                                                             "if(element)" +
                                                                             "{" +
@@ -71,8 +71,7 @@ namespace FlashbackUwp.Views
             }
             else if (args.Uri.AbsoluteUri.Contains("http://www.flashback.org/showthread.php?t=")) // gammla FB-standarden, öppna internt
             {
-                var id = args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
-                id = "t" + id;
+                string id = "t" + args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
 
                 nav?.Navigate(typeof(ThreadPage), id);
             }
@@ -91,8 +90,8 @@ namespace FlashbackUwp.Views
                     ImageViewer.DataContext = model;
                     ImageViewer.Visibility = Visibility.Visible;
                     ImageViewer.Tapped += (o, e) =>
-                    {                        
-                        ImagePopup.IsOpen = false;                        
+                    {
+                        ImagePopup.IsOpen = false;
                     };
 
                     ImagePopup.MaxHeight = Window.Current.Bounds.Height - 100;
@@ -103,12 +102,12 @@ namespace FlashbackUwp.Views
                     ImagePopup.IsOpen = true;
                 }
                 catch (UriFormatException)
-                {                    
+                { 
                     Messenger.Default.Send("Länken till bilden är felaktig och går inte att ladda", FlashbackConstants.MessengerShowError);
                     ImagePopup.IsOpen = false;
                 }
                 catch (Exception)
-                {                    
+                { 
                     Messenger.Default.Send("Ett okänt fel inträffade när bilden skulle laddas.", FlashbackConstants.MessengerShowError);
                     ImagePopup.IsOpen = false;
                 }
@@ -116,17 +115,17 @@ namespace FlashbackUwp.Views
             else
             {
                 var openUrl = Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));                
-            }            
+            } 
         }
-           
+
         private async void WebViewTop(object sender, RoutedEventArgs e)
         {
-            await this.WebView.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0,0);" });            
+            await WebView.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0,0);" });
         }
 
         private async void WebViewBottom(object sender, RoutedEventArgs e)
         {
-            await this.WebView.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0, document.body.scrollHeight);" });   
+            await WebView.InvokeScriptAsync("eval", new string[] { @"window.scrollTo(0, document.body.scrollHeight);" });
         }
 
         private async void OpenInWebBrowser(object sender, RoutedEventArgs e)
@@ -137,9 +136,6 @@ namespace FlashbackUwp.Views
             }
         }
 
-        private void ShowShareTask(object sender, RoutedEventArgs e)
-        {            
-            DataTransferManager.ShowShareUI();
-        }
+        private void ShowShareTask(object sender, RoutedEventArgs e) => DataTransferManager.ShowShareUI();
     }
 }
