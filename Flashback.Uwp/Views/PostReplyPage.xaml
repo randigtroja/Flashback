@@ -37,6 +37,7 @@
             </Grid.RowDefinitions>
 
             <TextBox 
+                x:Name="MessageField"
                 Grid.Row="0"
                 Margin="12" 
                 Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
