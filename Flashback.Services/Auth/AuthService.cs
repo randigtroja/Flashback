@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -26,8 +26,7 @@ namespace Flashback.Services.Auth
             byte[] utfBytesPass = utf8.GetBytes(password);
             byte[] isoBytesPass = Encoding.Convert(utf8, iso, utfBytesPass);
 
-            var md5 = MD5.Create();
-            var hash =  md5.ComputeHash(isoBytesPass);
+            var hash = MD5.Create().ComputeHash(isoBytesPass);
 
             var result = new StringBuilder(hash.Length * 2);
 
@@ -54,28 +53,27 @@ namespace Flashback.Services.Auth
 
             if (hashCheck != null)
             {
-                Uri uri = new Uri("http://www.flashback.org" + "/" + hashCheck.Attributes["href"].Value.Replace("&amp;", "&"));
+                Uri uri = new Uri("http://www.flashback.org/" + hashCheck.Attributes["href"].Value.Replace("&amp;", "&"));
 
-                var parameterValue = uri.Query.Split('&')
+                return uri.Query.Split('&')
                                     .Where(s => s.Split('=')[0] == "logouthash")
                                     .Select(s => s.Split('=')[1])
                                     .FirstOrDefault();
-
-                return parameterValue;
             }
-
-            return "";
-
+            else
+            {
+                return "";
+            }
         }
 
         /// <summary>
         /// Loggar in
         /// </summary>
         /// <param name="username">Användarnamn</param>
-        /// <param name="password">Lösenord</param>        
+        /// <param name="password">Lösenord</param>
         /// <returns></returns>
         public async Task<bool> TryLogin(string username, string password)
-        {            
+        {
             var postData = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("vb_login_username", username),
@@ -93,20 +91,18 @@ namespace Flashback.Services.Auth
             var pageUri = response.RequestMessage.RequestUri;
 
             var cookieContainer = new CookieContainer();
-            IEnumerable<string> cookies;
-            if (response.Headers.TryGetValues("set-cookie", out cookies))
+
+            if (response.Headers.TryGetValues("set-cookie", out IEnumerable<string> cookies))
             {
                 foreach (var c in cookies)
                 {
                     cookieContainer.SetCookies(pageUri, c);
                 }
             }
-            
-            var loginCheck = cookieContainer.GetCookies(new Uri("https://flashback.org/"))
-                .Cast<Cookie>()
-                .FirstOrDefault(x => x.Name == "vbscanuserid");
 
-            return loginCheck != null;            
+            return cookieContainer.GetCookies(new Uri("https://flashback.org/"))
+                .Cast<Cookie>()
+                .FirstOrDefault(x => x.Name == "vbscanuserid") != null;
         }
     }
 }
