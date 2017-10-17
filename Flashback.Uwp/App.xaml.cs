@@ -33,12 +33,10 @@ namespace FlashbackUwp
 
         public static bool IsUserLoggedIn()
         {
-            var userId = CookieContainer
+            return CookieContainer
                 .GetCookies(new Uri("https://flashback.org/"))
                 .Cast<Cookie>()
-                .FirstOrDefault(x => x.Name == "vbscanuserid");
-
-            return userId != null;
+                .FirstOrDefault(x => x.Name == "vbscanuserid") != null;
         }        
 
         public static string GetUserId()
@@ -47,11 +45,8 @@ namespace FlashbackUwp
                 .GetCookies(new Uri("https://flashback.org/"))
                 .Cast<Cookie>().ToList();
 
-            var hash = cookies.FirstOrDefault(x => x.Name == "vbscanuserid");
-
-            return hash?.Value;
+            return cookies.FirstOrDefault(x => x.Name == "vbscanuserid")?.Value;
         }
-
 
         public App()
         {
@@ -78,11 +73,10 @@ namespace FlashbackUwp
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)
         {
-            var service = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
             return new ModalDialog
             {
                 DisableBackButtonWhenModal = true,
-                Content = new Views.Shell(service),
+                Content = new Views.Shell(NavigationServiceFactory(BackButton.Attach, ExistingContent.Include)),
                 ModalContent = new Views.Busy(),
             };
         }
@@ -90,9 +84,8 @@ namespace FlashbackUwp
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             await LoadSavedCookies();
-                        
-            AdditionalKinds cause = DetermineStartCause(args);
-            if (cause == AdditionalKinds.SecondaryTile)
+
+            if (DetermineStartCause(args) == AdditionalKinds.SecondaryTile)
             {
                 LaunchActivatedEventArgs eventArgs = args as LaunchActivatedEventArgs;
                 if (eventArgs.Arguments.StartsWith("t"))
@@ -114,7 +107,7 @@ namespace FlashbackUwp
                 NavigationService.Navigate(typeof(Views.ForumMainList));
             }
         }
-        
+
         public override async void OnResuming(object s, object e, AppExecutionState previousExecutionState)
         {
             await LoadSavedCookies();
@@ -124,9 +117,8 @@ namespace FlashbackUwp
 
         private async Task LoadSavedCookies()
         {
-            var encryptionService = new EncryptionService();
+            var cookies = await new EncryptionService().GetCookieData();
 
-            var cookies = await encryptionService.GetCookieData();
             if (cookies != null && cookies.Any())
             {
                 foreach (var cookie in cookies)
@@ -135,31 +127,29 @@ namespace FlashbackUwp
                 }
             }
 
-            Messenger.Default.Send<bool>(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
+            Messenger.Default.Send(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
 
             await Task.CompletedTask;
         }
 
         public static async Task SaveCookies()
         {
-            var encryptionService = new EncryptionService();
-            await encryptionService.WriteCookieData(CookieContainer);
+            await new EncryptionService().WriteCookieData(CookieContainer);
 
             await Task.CompletedTask;
         }
 
         public static async Task Logout()
-        {           
+        {
             await new AuthService(CookieContainer).Logout();
 
             CookieContainer = new CookieContainer();
 
-            var encryptionService = new EncryptionService();
-            await encryptionService.WriteCookieData(CookieContainer);
+            await new EncryptionService().WriteCookieData(CookieContainer);
 
-            Messenger.Default.Send<bool>(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
+            Messenger.Default.Send(IsUserLoggedIn(), FlashbackConstants.MessengerLoggedInStatus);
 
-            Messenger.Default.Send<string>("Ok! Du är utloggad!", FlashbackConstants.MessengerShowInformation);
+            Messenger.Default.Send("Ok! Du är utloggad!", FlashbackConstants.MessengerShowInformation);
         }
     }
 }
