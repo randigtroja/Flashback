@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -35,10 +34,8 @@ namespace Flashback.Services.Threads
         }
 
         private async Task<List<FbItem>> ParseHotTopics(string result)
-        {                        
-            var parser = new HtmlParser();
-
-            var document = await parser.ParseAsync(result);
+        {
+            var document = await new HtmlParser().ParseAsync(result);
 
             var threadsParsed = document.QuerySelectorAll("table.table-threads tr");
 
@@ -108,9 +105,7 @@ namespace Flashback.Services.Threads
 
         private async Task<ForumThread> ParseSinglePost(string result)
         {
-            var parser = new HtmlParser();
-
-            var singlePost = await parser.ParseAsync(result);
+            var singlePost = await new HtmlParser().ParseAsync(result);
 
             var pageNameCheck = singlePost.QuerySelector("title");
             bool userLoggedIn = singlePost.QuerySelector("a.btn-quote-multiple") != null; // hack - denna knapp verkar bara renderas när man är inloggad
@@ -150,9 +145,7 @@ namespace Flashback.Services.Threads
 
         private async Task<ForumThread> ParseThread(string result)
         {
-            var parser = new HtmlParser();
-
-            var thread = await parser.ParseAsync(result);
+            var thread = await new HtmlParser().ParseAsync(result);
 
             bool userLoggedIn = result.Contains("onclick=\"return log_out()\">Logga ut</a>");
 
@@ -375,9 +368,7 @@ namespace Flashback.Services.Threads
 
         private async Task<List<FbItem>> ParseNewTopics(string result)
         {
-            var parser = new HtmlParser();
-
-            var topics = await parser.ParseAsync(result);            
+            var topics = await new HtmlParser().ParseAsync(result);
             var postsCheck = topics.QuerySelectorAll("table.table-threads tr");
 
             var newTopics = new List<FbItem>();
@@ -457,18 +448,16 @@ namespace Flashback.Services.Threads
         {
             var result = await _httpClient.GetStringAsync("https://www.flashback.org/subscription.php");
 
-            return await ParseFavourites(result);           
+            return await ParseFavourites(result);
         }
 
         private async Task<List<FbFavourite>> ParseFavourites(string result)
         {
-            var parser = new HtmlParser();
-
             var resultFavourites = new List<FbFavourite>();
 
-            var favourites = await parser.ParseAsync(result);
+            var favourites = await new HtmlParser().ParseAsync(result);
 
-            // börjar först med favoriter som är a typen forum            
+            // börjar först med favoriter som är a typen forum
             var favouritesForumCheck = favourites.QuerySelectorAll("table.forumslist tr.tr_subforum");
             if (favouritesForumCheck != null)
             {
@@ -503,9 +492,9 @@ namespace Flashback.Services.Threads
                     if (idCheck != null)
                     {
                         item.FbId = idCheck.Attributes[1].Value;
-                    }                    
+                    }
 
-                    resultFavourites.Add(item);                    
+                    resultFavourites.Add(item);
                 }
             }
 
@@ -518,7 +507,7 @@ namespace Flashback.Services.Threads
                 {
                     var item = new FbFavourite()
                     {
-                        Type = FbItemType.Thread, ShowPostCount = true, ShowForumColor = false                        
+                        Type = FbItemType.Thread, ShowPostCount = true, ShowForumColor = false  
                     };
 
                     var titleCheck = thread.QuerySelector("td:nth-child(2) div a");
@@ -582,15 +571,13 @@ namespace Flashback.Services.Threads
         {
             string result = await _httpClient.GetStringAsync("https://www.flashback.org/find_threads_by_user.php?userid=" + userId);
 
-            return await ParseMyStartedThreads(result);            
+            return await ParseMyStartedThreads(result);
         }
 
         private async Task<List<FbItem>> ParseMyStartedThreads(string result)
         {
+            var threads = await new HtmlParser().ParseAsync(result);
 
-            var parser = new HtmlParser();
-
-            var threads = await parser.ParseAsync(result);
             var threadsCheck = threads.QuerySelectorAll("table#threadslist tr");
 
             var resultThreads = new List<FbItem>();
@@ -611,7 +598,7 @@ namespace Flashback.Services.Threads
                     if (titleCheck != null)
                     {
                         item.Name = WebUtility.HtmlDecode(titleCheck.TextContent).FixaRadbrytningar();
-                        item.Id = titleCheck.Attributes["href"].Value.Replace("/", "");                        
+                        item.Id = titleCheck.Attributes["href"].Value.Replace("/", ""); 
                     }
                     else
                     {
@@ -628,7 +615,7 @@ namespace Flashback.Services.Threads
                     if (countCheck != null)
                     {
                         
-                        item.PostCount = int.Parse(countCheck.TextContent.FixaRadbrytningar().Replace("svar", ""));                        
+                        item.PostCount = int.Parse(countCheck.TextContent.FixaRadbrytningar().Replace("svar", "")); 
                     }
 
                     resultThreads.Add(item);
@@ -646,7 +633,7 @@ namespace Flashback.Services.Threads
         public async Task<bool> AddThreadToFavourites(string forumThreadId)
         {
             var postData = new List<KeyValuePair<string, string>>
-                {                    
+                {
                     new KeyValuePair<string, string>("do", "doaddsubscription"),
                     new KeyValuePair<string, string>("threadid", forumThreadId),
                     new KeyValuePair<string, string>("url", "https://www.flashback.org/t" + forumThreadId),
@@ -662,7 +649,7 @@ namespace Flashback.Services.Threads
         }
 
         public async Task<bool> RemoveFavourite(FbFavourite favouriteItem)
-        {            
+        {
             var postData = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("s", ""),
@@ -699,9 +686,7 @@ namespace Flashback.Services.Threads
 
         private async Task<List<FbItem>> ParseMyQuotedPosts(string result)
         {
-            var parser = new HtmlParser();
-
-            var quotedPosts = await parser.ParseAsync(result);
+            var quotedPosts = await new HtmlParser().ParseAsync(result);
 
             var quotedPostsList = new List<FbItem>();
 
@@ -746,9 +731,8 @@ namespace Flashback.Services.Threads
                     }
 
                     item.Description = date + " - " + username;
-                                        
-                    quotedPostsList.Add(item);
 
+                    quotedPostsList.Add(item);
                 }
             }
 
@@ -785,17 +769,17 @@ namespace Flashback.Services.Threads
         {
             string searchUrl;
             if (string.IsNullOrWhiteSpace(forumId))
-            {                
+            {
                 searchUrl = "https://www.flashback.org/sok/" + searchTerm;
             }
             else
-            {                
+            {
                 searchUrl = "https://www.flashback.org/sok/" + searchTerm + "?f=" + forumId.Replace("/","").Replace("f","");
             }
 
             string result = await _httpClient.GetStringAsync(searchUrl);
 
-            return await ParseSearchResult(result);            
+            return await ParseSearchResult(result);
         }
 
         public async Task<List<FbItem>> SearchThreadsByTag(string tag)
@@ -808,9 +792,7 @@ namespace Flashback.Services.Threads
 
         private async Task<List<FbItem>> ParseSearchResult(string result)
         {
-            var parser = new HtmlParser();
-
-            var quotedPosts = await parser.ParseAsync(result);
+            var quotedPosts = await new HtmlParser().ParseAsync(result);
 
             var searchResult = new List<FbItem>();
 
@@ -828,7 +810,7 @@ namespace Flashback.Services.Threads
                     {
                         item.Name = WebUtility.HtmlDecode(titleCheck.TextContent);
                         string id = titleCheck.Attributes["href"].Value;
-                        id = id.Replace("/", "");                        
+                        id = id.Replace("/", "");
                         item.Id = id;
                     }
                     else
@@ -853,7 +835,6 @@ namespace Flashback.Services.Threads
                     }
 
                     searchResult.Add(item);
-
                 }
             }
 
