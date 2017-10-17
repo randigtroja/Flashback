@@ -8,7 +8,7 @@ namespace FlashbackUwp.Views
 {
     public sealed partial class ViewPrivateMessagePage : Page
     {
-        public ViewPrivateMessagePage() => this.InitializeComponent();
+        public ViewPrivateMessagePage() => InitializeComponent();
 
         private async void WebView_OnNewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
@@ -29,8 +29,7 @@ namespace FlashbackUwp.Views
             }
             else if(args.Uri.AbsoluteUri.Contains("http://www.flashback.org/showthread.php?t=")) // gammla FB-standarden, öppna internt
             {
-                var id = args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
-                id = "t" + id;                
+                string id = "t" + args.Uri.AbsoluteUri.Replace("http://www.flashback.org/showthread.php?t=", "");
 
                 nav?.Navigate(typeof(ThreadPage), id);
             }
@@ -46,9 +45,7 @@ namespace FlashbackUwp.Views
                 dialog.DefaultCommandIndex = 0;
                 dialog.CancelCommandIndex = 1;
 
-                var resultDialog = await dialog.ShowAsync();
-
-                if (resultDialog.Label == "Öppna")
+                if ((await dialog.ShowAsync()).Label == "Öppna")
                 {
                     await Launcher.LaunchUriAsync(new Uri(System.Net.WebUtility.HtmlDecode(args.Uri.LocalPath)));
                 }
