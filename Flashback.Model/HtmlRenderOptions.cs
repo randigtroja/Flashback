@@ -122,13 +122,6 @@ namespace Flashback.Model
                     "yDown = null;" +
                 "}};</script>");
 
-
-            sb.AppendLine("<script type=\"text/javascript\">" + 
-                            "function prepareQuote(i) {" +
-                                "window.external.notify(i);" +
-                            "};" +
-                          "</script>");
-
             sb.AppendLine("</head>");
             sb.AppendLine("<body style=\"margin:12px;font-family:'Segoe UI';background-color:" + backgroundColor + ";font-size: " + fontSize + ";\">");
             sb.AppendLine("<div id=\"pageWrapper\" style=\"width:100%; color:" + foreColor + ";word-wrap: break-word\">");
@@ -145,14 +138,7 @@ namespace Flashback.Model
         {
             StringBuilder sb = new StringBuilder();
 
-            var spoilerScript = "<script>" +
-                                        "var elements = document.querySelectorAll('[data-toggle=\"hidden\"]');" +
-                                            "Array.prototype.forEach.call(elements, function(el, i) {el.onclick = function() {" +
-                                                "el.nextElementSibling.classList.toggle(\"hidden\");" +
-                                        "}});" +
-                                    "</script>";
-
-            sb.AppendLine(spoilerScript);
+            sb.AppendLine("<script src='ms-appx-web:///Assets/FbCommon.js'>");
             sb.AppendLine("</body>");
             sb.AppendLine("</html>");
 
