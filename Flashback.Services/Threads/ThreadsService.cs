@@ -195,7 +195,7 @@ namespace Flashback.Services.Threads
 
             if (parentCheck != null)
             {
-                parentId = parentCheck.Attributes["href"].Value.Replace("/","");                
+                parentId = parentCheck.Attributes["href"].Value.Replace("/","");
             }
 
             var poster = thread.QuerySelectorAll("div#posts div.post");
@@ -206,8 +206,8 @@ namespace Flashback.Services.Threads
                 replyId = post.Attributes["id"].Value;
                 replyId = replyId.Replace("post", "");
 
-                if (!string.IsNullOrWhiteSpace(replyId))                
-                    break;                
+                if (!string.IsNullOrWhiteSpace(replyId))
+                    break;
             }
 
             string html = _options.GetHtmlHeaders() +  BuildHtmlForForumThreads(poster, userLoggedIn) + _options.GetHtmlFooter();
@@ -239,7 +239,7 @@ namespace Flashback.Services.Threads
         }
 
         /// <summary>
-        /// Bygger upp html för enbart alla inlägg i en tråd        
+        /// Bygger upp html för enbart alla inlägg i en tråd
         /// </summary>
         /// <param name="poster"></param>
         /// <param name="userLoggedIn">Om vi ska rendera ut saker som enbart gäller för inloggade användare</param>
@@ -275,7 +275,7 @@ namespace Flashback.Services.Threads
                 {
                     onlinestatus = "<span style='color:rgb(213, 89, 89);font-size:50%; -ms-high-contrast-adjust: none;'>&#9632; </span>";
                 }
-                
+
 
                 userName = onlinestatus + userName + (moderatorCheck ? " <span style=\"color:rgb(204, 59, 59)\"> (Mod) </span>" : "");
 
@@ -299,7 +299,7 @@ namespace Flashback.Services.Threads
                     }
                 }
 
-                var postMessageCheck = post.QuerySelector("div.post_message");                
+                var postMessageCheck = post.QuerySelector("div.post_message");
                 string postMessage;
 
                 if (postMessageCheck != null)
@@ -379,7 +379,7 @@ namespace Flashback.Services.Threads
                 {
                     var item = new FbItem()
                     {
-                        ShowPostCount = true, ShowForumColor = false, Type = FbItemType.Thread                        
+                        ShowPostCount = true, ShowForumColor = false, Type = FbItemType.Thread
                     };
 
                     var titleCheck = post.QuerySelector("a.thread-title");
@@ -614,7 +614,6 @@ namespace Flashback.Services.Threads
                     var countCheck = thread.QuerySelector("td:nth-child(3) div:nth-child(1) a");
                     if (countCheck != null)
                     {
-                        
                         item.PostCount = int.Parse(countCheck.TextContent.FixaRadbrytningar().Replace("svar", "")); 
                     }
 
@@ -632,25 +631,21 @@ namespace Flashback.Services.Threads
         /// <returns>Om anropet gick bra eller ej</returns>
         public async Task<bool> AddThreadToFavourites(string forumThreadId)
         {
-            var postData = new List<KeyValuePair<string, string>>
+            var postContent = new FlashbackStringUrlContent(new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("do", "doaddsubscription"),
                     new KeyValuePair<string, string>("threadid", forumThreadId),
                     new KeyValuePair<string, string>("url", "https://www.flashback.org/t" + forumThreadId),
                     new KeyValuePair<string, string>("folderid", "0"),  // todo: styr till vilken mapp, pressentera något? Eller bara skita i det som tidigare?
                     new KeyValuePair<string, string>("emailupdate", "0") // todo: läs ut användarens inställningar eller bara skita i det som tidigare?
-                };
+                });
 
-            var postContent = new FlashbackStringUrlContent(postData);
-          
-            var response = await _httpClient.PostAsync("https://www.flashback.org/subscription.php", postContent);
-
-            return response.IsSuccessStatusCode;
+            return (await _httpClient.PostAsync("https://www.flashback.org/subscription.php", postContent)).IsSuccessStatusCode;
         }
 
         public async Task<bool> RemoveFavourite(FbFavourite favouriteItem)
         {
-            var postData = new List<KeyValuePair<string, string>>
+            var postContent = new FlashbackStringUrlContent(new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("s", ""),
                 new KeyValuePair<string, string>("do", favouriteItem.Type == FbItemType.Forum ? "dostuff-forum" : "dostuff"),
@@ -658,13 +653,9 @@ namespace Flashback.Services.Threads
                 new KeyValuePair<string, string>(favouriteItem.FbId, "yes"),
                 new KeyValuePair<string, string>("what", "delete"),
                 new KeyValuePair<string, string>("stoken", "")
-            };
+            });
 
-            var postContent = new FlashbackStringUrlContent(postData);
-
-            var response = await _httpClient.PostAsync("https://www.flashback.org/subscription.php", postContent);
-
-            return response.IsSuccessStatusCode;
+            return (await _httpClient.PostAsync("https://www.flashback.org/subscription.php", postContent)).IsSuccessStatusCode;
         }
 
         public async Task<List<FbItem>> GetMyQuotedPosts(string userId)
@@ -697,7 +688,6 @@ namespace Flashback.Services.Threads
             {
                 foreach (var post in postsCheck)
                 {
-
                     var item = new FbItem() {Type = FbItemType.Thread};
 
                     var titleCheck = post.QuerySelector("div.post-body a strong");
@@ -715,7 +705,6 @@ namespace Flashback.Services.Threads
                         item.Id = id;
                     }
 
-                    
                     string date = "";
                     var dateCheck = post.QuerySelector("div.post-heading").LastChild;
                     if (dateCheck != null)
@@ -743,9 +732,7 @@ namespace Flashback.Services.Threads
         {
             var result = await _httpClient.GetStringAsync("https://www.flashback.org/u" + userId);
 
-            var parser = new HtmlParser();
-
-            var userProfilePage = await parser.ParseAsync(result);
+            var userProfilePage = await new HtmlParser().ParseAsync(result);
 
             var userNameCheck = userProfilePage.QuerySelector("div.panel-heading span.panel-title");
 
@@ -827,7 +814,6 @@ namespace Flashback.Services.Threads
                     var countCheck = searchRow.QuerySelector("td:nth-child(4)");
                     if (countCheck != null)
                     {
-
                         foreach (Match match in regex.Matches(countCheck.Attributes[1].Value.Replace(" ", "").FixaRadbrytningar()))
                         {
                             item.PostCount = int.Parse(match.Groups[1].Value);
@@ -863,9 +849,7 @@ namespace Flashback.Services.Threads
         {
             var model = new PostReplyModel();
 
-            var parser = new HtmlParser();
-
-            var reply = await parser.ParseAsync(result);
+            var reply = await new HtmlParser().ParseAsync(result);
 
             var titleCheck = reply.QuerySelector("div.page-title h1 a");
             model.Title = titleCheck != null ? titleCheck.TextContent : "";
@@ -903,7 +887,7 @@ namespace Flashback.Services.Threads
 
         public async Task<bool> PostReply(string message,string threadId, string postId, string userId, string subsciptionType)
         {
-            var postData = new List<KeyValuePair<string, string>>
+            var postContent = new FlashbackStringUrlContent(new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("message", message),
                 new KeyValuePair<string, string>("s", ""),
@@ -918,13 +902,9 @@ namespace Flashback.Services.Threads
                 new KeyValuePair<string, string>("disablesmilies", "0"),
                 new KeyValuePair<string, string>("emailupdate", subsciptionType),
                 new KeyValuePair<string, string>("stoken", "")
-            };
+            });
 
-            var postContent = new FlashbackStringUrlContent(postData);
-
-            var response = await _httpClient.PostAsync("https://www.flashback.org/newreply.php", postContent);
-
-            return response.IsSuccessStatusCode;
+            return (await _httpClient.PostAsync("https://www.flashback.org/newreply.php", postContent)).IsSuccessStatusCode;
         }
     }
 }
