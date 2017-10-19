@@ -46,7 +46,7 @@ namespace Flashback.Services.Messages
                     }
                     else
                     {
-                        continue;    
+                        continue;
                     }
 
                     var fromCheck = message.QuerySelector("td:nth-child(1) div div:nth-child(1) div:nth-child(2) a");
@@ -59,15 +59,13 @@ namespace Flashback.Services.Messages
                             item.IsUnread = true;
                         }
                     }
-                                       
-                    Uri uri = new Uri("http://www.flashback.org" + "/" + title.Attributes["href"].Value.Replace("&amp;", "&"));
 
-                    var parameterValue = uri.Query.Split('&')
+                    Uri uri = new Uri("http://www.flashback.org/" + title.Attributes["href"].Value.Replace("&amp;", "&"));
+
+                    item.Id = uri.Query.Split('&')
                                         .Where(s => s.Split('=')[0] == "pmid")
                                         .Select(s => s.Split('=')[1])
                                         .FirstOrDefault();
-
-                    item.Id = parameterValue;
 
                     privateMessages.Add(item);
                 }
@@ -132,49 +130,41 @@ namespace Flashback.Services.Messages
 
         public async Task<bool> PostMessage(string to, string subject, string message,string token)
         {
-            var postData = new List<KeyValuePair<string, string>>
+            var postContent = new FlashbackStringUrlContent(new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("message", message),
-                new KeyValuePair<string, string>("s",""),
-                new KeyValuePair<string, string>("do","insertpm"),
-                new KeyValuePair<string, string>("recipients[]",to),
-                new KeyValuePair<string, string>("title",subject),
-                new KeyValuePair<string, string>("receipt","0"),
-                new KeyValuePair<string, string>("signature","1"),
-                new KeyValuePair<string, string>("parseurl","1"),
-                new KeyValuePair<string, string>("disablesmilies","0"),
-                new KeyValuePair<string, string>("savecopy","1"),
-                new KeyValuePair<string, string>("pmid",""),
-                new KeyValuePair<string, string>("ajax",""),
-                new KeyValuePair<string, string>("forward",""),
-                new KeyValuePair<string, string>("csrftoken",token)
-            };
-            
-            var postContent = new FlashbackStringUrlContent(postData);            
+                new KeyValuePair<string, string>("s", ""),
+                new KeyValuePair<string, string>("do", "insertpm"),
+                new KeyValuePair<string, string>("recipients[]", to),
+                new KeyValuePair<string, string>("title", subject),
+                new KeyValuePair<string, string>("receipt", "0"),
+                new KeyValuePair<string, string>("signature", "1"),
+                new KeyValuePair<string, string>("parseurl", "1"),
+                new KeyValuePair<string, string>("disablesmilies", "0"),
+                new KeyValuePair<string, string>("savecopy", "1"),
+                new KeyValuePair<string, string>("pmid", ""),
+                new KeyValuePair<string, string>("ajax", ""),
+                new KeyValuePair<string, string>("forward", ""),
+                new KeyValuePair<string, string>("csrftoken", token)
+            });
 
-            var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);                        
-
-            return response.IsSuccessStatusCode;
+            return (await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent)).IsSuccessStatusCode;
         }
 
         public async Task<bool> DeleteMessage(string messageId, string folderId, string token)
         {
-            var postData = new List<KeyValuePair<string, string>>
+            var postContent = new FlashbackStringUrlContent(new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("do","managepm"),
-                new KeyValuePair<string, string>("csrftoken",token),
-                new KeyValuePair<string, string>("s",""),
-                new KeyValuePair<string, string>("dowhat","delete"),
-                new KeyValuePair<string, string>("folderid",folderId),
-                new KeyValuePair<string, string>("dowhat","delete") ,
-                new KeyValuePair<string, string>("pm[" + messageId + "]","true")                                 
-            };
+                new KeyValuePair<string, string>("do", "managepm"),
+                new KeyValuePair<string, string>("csrftoken", token),
+                new KeyValuePair<string, string>("s", ""),
+                new KeyValuePair<string, string>("dowhat", "delete"),
+                new KeyValuePair<string, string>("folderid", folderId),
+                new KeyValuePair<string, string>("dowhat", "delete") ,
+                new KeyValuePair<string, string>("pm[" + messageId + "]", "true")
+            });
 
-            var postContent = new FlashbackStringUrlContent(postData);
-
-            var response = await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent);
-
-            return response.IsSuccessStatusCode;
+            return (await _httpClient.PostAsync("https://www.flashback.org/private.php", postContent)).IsSuccessStatusCode;
         }
 
         public async Task<PrivateMessage> GetMessage(string id)
@@ -221,17 +211,17 @@ namespace Flashback.Services.Messages
                 var tokenCheck = document.QuerySelector("input[name='csrftoken']");
                 if (tokenCheck != null)
                 {
-                    privateMessage.Token = tokenCheck.Attributes["value"].Value;                        
+                    privateMessage.Token = tokenCheck.Attributes["value"].Value;
                 }
 
                 var folderIdCheck = document.QuerySelector("input[name='folderid']");
                 if (folderIdCheck != null)
                 {
                     privateMessage.FolderId = folderIdCheck.Attributes["value"].Value;
-                }               
+                }
             }
 
-            return privateMessage;            
+            return privateMessage;
         }
     }
 }
